@@ -1,21 +1,28 @@
 import React from 'react'
 
 export const Login = () => {
+/*
+    const color = {
+        backgroundColor: 'blue', color: 'white',
+    };
+*/
     return (
 
 <div className="container" >
         
         <form id="form_login">
             <div>
-                <h1 >LOGIN</h1>
-                <label htmlFor="txtusu"><strong>Usuario </strong></label>
-                <input type="text" id="txtusu" style={{textAlign:"center"}} className="form-control"  required/>
+                <label >Login</label>
+                <br></br>
+                <label>Usuario</label>
+                <input type="text" id="txtusuario" style={{textAlign:"center"}} className="form-control"  required/>
             </div>
             <div>
-                <label htmlFor="txtpas"><strong>Contraseña</strong></label>
-                <input type="password" id="txtpas" style={{textAlign:"center"}} className="form-control"  required/>
-            </div><br/>
-            <input type="submit"  className="btn btn-primary" value="Login"/>
+                <label>Contraseña</label>
+                <input type="password" id="txtcontraseña" style={{textAlign:"center"}} className="form-control"  required/>
+            </div>
+            <br></br>
+            <input type="submit"  className="btn btn-primary" value="Entrar"/>
         </form>
         </div>
         
