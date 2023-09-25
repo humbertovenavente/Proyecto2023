@@ -13,17 +13,14 @@ const Barra = () => {
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to = '/'>Inicio</Link>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Features</a>
+          <Link className="nav-link active" aria-current="page" to = '/articulos'>Articulos</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to='/iniciar sesion'>Iniciar sesion</Link>
         </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Contactanos
+            Categorias
           </a>
           <ul className="dropdown-menu">
             <li><Link className="dropdown-item" to='/Contacto'>Contacto</Link></li>
