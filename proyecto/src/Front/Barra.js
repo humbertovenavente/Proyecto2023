@@ -12,8 +12,11 @@ const Barra = () => {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
       <ul className="navbar-nav">
+      <li className="nav-item">
+          <Link className="nav-link" to='/home'>Home</Link>
+        </li>
         <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to = '/articulos'>Articulos</Link>
+          <Link className="nav-link active" aria-current="page" to = '/articulos'>Crear articulo</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to='/iniciar sesion'>Iniciar sesion</Link>
