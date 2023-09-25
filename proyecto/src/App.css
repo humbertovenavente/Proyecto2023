@@ -13,6 +13,14 @@
   }
 }
 
+body {
+  background-color: #80a8f7;
+}
+
+.login {
+  background-color:  #ee9b53;
+}
+
 .App-header {
   background-color: #80a8f7;
   min-height: 100vh;
