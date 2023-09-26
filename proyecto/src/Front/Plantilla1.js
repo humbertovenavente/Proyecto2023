@@ -7,7 +7,7 @@ const Plantilla1 = () => {
 
       <h1>*Titulo del articulo*</h1>
 
-      <p style={{textAlign: "center", width: "50%"}}>
+      <p style={{justifyContent: "center", width: "50%"}}>
         Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. 
         Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. 
         Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. 
