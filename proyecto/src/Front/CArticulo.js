@@ -19,6 +19,15 @@ const CArticulo = () => {
 
       <br></br>
 
+      <label htmlFor="subcategorias">Seleccione una Subcategoria</label>
+      <select id="subcategoria" name="subcategoria">
+        <option value="deporte">Internacional</option>
+        <option value="tecnologia">Local</option>
+      </select>
+
+            
+      <br></br>
+
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label htmlFor="texto">Ingrese el texto del articulo en el cuadro de abajo</label>
         <textarea id="story" name="story" rows="10" cols="33" style={{width: "50%"}}/>
