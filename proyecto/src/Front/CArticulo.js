@@ -3,6 +3,7 @@ import React from 'react'
 const CArticulo = () => {
   return (
     <div>
+      <h3>En esta pestaña usted podra crear un articulo</h3>
       <br></br>
       <label htmlFor="titulo">Ingrese el nombre del articulo</label>
       <input type="text" id="titulo" name="titulo" />

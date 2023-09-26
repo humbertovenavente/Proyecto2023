@@ -7,6 +7,7 @@ import { Login } from './Front/Login';
 import Barra from './Front/Barra';
 import CArticulo from './Front/CArticulo';
 import Home from './Front/Home';
+import Articulos from './Front/Articulos';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Barra/>
       <Routes>
         <Route path = '/home' element = {<Home/>}/>
+        <Route path = '/home' element = {<Articulos/>}/>
         <Route path = '/iniciar sesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
         

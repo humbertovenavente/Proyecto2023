@@ -26,8 +26,9 @@ const Barra = () => {
             Categorias
           </a>
           <ul className="dropdown-menu">
-            <li><Link className="dropdown-item" to='/Contacto'>Contacto</Link></li>
-            <li><Link className="dropdown-item" to='/Informacion'>Informacion</Link></li>
+            <li><Link className="dropdown-item" to='/Contacto'>Deportes</Link></li>
+            <li><Link className="dropdown-item" to='/Informacion'>Tecnologia</Link></li>
+            <li><Link className="dropdown-item" to='/Comida'>Comida</Link></li>
           </ul>
         </li>
       </ul>
