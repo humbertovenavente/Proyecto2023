@@ -24,7 +24,7 @@ const CArticulo = () => {
         <textarea id="story" name="story" rows="10" cols="33" style={{width: "50%"}}/>
         
         <br></br>
-        <label htmlFor="texto">Ingrese una imgagen (si gusta) </label>
+        <label htmlFor="texto">Ingrese una imagen (si gusta) </label>
         <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
        
       </div>
