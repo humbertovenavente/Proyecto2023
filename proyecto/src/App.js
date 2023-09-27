@@ -7,7 +7,7 @@ import { Login } from './Front/Login';
 import Barra from './Front/Barra';
 import CArticulo from './Front/CArticulo';
 import Home from './Front/Home';
-import Articulos from './Front/Articulos';
+import Registro from './Front/Registro';
 
 //Import plantillas
 import Plantilla1 from './Front/Plantilla1';
@@ -22,9 +22,10 @@ function App() {
     <Barra/>
       <Routes>
         <Route path = '/home' element = {<Home/>}/>
-        <Route path = '/home' element = {<Articulos/>}/>
         <Route path = '/iniciar sesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
+        <Route path = '/registro' element = {<Registro/>}/>
+        
         
         <Route path = '/plantilla1' element = {<Plantilla1/>}/>
         <Route path = '/plantilla2' element = {<Plantilla2/>}/>

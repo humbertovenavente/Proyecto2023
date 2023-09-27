@@ -61,7 +61,7 @@ const Plantilla2 = () => {
          
 <div class="justify-content-center" >
       <p >
-        Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. 
+        Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo.
        
 
       </p > 

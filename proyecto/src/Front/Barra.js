@@ -18,9 +18,6 @@ const Barra = () => {
         <li className="nav-item">
           <Link className="nav-link active"  to = '/articulos'>Crear articulo</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to='/iniciar sesion'>Iniciar sesion</Link>
-        </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categorias
@@ -30,6 +27,12 @@ const Barra = () => {
             <li><Link className="dropdown-item" to='/Informacion'>Tecnologia</Link></li>
             <li><Link className="dropdown-item" to='/Comida'>Comida</Link></li>
           </ul>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to='/iniciar sesion'>Iniciar sesion</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to='/registro'>Registro de usuario</Link>
         </li>
       </ul>
     </div>

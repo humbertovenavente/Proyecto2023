@@ -49,14 +49,7 @@ export const Login = () => {
                     </div>
                    
                 <input class="form-control" type="password" id="txtcontraseña"  placeholder='Contraseña'  required/>
-            
-           
             </div>
-            
-
-         
-
-        
             <br></br>
             <div class="btn btn-info text-white w-100 mt-3">
             <input type="submit"  className="btn btn-info text-white w-100" value="Entrar"/>
