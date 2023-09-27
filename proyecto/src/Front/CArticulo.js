@@ -5,8 +5,8 @@ const CArticulo = () => {
     <div>
       <h3>En esta pestaña usted podra crear un articulo</h3>
       <br></br>
-      <label htmlFor="titulo">Ingrese el nombre del articulo</label>
-      <input type="text" id="titulo" name="titulo" />
+      <label htmlFor="titulo" >Ingrese el nombre del articulo</label>
+      <input type="text" id="titulo" class="form-control" name="titulo" />
 
       <br></br>
 
