@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.degradado-c{
+  background: linear-gradient(to bottom,  #0DCAF0, #ffffff 80%);
+}
+.degradado-c1{
+  background: linear-gradient(to bottom, #01ffff );
+}
+
+.degradado-c2{
+  background: linear-gradient(to bottom, #ffffff);
+}
+
+.degradado-o{
+  background: linear-gradient(to bottom, #0DCAF0 60%, #0400ff );
+}
+
+
+
+
