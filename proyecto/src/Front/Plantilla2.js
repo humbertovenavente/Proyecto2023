@@ -2,8 +2,7 @@ import React from 'react'
 
 const Plantilla2 = () => {
   return (
-<body class="bg-info d-flex justify-content-center
-                align-items-center vh-100">
+<body class="bg-info d-flex justify-content-center align-items-center vh-100">
     <div >
 
 
@@ -57,7 +56,7 @@ const Plantilla2 = () => {
       
      
    <section> 
-<div class="mt-3 bg-black p-5 rounded-5 text-white " style={{width:'100rem', height: "5rem"}}  >
+<div class="mt-3 bg-black p-5 rounded-5 text-white " style={{ width: '100%', maxWidth: '100rem', height: 'auto' }}>
          
 <div class="justify-content-center" >
       <p >
@@ -70,7 +69,7 @@ const Plantilla2 = () => {
 </section> 
   
   
-<div class="mt-1 bg-white p-5 rounded-5 text-secondary" style={{width:'100rem', height: "15rem"}}  >
+<div class="mt-1 bg-white p-5 rounded-5 text-secondary" style={{ width: '100%', maxWidth: '100rem', height: 'auto' }}>
 
        
 <div class="justify-content-center" >
