@@ -22,7 +22,7 @@ const Plantilla1 = () => {
   Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. 
   Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. 
 
-<<<<<<< HEAD
+
 </p > 
 <div  class= "border my-3 col-6  mt-5" >
 <img src="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" style={{height:'15rem'}} className="img-fluid" alt="Pelota de fútbol"  />
@@ -36,7 +36,7 @@ Año de publicacion
 </div>
             </div>
       
-=======
+
       <div style={{ display: "flex", justifyContent: "center" }}>
 
         <p style={{ display: "flex", justifyContent: "center", width: "50%" }}>
@@ -54,7 +54,7 @@ Año de publicacion
       </div>
 
       <img src="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" className="img-fluid" alt="Pelota de fútbol" />
->>>>>>> 8497fd8029b56289512ce3456f6b5528fcba7ed4
+
 
       </body>
     </div>
