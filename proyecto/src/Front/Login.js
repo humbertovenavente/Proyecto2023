@@ -1,11 +1,30 @@
 import React from 'react'
+import { useState } from 'react'
+import Home from './Home';
 
 export const Login = () => {
-/*
-    const color = {
-        backgroundColor: 'blue', color: 'white',
-    };
-*/
+
+    const [miLogin, setMiLogin] = useState("flase");
+
+    const [usuario, setUsuario] = useState("");
+    const [contraseña, setcontraseña ] = useState("");
+
+    function entrar(e){
+        e.preventDefault();
+        var txtusuario = document.getElementById("txtusuario").value;
+        var txtcontraseña = document.getElementById("txtcontraseña").value;
+        
+        if (usuario === "jose" && contraseña === "12345"){
+            setMiLogin("true");
+            //document.getElementById("form_login").style.display = "none";
+        }else{
+            setMiLogin("false");
+            document.getElementById("txtusuario").value = "";
+            document.getElementById("txtcontraseña").value = "";
+        }
+    }
+
+
     return (
 
 <div className="login" >
@@ -17,19 +36,14 @@ export const Login = () => {
                 <img src= "https://th.bing.com/th/id/R.e4f5f40d133018514c664efeb90a8ff9?rik=c6EIpQd4ztpYMw&riu=http%3a%2f%2fwww.easyloanscur.com%2fimages%2flogin-icon.png&ehk=51PAUVKiVvN9WJTyNB9jE%2bYipg232zsMoHxoxnmf%2fIg%3d&risl=&pid=ImgRaw&r=0"
                 alt="login-icon"
                 style={{height:'7rem'}}
-            
                 />
-
             </div>
 
-                  
         <form id="form_login">
-           
             <div>
                 <h1 class= "text-center fs-1 mt-3">Login</h1>
                 <br></br>
-           
-
+        
                 <div class= "input-group mt-3">
                 <div class= "input-group-text bg-info">
                     <img 
@@ -37,7 +51,7 @@ export const Login = () => {
                     style={{height:'1rem'}}/>
             
                     </div>
-                <input class="form-control" type="text" id="txtusuario"  placeholder='Usuario'  required/>
+                <input class="form-control" type="text" id="txtusuario"  placeholder='Usuario' onChange={(e) => setUsuario(e.target.value)} required/>
                 </div>
             </div>
             
@@ -48,28 +62,21 @@ export const Login = () => {
                     style={{height:'1rem'}}/>
                     </div>
                    
-                <input class="form-control" type="password" id="txtcontraseña"  placeholder='Contraseña'  required/>
+                <input class="form-control" type="password" id="txtcontraseña"  placeholder='Contraseña' onChange={(e) => setcontraseña(e.target.value)} required/>
             </div>
             <br></br>
             <div class="btn btn-info text-white w-100 mt-3">
-            <input type="submit"  className="btn btn-info text-white w-100" value="Entrar"/>
-            </div>
-            <div styles="font-size: 0.9rem"  class= "d-flex align-items-center gap-1 mt-3"> 
-                Dont you have an account?
-
-                <a href="#" class= "text-decoration-none text-info fw-semibold fst-italic"> Create an account</a>
+            <input type="submit"  className="btn btn-info text-white w-100" value="Entrar" onClick={entrar}/>
             </div>
             </form>
+
+            {miLogin === "true" && <Home/>}
+
+
             </div>
             </div>
             </body>
-            
-        
         </div>
-        
-
-        
-        
     )
 }
 

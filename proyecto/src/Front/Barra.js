@@ -6,12 +6,13 @@ const Barra = () => {
     
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">Pagina Principal</a>
+    
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul className="navbar-nav">
+
+      <ul className="navbar-nav ml-auto">
       <li className="nav-item">
           <Link className="nav-link" to='/home'>Home</Link>
         </li>
@@ -28,13 +29,23 @@ const Barra = () => {
             <li><Link className="dropdown-item" to='/Comida'>Comida</Link></li>
           </ul>
         </li>
+        </ul>
+
+        <a className="navbar-brand ms-auto" href="#">
+        <img src="https://img.freepik.com/vetores-premium/design-de-logotipo-elegante-g-e-h_728226-5.jpg?w=2000" className="card-img-top" alt="Logo" style={{ width: '70px', height: 'auto' }}/>
+        </a>
+
+        <ul className="navbar-nav ms-auto">
         <li className="nav-item">
           <Link className="nav-link" to='/iniciar sesion'>Iniciar sesion</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to='/registro'>Registro de usuario</Link>
         </li>
-      </ul>
+        </ul>
+
+      
+
     </div>
   </div>
 </nav>
