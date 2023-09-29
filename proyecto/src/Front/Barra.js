@@ -23,7 +23,7 @@ const Barra = () => {
 
        <li className="nav-item dropdown">
          
-         <a className="nav-link dropdown-toggle" href=""  data-bs-toggle="dropdown"  aria-expanded="false">
+         <a className="nav-link dropdown-toggle ml-auto" href=""  data-bs-toggle="dropdown"  aria-expanded="false">
            Categorias</a>
       <ul className="dropdown-menu">
            <li><a className="dropdown-item" href=""> Deporte &raquo;</a>
@@ -61,23 +61,25 @@ const Barra = () => {
     
           
        
-       </li>
+     </li>
         
+      </ul>
+      <a className="navbar-brand mx-auto" href="#">
+      <img src="https://img.freepik.com/vetores-premium/design-de-logotipo-elegante-g-e-h_728226-5.jpg?w=2000" className="card-img-top" alt="Logo" style={{ width: '70px', height: 'auto' }}/>
+      </a>
       
 
-        <a className="navbar-brand ms-auto" href="#">
-        <img src="https://img.freepik.com/vetores-premium/design-de-logotipo-elegante-g-e-h_728226-5.jpg?w=2000" className="card-img-top" alt="Logo" style={{ width: '70px', height: 'auto' }}/>
-        </a>
       
-
-        <ul className="navbar-nav ms-auto">
+      <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to='/iniciar sesion'>Iniciar sesion</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to='/registro'>Registro de usuario</Link>
-        </li></ul>
-    </ul>
+        </li>
+      </ul>
+
+    
       
 
       
