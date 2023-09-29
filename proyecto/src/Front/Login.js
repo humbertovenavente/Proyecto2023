@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
-import Home from './Home';
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
 
+    const navigate = useNavigate();
     const [miLogin, setMiLogin] = useState("flase");
 
     const [usuario, setUsuario] = useState("");
@@ -15,7 +16,7 @@ export const Login = () => {
         var txtcontraseña = document.getElementById("txtcontraseña").value;
         
         if (usuario === "jose" && contraseña === "12345"){
-            setMiLogin("true");
+            navigate("/home")
             //document.getElementById("form_login").style.display = "none";
         }else{
             setMiLogin("false");
@@ -69,8 +70,6 @@ export const Login = () => {
             <input type="submit"  className="btn btn-info text-white w-100" value="Entrar" onClick={entrar}/>
             </div>
             </form>
-
-            {miLogin === "true" && <Home/>}
 
 
             </div>
