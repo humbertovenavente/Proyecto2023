@@ -10,6 +10,7 @@ export const Login = () => {
     const [usuario, setUsuario] = useState("");
     const [contraseña, setcontraseña ] = useState("");
 
+    
     function entrar(e){
         e.preventDefault();
         var txtusuario = document.getElementById("txtusuario").value;
