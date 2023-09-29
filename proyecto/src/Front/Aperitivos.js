@@ -4,7 +4,7 @@ const Aperitivos = () => {
   return (
 <div>
 
-    <h3>Bienvenidos al Tec, en esta parte se mostrarán los artículos que hayan sido publicados recientemente</h3>
+    <h3>Bienvenidos al Aperitivos, en esta parte se mostrarán los artículos que hayan sido publicados recientemente</h3>
 
 </div>
 
