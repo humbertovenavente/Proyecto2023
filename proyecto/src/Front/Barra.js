@@ -12,28 +12,63 @@ const Barra = () => {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
 
-      <ul className="navbar-nav ml-auto">
+    <ul className="navbar-nav ml-auto">
       <li className="nav-item">
           <Link className="nav-link" to='/home'>Home</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link active"  to = '/articulos'>Crear articulo</Link>
-        </li>
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categorias
-          </a>
-          <ul className="dropdown-menu">
-            <li><Link className="dropdown-item" to='/Contacto'>Deportes</Link></li>
-            <li><Link className="dropdown-item" to='/Informacion'>Tecnologia</Link></li>
-            <li><Link className="dropdown-item" to='/Comida'>Comida</Link></li>
-          </ul>
-        </li>
-        </ul>
+          </li>
+       
+
+       <li className="nav-item dropdown">
+         
+         <a className="nav-link dropdown-toggle" href=""  data-bs-toggle="dropdown"  aria-expanded="false">
+           Categorias</a>
+      <ul className="dropdown-menu">
+           <li><a className="dropdown-item" href=""> Deporte &raquo;</a>
+        
+            <ul className="dropdown-menu submenu">
+               <li><a className="dropdown-item" href=""> <Link  to='/deporte'>Futbol  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/deporte'>Baloncesto  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/deporte'>Volley  </Link> &raquo;</a></li>
+            </ul>
+
+           </li>
+
+           <li><a className="dropdown-item" href=""> Tecnologia &raquo;</a>
+        
+            <ul className="dropdown-menu submenu">
+               <li><a className="dropdown-item" href=""> <Link  to='/tec'>Nanotecnologia  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/tec'>Medicina  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/tec'>Nuevas Tendencias </Link> &raquo;</a></li>
+             </ul>
+
+           </li>
+
+           <li><a className="dropdown-item" href=""> Comida &raquo;</a>
+        
+         <ul className="dropdown-menu submenu">
+           <li><a className="dropdown-item" href=""> <Link  to='/comida'>Postres </Link> &raquo;</a></li>
+           <li><a className="dropdown-item" href=""> <Link  to='/comida'>Aperitivos </Link> &raquo;</a></li>
+           <li><a className="dropdown-item" href=""> <Link  to='/comida'>Platos fuertes  </Link> &raquo;</a></li>
+         </ul>
+         
+       </li>
+
+      </ul>
+           
+    
+          
+       
+       </li>
+        
+      
 
         <a className="navbar-brand ms-auto" href="#">
         <img src="https://img.freepik.com/vetores-premium/design-de-logotipo-elegante-g-e-h_728226-5.jpg?w=2000" className="card-img-top" alt="Logo" style={{ width: '70px', height: 'auto' }}/>
         </a>
+      
 
         <ul className="navbar-nav ms-auto">
         <li className="nav-item">
@@ -41,8 +76,9 @@ const Barra = () => {
         </li>
         <li className="nav-item">
           <Link className="nav-link" to='/registro'>Registro de usuario</Link>
-        </li>
-        </ul>
+        </li></ul>
+    </ul>
+      
 
       
 

@@ -8,6 +8,23 @@ import Barra from './Front/Barra';
 import CArticulo from './Front/CArticulo';
 import Home from './Front/Home';
 import Registro from './Front/Registro';
+import Deporte from './Front/Deporte';
+import Comida from './Front/Comida';
+import Tec from './Front/Tec';
+
+import Baloncesto from './Front/Baloncesto';
+import Volley from './Front/Volley';
+import Futbol from './Front/Volley';
+
+import Nt from './Front/Nt';
+import Nanotecnologia from './Front/Nanotecnologia';
+import Medicina from './Front/Medicina';
+
+import Postres from './Front/Postres';
+import Aperitivos from './Front/Aperitivos';
+import Pf from './Front/Pf';
+
+
 
 //Import plantillas
 import Plantilla1 from './Front/Plantilla1';
@@ -25,7 +42,22 @@ function App() {
         <Route path = '/iniciar sesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
         <Route path = '/registro' element = {<Registro/>}/>
+       
+        <Route path = '/deporte' element = {<Deporte/>}/>
+        <Route path = '/tec' element = {<Tec/>}/>
+        <Route path = '/comida' element = {<Comida/>}/>
         
+        <Route path = '/baloncesto' element = {<Baloncesto/>}/>
+        <Route path = '/volley' element = {<Volley/>}/>
+        <Route path = '/futbol' element = {<Futbol/>}/>
+
+        <Route path = '/nanotecnologia' element = {<Nanotecnologia/>}/>
+        <Route path = '/medicina' element = {<Medicina/>}/>
+        <Route path = '/nuevas tendencias' element = {<Nt/>}/>
+
+        <Route path = '/platos fuertes' element = {<Pf/>}/>
+        <Route path = '/postres' element = {<Postres/>}/>
+        <Route path = '/aperitivos' element = {<Aperitivos/>}/>
         
         <Route path = '/plantilla1' element = {<Plantilla1/>}/>
         <Route path = '/plantilla2' element = {<Plantilla2/>}/>
