@@ -3,6 +3,7 @@ import './App.css';
 
 import { BrowserRouter, Routes, Route, Router} from "react-router-dom";
 
+
 import { Login } from './Front/Login';
 import Barra from './Front/Barra';
 import CArticulo from './Front/CArticulo';
@@ -14,7 +15,7 @@ import Tec from './Front/Tec';
 
 import Baloncesto from './Front/Baloncesto';
 import Volley from './Front/Volley';
-import Futbol from './Front/Volley';
+import PFutbol from './Front/PFutbol';
 
 import Nt from './Front/Nt';
 import Nanotecnologia from './Front/Nanotecnologia';
@@ -26,18 +27,21 @@ import Pf from './Front/Pf';
 
 
 
+
 //Import plantillas
 import Plantilla1 from './Front/Plantilla1';
 import Plantilla2 from './Front/Plantilla2';
 import Plantilla3 from './Front/Plantilla3';
 
 function App() {
+  
   return (
     <div className="App">
 
     <BrowserRouter>
     <Barra/>
       <Routes>
+        
         <Route path = '/home' element = {<Home/>}/>
         <Route path = '/iniciar sesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
@@ -49,7 +53,7 @@ function App() {
         
         <Route path = '/baloncesto' element = {<Baloncesto/>}/>
         <Route path = '/volley' element = {<Volley/>}/>
-        <Route path = '/futbol' element = {<Futbol/>}/>
+        <Route path = '/futbol' element = {<PFutbol/>}/>
 
         <Route path = '/nanotecnologia' element = {<Nanotecnologia/>}/>
         <Route path = '/medicina' element = {<Medicina/>}/>
@@ -62,6 +66,11 @@ function App() {
         <Route path = '/plantilla1' element = {<Plantilla1/>}/>
         <Route path = '/plantilla2' element = {<Plantilla2/>}/>
         <Route path = '/plantilla3' element = {<Plantilla3/>}/>
+
+       
+
+
+        
 
 
       </Routes>

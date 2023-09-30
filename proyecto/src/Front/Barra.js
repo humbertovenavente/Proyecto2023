@@ -29,9 +29,9 @@ const Barra = () => {
            <li><a className="dropdown-item" href=""> Deporte &raquo;</a>
         
             <ul className="dropdown-menu submenu">
-               <li><a className="dropdown-item" href=""> <Link  to='/deporte'>Futbol  </Link> &raquo;</a></li>
-               <li><a className="dropdown-item" href=""> <Link  to='/deporte'>Baloncesto  </Link> &raquo;</a></li>
-               <li><a className="dropdown-item" href=""> <Link  to='/deporte'>Volley  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/Futbol'>Futbol  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/Baloncesto'>Baloncesto  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/Volley'>Volley  </Link> &raquo;</a></li>
             </ul>
 
            </li>
@@ -39,9 +39,9 @@ const Barra = () => {
            <li><a className="dropdown-item" href=""> Tecnologia &raquo;</a>
         
             <ul className="dropdown-menu submenu">
-               <li><a className="dropdown-item" href=""> <Link  to='/tec'>Nanotecnologia  </Link> &raquo;</a></li>
-               <li><a className="dropdown-item" href=""> <Link  to='/tec'>Medicina  </Link> &raquo;</a></li>
-               <li><a className="dropdown-item" href=""> <Link  to='/tec'>Nuevas Tendencias </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/Nanotecnologia'>Nanotecnologia  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/Medicina'>Medicina  </Link> &raquo;</a></li>
+               <li><a className="dropdown-item" href=""> <Link  to='/Nt'>Nuevas Tendencias </Link> &raquo;</a></li>
              </ul>
 
            </li>
@@ -49,9 +49,9 @@ const Barra = () => {
            <li><a className="dropdown-item" href=""> Comida &raquo;</a>
         
          <ul className="dropdown-menu submenu">
-           <li><a className="dropdown-item" href=""> <Link  to='/comida'>Postres </Link> &raquo;</a></li>
-           <li><a className="dropdown-item" href=""> <Link  to='/comida'>Aperitivos </Link> &raquo;</a></li>
-           <li><a className="dropdown-item" href=""> <Link  to='/comida'>Platos fuertes  </Link> &raquo;</a></li>
+           <li><a className="dropdown-item" href=""> <Link  to='/Postres'>Postres </Link> &raquo;</a></li>
+           <li><a className="dropdown-item" href=""> <Link  to='/Aperitivos'>Aperitivos </Link> &raquo;</a></li>
+           <li><a className="dropdown-item" href=""> <Link  to='/Pf'>Platos fuertes  </Link> &raquo;</a></li>
          </ul>
          
        </li>
@@ -93,3 +93,4 @@ const Barra = () => {
 }
 
 export default Barra
+
