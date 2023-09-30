@@ -1,11 +1,34 @@
 import React from 'react'
+import axios from 'axios'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const Home = () => {
 
+  
+  useEffect(() => { articles()}, [])
+
+  const [data, setData] = useState ([]);
+
+  async function articles() {
+
+    const info = await axios.get("http://localhost/apisP/articulos.php")
+
+    setData(info.data);
+
+  }
   return (
     <div>
       <h3>Bienvenidos al Home, en esta parte se mostrarán los artículos que hayan sido publicados recientemente</h3>
 
+      {data.map(function(article) {
+    return (
+      <div>
+        <div>{article.titulo_articulo}</div>
+        <div></div>
+      </div>
+   )
+})}
 
       <div style={{ display: "flex", columnGap: "2.5rem", rowGap: "2.5rem", flexWrap: "wrap", justifyContent: "center" }}>
         <div className="card" style={{ width: '15rem' }}>
