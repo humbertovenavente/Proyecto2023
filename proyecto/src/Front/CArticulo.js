@@ -24,6 +24,7 @@ const CArticulo = ({ }) => {
    const [subCategoria, setSubCategoria] = useState('');
    const [contenido, setContenido] = useState('');
    const [imagen, setImagen] = useState(null);
+   const [informacionGuardada, setInformacionGuardada] = useState(null);
    
 
    //aca el title, category y aja son variables que van a almacenar los datos relacionados con el articulo y se van creando valores iniciales o null en imagen
@@ -42,10 +43,11 @@ const CArticulo = ({ }) => {
       contenido,
       imagen,
     };
+    setInformacionGuardada(newArticle);
     
     console.log('Datos enviados:', newArticle);
 
-   // ...
+  
 
 let archivoJS;
 
@@ -185,9 +187,15 @@ return (
       {/* <input type="text" id="texto" name="texto"/> */}
 
       <br></br>
-      <button type="submit" className="btn btn-primary">Publicar Articulo</button>
+      <button type="submit" className="btn btn-primary" >Publicar Articulo</button>
       </form>
+  
     </div>
+
+
+
+    
+    
   );
 };
 
