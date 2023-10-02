@@ -5,7 +5,7 @@ header ("Content-Type: application/json");
 
 $query = "SELECT * FROM articulos";
 
-$result = mysqli_query ($conn , $query);
+$result = mysqli_query ($conexion , $query);
 
 
 

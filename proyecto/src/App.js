@@ -32,6 +32,7 @@ import Pf from './Front/Pf';
 import Plantilla1 from './Front/Plantilla1';
 import Plantilla2 from './Front/Plantilla2';
 import Plantilla3 from './Front/Plantilla3';
+import APublicados from './Front/APublicados';
 
 function App() {
   
@@ -46,6 +47,7 @@ function App() {
         <Route path = '/iniciar sesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
         <Route path = '/registro' element = {<Registro/>}/>
+        <Route path = '/articulos publicados' element = {<APublicados/>}/>
        
         <Route path = '/deporte' element = {<Deporte/>}/>
         <Route path = '/tec' element = {<Tec/>}/>

@@ -9,23 +9,46 @@ import Pf from './Pf';
 import Postres from './Postres'; 
 import Aperitivos from './Aperitivos'; 
 import Nanotecnologia from './Nanotecnologia';
-
+import axios from 'axios';
 
 
 const CArticulo = ({ }) => {
   const navigate = useNavigate();
 
 
+  const [titulo, setTitulo] = useState('');
+  const [contenido, setContenido] = useState('');
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("post1");
+      const response = await axios.post("http://gregserver/apisP/guardarart.php", {
+        titulo: titulo,
+        contenido: contenido,
+      });
+      console.log("post1");
+      //console.log(response.data);
+      // Puedes mostrar un mensaje de éxito o realizar otras acciones después de la inserción.
+    } catch (error) {
+      console.log("post2");
+      //console.error(error);
+      // Manejar errores aquí
+    }
+  };
+
+
    //Esto lo vamos a usar para que esta funcion se va a llamar cuadndo los datos se envien al controlador
 
    //ahora 
-   const [titulo, setTitulo] = useState(''); //arreglo con dos itmes, titulo es current state y el sengod es lo que ayuda a actualizar el estado
-   const [categoria, setCategoria] = useState('');
-   const [subCategoria, setSubCategoria] = useState('');
-   const [contenido, setContenido] = useState('');
-   const [imagen, setImagen] = useState(null);
-   const [informacionGuardada, setInformacionGuardada] = useState(null);
+   const [tituloAct, setTituloAct] = useState(''); //arreglo con dos itmes, titulo es current state y el sengod es lo que ayuda a actualizar el estado
+   const [categoriaAct, setCategoriaAct] = useState('');
+   const [subCategoriaAct, setSubCategoriaAct] = useState('');
+   const [contenidoAct, setContenidoAct] = useState('');
+   const [imagenAct, setImagenAct] = useState(null);
+   const [informacionGuardadaAct, setInformacionGuardadaAct] = useState(null);
    
+//useState se usa para declarar los estados dentros del componente 
 
    //aca el title, category y aja son variables que van a almacenar los datos relacionados con el articulo y se van creando valores iniciales o null en imagen
    //el set title y aja son funicones que se usa para actualizar los valores de las variables  osea re*rendiriza el componente con el nuevo estado
@@ -36,14 +59,14 @@ const CArticulo = ({ }) => {
     //por lo que ayuda a que haya logica en el envio de los datos
 
 
-    const newArticle = {
-      titulo,
-      categoria,
-      subCategoria,
-      contenido,
-      imagen,
+    const newArticle = { //Crea un objeto llamado newArticle que contiene los datos del artículo 
+      tituloAct,
+      categoriaAct,
+      subCategoriaAct,
+      contenidoAct,
+      imagenAct,
     };
-    setInformacionGuardada(newArticle);
+    setInformacionGuardadaAct(newArticle); //almacena los datos del objeto en el estado informacion gaurdada
     
     console.log('Datos enviados:', newArticle);
 
@@ -51,14 +74,14 @@ const CArticulo = ({ }) => {
 
 let archivoJS;
 
-switch (categoria) {
+switch (categoriaAct) {
   case 'Deporte':
     archivoJS = (
       <>
-        {subCategoria === 'futbol' && <PFutbol data={newArticle} />}
+        {subCategoriaAct === 'futbol' && <PFutbol data={newArticle} />}
 
-        {subCategoria === 'baloncesto' && <Baloncesto data={newArticle} />}
-        {subCategoria === 'volley' && <Volley data={newArticle} />}
+        {subCategoriaAct === 'baloncesto' && <Baloncesto data={newArticle} />}
+        {subCategoriaAct === 'volley' && <Volley data={newArticle} />}
       </>
     );
     break;
@@ -66,9 +89,9 @@ switch (categoria) {
   case 'Tec':
     archivoJS = (
       <>
-        {subCategoria === 'nanotecnologia' && <Nanotecnologia data={newArticle} />}
-        {subCategoria === 'medicina' && <Medicina data={newArticle} />}
-        {subCategoria === 'nuevas tendencias' && <Nt data={newArticle} />}
+        {subCategoriaAct === 'nanotecnologia' && <Nanotecnologia data={newArticle} />}
+        {subCategoriaAct === 'medicina' && <Medicina data={newArticle} />}
+        {subCategoriaAct === 'nuevas tendencias' && <Nt data={newArticle} />}
       </>
     );
     break;
@@ -76,9 +99,9 @@ switch (categoria) {
   case 'Comida':
     archivoJS = (
       <>
-        {subCategoria === 'platos fuertes' && <Pf data={newArticle} />}
-        {subCategoria === 'postres' && <Postres data={newArticle} />}
-        {subCategoria === 'aperitivos' && <Aperitivos data={newArticle} />}
+        {subCategoriaAct === 'platos fuertes' && <Pf data={newArticle} />}
+        {subCategoriaAct === 'postres' && <Postres data={newArticle} />}
+        {subCategoriaAct === 'aperitivos' && <Aperitivos data={newArticle} />}
       </>
     );
     break;
@@ -95,11 +118,11 @@ switch (categoria) {
 
 
   // Limpia el estado después de enviar los datos
-      setTitulo('');
-      setCategoria('');
-      setSubCategoria('');
-      setContenido('');
-      setImagen(null);
+      setTituloAct('');
+      setCategoriaAct('');
+      setSubCategoriaAct('');
+      setContenidoAct('');
+      setImagenAct(null);
 
    
      navigate('/home');
@@ -109,7 +132,7 @@ switch (categoria) {
 return (
    <div>
       <h3>En esta pestaña usted podra crear un articulo</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit} >
       <br></br>
       <label htmlFor="titulo" >Ingrese el nombre del articulo</label>
 
@@ -123,7 +146,7 @@ return (
       <br></br>
   <div> 
       <label htmlFor="categoria">Seleccione una categoria</label>
-      <select id="categoria" name="categoria" value={categoria} onChange={(hola) => setCategoria(hola.target.value)} // className="form-select"
+      <select id="categoria" name="categoria" value={categoriaAct} onChange={(hola) => setCategoriaAct(hola.target.value)} // className="form-select"
             required>
 
         <option value="">Seleccione una categoria</option>
@@ -135,28 +158,28 @@ return (
 
       <br></br>
 
-      {categoria && (
+      {categoriaAct && (
         <div> 
         <label htmlFor="subcategoria" >Subcategoria</label>
-        <select id="subcategoria" name="subcategoria"   value={subCategoria} // className="form-select" 
-                onChange={(hola) => setSubCategoria(hola.target.value)}
+        <select id="subcategoria" name="subcategoria"   value={subCategoriaAct} // className="form-select" 
+                onChange={(hola) => setSubCategoriaAct(hola.target.value)}
                 required>
   
           <option value="">Seleccione una subcategoria</option>
-          {categoria === 'Deporte' && (
+          {categoriaAct === 'Deporte' && (
             <>
             <option value="futbol">Futbol</option>
            <option value="baloncesto">Baloncesto</option>
            <option value="volley">Volley</option>
             </>
             )}
-            {categoria === 'Tec' && (
+            {categoriaAct === 'Tec' && (
             <>
             <option value="nanotecnologia">Nanotecnologia</option>
                     <option value="medicina">Medicina</option>
                     <option value="nuevas tendencias">Nuevas tendencias</option>
             </>)}
-            {categoria ==='Comida'&& (
+            {categoriaAct ==='Comida'&& (
             <>
             <option value="platos fuertes">Platos fuertes</option>
                     <option value="postres">Postres</option>
@@ -181,7 +204,7 @@ return (
         
         <br></br>
         <label htmlFor="texto">Ingrese una imagen (si gusta) </label>
-        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"   onChange={(hola) => setImagen(hola.target.files[0])}/>
+        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"   onChange={(hola) => setImagenAct(hola.target.files[0])}/>
        
       </div>
       {/* <input type="text" id="texto" name="texto"/> */}
