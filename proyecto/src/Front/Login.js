@@ -16,7 +16,7 @@ export const Login = () => {
         var txtusuario = document.getElementById("txtusuario").value;
         var txtcontraseña = document.getElementById("txtcontraseña").value;
         
-        if (usuario === "jose" && contraseña === "12345"){
+        if (usuario === "josegregorio" && contraseña === "12345"){
             navigate("/home")
             //document.getElementById("form_login").style.display = "none";
         }else{
