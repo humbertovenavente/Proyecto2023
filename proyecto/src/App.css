@@ -1,11 +1,15 @@
 .App {
   text-align: center;
+  background-color: white;
+  
+  
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -15,15 +19,17 @@
 
 
 body {
-  background-color: #80a8f7;
+  background-color: white; /* Cambia esto al color de fondo deseado */
+
 }
+¿
 
 .login {
   background-color:  #ee9b53;
 }
 
 .App-header {
-  background-color: #80a8f7;
+  background-color: #61dafb;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,8 +39,8 @@ body {
   color: rgb(100, 215, 238);
 }
 
-.App-link {
-  color: #61dafb;
+.llink{
+  background-color:  #61dafb;
 }
 
 @keyframes App-logo-spin {

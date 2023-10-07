@@ -19,6 +19,17 @@ const CArticulo = ({ }) => {
   const [titulo, setTitulo] = useState('');
   const [contenido, setContenido] = useState('');
 
+  //const [subcategory, setSubcategory] = useState('');
+  //const [content, setContent] = useState('');
+  //const [image, setImage] = useState(null);
+
+  //const [template, setTemplate] = useState('');
+  //const [content1, setContent1] = useState('');
+  //const [content2, setContent2] = useState(''); 
+  //const [content3, setContent3] = useState(''); 
+  //const [image1, setImage1] = useState(null);
+
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -38,9 +49,6 @@ const CArticulo = ({ }) => {
   };
 
 
-   //Esto lo vamos a usar para que esta funcion se va a llamar cuadndo los datos se envien al controlador
-
-   //ahora 
    const [tituloAct, setTituloAct] = useState(''); //arreglo con dos itmes, titulo es current state y el sengod es lo que ayuda a actualizar el estado
    const [categoriaAct, setCategoriaAct] = useState('');
    const [subCategoriaAct, setSubCategoriaAct] = useState('');
@@ -50,13 +58,11 @@ const CArticulo = ({ }) => {
    
 //useState se usa para declarar los estados dentros del componente 
 
-   //aca el title, category y aja son variables que van a almacenar los datos relacionados con el articulo y se van creando valores iniciales o null en imagen
-   //el set title y aja son funicones que se usa para actualizar los valores de las variables  osea re*rendiriza el componente con el nuevo estado
-
    const handleSubmit = (e) => {
     e.preventDefault();
-    //esta funcion se ejecuta a la hora de envair los datos y la segunda linea evitar que e envien predetemrinadamente
-    //por lo que ayuda a que haya logica en el envio de los datos
+
+    //const imageUrl = image ? URL.createObjectURL(image) : null;
+    
 
 
     const newArticle = { //Crea un objeto llamado newArticle que contiene los datos del artículo 
@@ -65,10 +71,20 @@ const CArticulo = ({ }) => {
       subCategoriaAct,
       contenidoAct,
       imagenAct,
+      //imagenAct: imageUrl,
+
+      
+      //template,
+      //content1,
+      //content2,
+      //content3,
+      //image1,
     };
     setInformacionGuardadaAct(newArticle); //almacena los datos del objeto en el estado informacion gaurdada
     
     console.log('Datos enviados:', newArticle);
+
+
 
   
 

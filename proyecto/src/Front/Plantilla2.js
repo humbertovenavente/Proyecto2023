@@ -1,6 +1,14 @@
 import React from 'react'
+import { useParams } from 'react-router-dom';
+
 
 const Plantilla2 = () => {
+  const { id } = useParams(); 
+  
+  const article = {
+    title: "Título del artículo",
+    content: "Esto es el contenido del artículo",
+  };
   return (
 <body class="bg-info d-flex justify-content-center align-items-center vh-100">
     <div >
@@ -8,7 +16,7 @@ const Plantilla2 = () => {
 
      <label>Esta es la plantilla 2</label>
 
-      <h1 class="text-center" >*Titulo del articulo*</h1>
+      <h1 class="text-center" >{article.title}</h1>
 
 
 <section class="carrusel mt-3">
@@ -60,8 +68,7 @@ const Plantilla2 = () => {
          
 <div class="justify-content-center" >
       <p >
-        Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo.
-       
+      {article.content1}
 
       </p > 
 </div>
@@ -98,3 +105,4 @@ const Plantilla2 = () => {
 }
 
 export default Plantilla2
+

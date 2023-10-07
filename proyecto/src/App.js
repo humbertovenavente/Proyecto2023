@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import { BrowserRouter, Routes, Route, Router} from "react-router-dom";
-
+import React, { useState } from 'react';
 
 import { Login } from './Front/Login';
 import Barra from './Front/Barra';
@@ -24,6 +24,7 @@ import Medicina from './Front/Medicina';
 import Postres from './Front/Postres';
 import Aperitivos from './Front/Aperitivos';
 import Pf from './Front/Pf';
+import Perfil from './Front/Perfil';
 
 
 
@@ -36,6 +37,13 @@ import APublicados from './Front/APublicados';
 
 function App() {
   
+  const [articles, setArticles] = useState([]); // Estado para almacenar los artículos
+
+  const handleArticleSubmit = (newArticle) => {
+    // Agregar el nuevo artículo a la lista de artículos
+    setArticles([...articles, newArticle]);
+  };
+
   return (
     <div className="App">
 
@@ -47,6 +55,8 @@ function App() {
         <Route path = '/iniciar sesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
         <Route path = '/registro' element = {<Registro/>}/>
+        <Route path = '/perfil' element = {<Perfil/>}/>
+        
         <Route path = '/articulos publicados' element = {<APublicados/>}/>
        
         <Route path = '/deporte' element = {<Deporte/>}/>

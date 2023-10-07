@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Barra = () => {
   return (
 
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg llink">
       <div className="container-fluid">
 
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@ const Barra = () => {
               <a className="nav-link dropdown-toggle ml-auto" href="" data-bs-toggle="dropdown" aria-expanded="false">
                 Categorias</a>
 
-                {/aqui/}
+                {/*aqui*/}
               <ul className="dropdown-menu">
 
                 
@@ -96,6 +96,10 @@ const Barra = () => {
             <li className="nav-item">
               <Link className="nav-link" to='/registro'>Registro de usuario</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to='/perfil'>Perfil</Link>
+            </li>
+            
           </ul>
 
 

@@ -42,6 +42,45 @@ code {
   display: block;
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Espacio entre las tarjetas */
+  max-height: 200px;
+  object-fit: cover;
+  height: inherit;
+
+}
+
+.card {
+  width: 15rem;
+  border: 1px solid #ccc; /* Borde para las tarjetas */
+  height: 24rem;
+}
+
+.card-img-top {
+  max-height: 200px; /* Altura máxima de la imagen */
+  object-fit: cover; /* Ajustar la imagen al tamaño de la tarjeta */
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem; /* Tamaño del título */
+}
+
+.card-text {
+  font-size: 1rem; /* Tamaño del texto */
+}
+
+.card-footer {
+  padding: 1rem;
+  text-align: center;
+}
+
 
 
 

@@ -1,0 +1,57 @@
+/* Futbol.css */
+.card-fixed-height {
+    height: 400px; /* O el tamaño que desees */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-fixed-height .card-img-top {
+    max-height: 150px;  /* O el tamaño que desees */
+    object-fit: cover; /* Esto hará que la imagen cubra el espacio disponible */
+  }
+  
+  .card-fixed-height .card-body {
+    overflow: auto; /* Para hacer el contenido desplazable si es necesario */
+    flex: 1;
+  }
+  
+  .card-fixed-height .card-footer {
+    margin-top: auto;  /* Esto empuja el footer hacia abajo */
+  }
+  
+  .card-img-top {
+    height: 200px; /* O el tamaño que prefieras */
+    object-fit: cover; /* Esto hará que la imagen cubra el espacio sin estirarse ni comprimirse */
+    width: 100%; /* Ocupará el ancho total del card */
+}
+
+.card-body {
+  min-height: 180px; /* Ajusta según tus necesidades */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-footer {
+  margin-top: auto; /* Esto empujará el footer hacia abajo */
+    background-color: white !important;
+    padding: 0 !important; /* Esto elimina el padding de card-footer */
+
+}
+.card-footer .btn {
+  width: 100%; /* Esto hace que el botón llene completamente el ancho del card-footer */
+  border-radius: 0; /* Esto hace que el botón no tenga bordes redondeados en los extremos */
+}
+
+.btn {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: -10px;  /* Ajusta según tus necesidades */
+  padding: 5px 10px;  /* Ajusta según tus necesidades */
+  overflow: hidden;
+  
+}
