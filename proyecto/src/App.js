@@ -48,6 +48,7 @@ function App() {
     <div className="App">
 
     <BrowserRouter>
+    
     <Barra/>
       <Routes>
         

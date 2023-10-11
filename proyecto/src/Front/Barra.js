@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 const Barra = () => {
   return (
 
+
     <nav className="navbar navbar-expand-lg llink">
       <div className="container-fluid">
 
@@ -71,7 +72,7 @@ const Barra = () => {
 
 
 
-  </ul>
+              </ul>
 
             </li>
 
