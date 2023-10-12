@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Router} from "react-router-dom";
 import React, { useState } from 'react';
 
 import { Login } from './Front/Login';
+import { useAuth } from './Front/AuthContext';
+
 import Barra from './Front/Barra';
 import CArticulo from './Front/CArticulo';
 import Home from './Front/Home';
@@ -26,17 +28,18 @@ import Aperitivos from './Front/Aperitivos';
 import Pf from './Front/Pf';
 import Perfil from './Front/Perfil';
 
-
-
-
 //Import plantillas
 import Plantilla1 from './Front/Plantilla1';
 import Plantilla2 from './Front/Plantilla2';
 import Plantilla3 from './Front/Plantilla3';
 import APublicados from './Front/APublicados';
+import AcercaDe from './Front/acercade';
 
-function App() {
-  
+function App() {  
+
+// const [username, setUsername] = useState("");
+const { isLoggedIn, l_user, logout } = useAuth();
+
   const [articles, setArticles] = useState([]); // Estado para almacenar los artículos
 
   const handleArticleSubmit = (newArticle) => {
@@ -47,12 +50,32 @@ function App() {
   return (
     <div className="App">
 
+      <header>
+        {/* <h1>Header en el APP.JS</h1> */}
+
+        { isLoggedIn ? ( 
+          <div>
+              <span>Usuario: {l_user} </span>
+              <button onClick={logout}>Cerrar sesión</button>            
+          </div>
+        ) : ( 
+          <div>
+            <span>
+              <p>Visitante</p>
+            </span> 
+          </div>
+        )
+        }
+
+      </header>
+
     <BrowserRouter>
     
     <Barra/>
+
       <Routes>
         
-        <Route path = '/home' element = {<Home/>}/>
+        <Route path = '/' element = {<Home/>}/>
         <Route path = '/iniciar sesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
         <Route path = '/registro' element = {<Registro/>}/>
@@ -80,18 +103,10 @@ function App() {
         <Route path = '/plantilla2' element = {<Plantilla2/>}/>
         <Route path = '/plantilla3' element = {<Plantilla3/>}/>
 
-       
-
-
+        <Route path = '/acercade' element = {<AcercaDe/>}/>
         
-
-
       </Routes>
-    </BrowserRouter>
-
-
-    
-
+    </BrowserRouter>   
 
     </div>
   );
