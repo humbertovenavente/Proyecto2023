@@ -81,6 +81,13 @@ code {
   text-align: center;
 }
 
+.bca{
+  display: flex;
+  align-items: center;
+}
 
+.oculto{
+  display: none;
+}
 
 

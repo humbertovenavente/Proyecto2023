@@ -4,14 +4,49 @@ import { useAuth } from './AuthContext';
 
 const Barra = () => {
 
-    const { isLoggedIn } = useAuth(); 
-    
+    //const { isLoggedIn } = useAuth(); 
+    const { isLoggedIn, l_user, logout, n_rol } = useAuth();  
+
     // return (
     //     <div>Test</div>
     // )
 
     return (
         <div>
+
+{isLoggedIn ? (
+            <nav className="navbar navbar-expand-lg llink">
+            <div className="container-fluid">
+              <ul className="navbar-nav ms-auto">
+                <li className="nav-item">
+                  {l_user} {n_rol}
+                </li>
+                <li className="nav-item">
+                  <button onClick={logout}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          </nav>          
+          ) : (
+            <nav className="navbar navbar-expand-lg llink">
+              <div className="container-fluid">
+                <ul className="navbar-nav ms-auto">
+
+                  <li className="nav-item bca">
+                    {n_rol}
+                  </li>
+
+                  <li className="nav-item">
+                    <Link className="nav-link" to='/front/login'>Login</Link>
+                  </li>
+
+                </ul>
+              </div>
+            </nav>
+          )
+          }     
+
+
         <nav className="navbar navbar-expand-lg llink">
             <div className="container-fluid">
 
@@ -37,12 +72,16 @@ const Barra = () => {
 
                     <ul className="navbar-nav ml-auto">
                         { !isLoggedIn ? (
-                            <li className="nav-item">
-                                <Link className="nav-link" to='/iniciar sesion'>Login</Link>
-                            </li>
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to='/iniciar sesion'>Login</Link>
+                        </li>                       
                         ) : ( '' ) }
                         <li className="nav-item">
-                            <Link className="nav-link" to='/registro'>Registro de usuario</Link>
+                                    <Link className="nav-link" to='/registro'>Registro de usuario</Link>
+                                </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" to='/categoria'>Categorias</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link active" to='/articulos'>Crear articulo</Link>

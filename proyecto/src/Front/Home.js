@@ -1,10 +1,30 @@
 import React from 'react'
+import { useEffect } from 'react';
+import axios from 'axios'
 
-//import axios from 'axios'
 //import { useEffect } from 'react'
-//import { useState } from 'react'
+// import { useState } from 'react'
 
-const Home = () => {
+const Home = ({articles}) => {
+
+  // const lastTenArticles = [...articles].reverse().slice(0, 10);
+
+
+
+  // useEffect(() => { 
+  //   setOper(8);
+  //   leercategorias()
+  // }, [])
+
+
+  // async function leercategorias() {
+  //   const response = await axios.get("http://gregserver/apisP/articulos.php")
+  //   r_categorias = response.data
+  //   if ( r_categorias.length >= 1 ) {
+  //     setDatos(r_categorias); 
+  //   }  
+  //   setOper(0);
+  // }
 
   /*
   useEffect(() => { articles()}, [])
@@ -34,7 +54,7 @@ const Home = () => {
       <h3>Bienvenidos al Home, en esta parte se mostrarán los artículos que hayan sido publicados recientemente</h3>
 
 
-      <div style={{ display: "flex", columnGap: "2.5rem", rowGap: "2.5rem", flexWrap: "wrap", justifyContent: "center" }}>
+      {/* <div style={{ display: "flex", columnGap: "2.5rem", rowGap: "2.5rem", flexWrap: "wrap", justifyContent: "center" }}>
         <div className="card" style={{ width: '15rem' }}>
           <img src="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" className="card-img-top" alt="Pelota de fútbol" />
           <div className="card-body">
@@ -117,7 +137,7 @@ const Home = () => {
 
         </div>
 
-      </div>
+      </div> */}
 
 
 

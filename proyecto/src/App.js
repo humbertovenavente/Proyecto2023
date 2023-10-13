@@ -12,6 +12,7 @@ import CArticulo from './Front/CArticulo';
 import Home from './Front/Home';
 import Registro from './Front/Registro';
 import Deporte from './Front/Deporte';
+import Categoria from './Front/categoria';
 import Comida from './Front/Comida';
 import Tec from './Front/Tec';
 
@@ -38,7 +39,7 @@ import AcercaDe from './Front/acercade';
 function App() {  
 
 // const [username, setUsername] = useState("");
-const { isLoggedIn, l_user, logout } = useAuth();
+//const { isLoggedIn, l_user, logout } = useAuth();
 
   const [articles, setArticles] = useState([]); // Estado para almacenar los artículos
 
@@ -50,8 +51,8 @@ const { isLoggedIn, l_user, logout } = useAuth();
   return (
     <div className="App">
 
-      <header>
-        {/* <h1>Header en el APP.JS</h1> */}
+      {/* <header>
+         <h1>Header en el APP.JS</h1> 
 
         { isLoggedIn ? ( 
           <div>
@@ -67,7 +68,7 @@ const { isLoggedIn, l_user, logout } = useAuth();
         )
         }
 
-      </header>
+      </header> */}
 
     <BrowserRouter>
     
@@ -80,6 +81,7 @@ const { isLoggedIn, l_user, logout } = useAuth();
         <Route path = '/articulos' element = {<CArticulo/>}/>
         <Route path = '/registro' element = {<Registro/>}/>
         <Route path = '/perfil' element = {<Perfil/>}/>
+        <Route path='/categoria' element={<Categoria />} />
         
         <Route path = '/articulos publicados' element = {<APublicados/>}/>
        
