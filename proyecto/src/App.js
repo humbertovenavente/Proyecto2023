@@ -11,6 +11,7 @@ import Barra from './Front/Barra';
 import CArticulo from './Front/CArticulo';
 import Home from './Front/Home';
 import Registro from './Front/Registro';
+import Moderar from './Front/Moderar';
 import Deporte from './Front/Deporte';
 import Categoria from './Front/categoria';
 import Comida from './Front/Comida';
@@ -77,11 +78,12 @@ function App() {
       <Routes>
         
         <Route path = '/' element = {<Home/>}/>
-        <Route path = '/iniciar sesion' element = {<Login/>}/>
+        <Route path = '/iniciarsesion' element = {<Login/>}/>
         <Route path = '/articulos' element = {<CArticulo/>}/>
         <Route path = '/registro' element = {<Registro/>}/>
         <Route path = '/perfil' element = {<Perfil/>}/>
         <Route path='/categoria' element={<Categoria />} />
+        <Route path='/moderar' element={<Moderar/>} />
         
         <Route path = '/articulos publicados' element = {<APublicados/>}/>
        

@@ -31,7 +31,7 @@ export const Login = () => {
             m_usuario = response.data
             if (m_usuario.length >= 1) {
                 // console.log(username, m_usuario[0].rol)
-                login(username, m_usuario[0].rol)
+                login(username, parseInt(m_usuario[0].rol))
                 setEstado(3)
                 setTimeout(() => {
                     return navigate('/')

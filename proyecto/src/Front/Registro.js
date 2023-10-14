@@ -12,8 +12,12 @@ var m_password2 = "";
 var numerror = 1;
 var m_usuario = [];
 var m_correo = [];
+// var response;
+var r_vusuarios = [];
 
 const Registro = () => {
+
+    let navigate = useNavigate();
 
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
@@ -22,6 +26,8 @@ const Registro = () => {
     const [password1, setPassword1] = useState("");
     const [password2, setPassword2] = useState("");
     const [usuario, setUsuario] = useState([]);
+
+    const [estado, setEstado] = useState(0);
     //--------------
     const [error, setError] = useState("");
     const [msg, setMsg] = useState("");
@@ -114,6 +120,7 @@ const Registro = () => {
 
     const sendData = async (e) => {
         e.preventDefault();
+        setEstado(1)
         try {
             console.log("send data");
             const response = await axios.post("http://gregserver/apisP/registro.php", {
@@ -128,9 +135,43 @@ const Registro = () => {
             //console.log(response.data);
             // Puedes mostrar un mensaje de éxito o realizar otras acciones después de la inserción.
         } catch (error) {
+            setEstado(2)
             console.log("send data error");
             //console.error(error);
             // Manejar errores aquí
+        } finally {
+            const response = await axios.post("http://gregserver/apisP/checklogin.php", {
+            username: m_username,
+            password: password1
+            });
+
+            r_vusuarios = response.data
+                if (r_vusuarios.length >= 1) {
+                   setEstado(3)
+                    setTimeout(() => {
+                        return navigate('/iniciarsesion')
+                    }, 2000);
+                } else {
+                        setEstado(4)
+                        setTimeout(() => {
+                            setEstado(0)
+                        }, 2000);
+                    }
+            // m_usuario = response.data
+            // if (m_usuario.length >= 1) {
+            //     // console.log(username, m_usuario[0].rol)
+            //     Registro(username, m_usuario[0].rol)
+            //     setEstado(3)
+            //     setTimeout(() => {
+            //         return navigate('/')
+            //     }, 2000);
+            // } else {
+            //     setEstado(4)
+            //     setTimeout(() => {
+            //         setEstado(0)
+            //     }, 2000);
+            // }
+            
         }
     };
 
@@ -302,7 +343,29 @@ const Registro = () => {
                         <p>Los Password no coinciden</p>
                     ) : numerror === 0 ? (
                         <div className="col-12">
-                            <button className="btn btn-primary" type="submit">  Registrarme </button>                    
+                            {estado === 0 ? (
+                            <button className="btn btn-primary" type="submit">  Registrarme </button>    
+                            ) : estado === 1 ? (
+                                <div>
+                                    <div className="spinner-border" role="status">
+                                    </div>
+                                    <span>  Registrando...</span>
+                                </div>
+                            ) : estado === 2 ? (<p>Error al Registrar</p>
+                            ) : estado === 3 ? (
+                                <div>
+                                    <span>Registro Exitoso, Redirigiendo..</span>
+                                    <div className="spinner-border" role="status">
+                                    </div>
+                                </div>
+
+                            ) : (<div>
+                                <span>Error al registrar, espere..</span>
+                                <div className="spinner-border" role="status">
+                                </div>
+                            </div>
+                            )
+                            }                
                         </div>
                     ) : ( <p></p> )
                     }
@@ -310,6 +373,7 @@ const Registro = () => {
                 </div>
 
 
+        
             </div>
 
         </form>

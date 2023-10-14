@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+// import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -8,6 +9,8 @@ export const AuthProvider = ({ children }) => {
   const [l_rol, setl_rol] = useState(0);
   const [n_rol, setn_rol] = useState("Visitante");
   var ln_rol = ''
+
+  // let navigate = useNavigate();
 
   const login = ( username, rol ) => {
     setIsLoggedIn( true );
@@ -38,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     setl_user("");
     setl_rol( 0 )
     setn_rol( 'Visitante' )
+    // return navigate('/')
   };
 
   return (
