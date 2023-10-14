@@ -35,22 +35,28 @@ const Categoria = () => {
 
   const guardarCategoria = async (e) => {
     e.preventDefault();
-    setOper(9);
-    try {
-      const response = await axios.post("http://gregserver/apisP/crearcategoria.php", {
-        categoria: a_categoria
-      });
 
-    } catch (error) {
-      console.log(error);
-    } finally {
+    if (a_categoria === "") {
+      alert("El Nombre de Categoría es Obligatorio");
+    } else {
+      setOper(9);
+      try {
+        const response = await axios.post("http://gregserver/apisP/crearcategoria.php", {
+          categoria: a_categoria
+        });
 
-      const response = await axios.get("http://gregserver/apisP/categorias.php")
-      r_categorias = response.data
-      if (r_categorias.length >= 1) {
-        setDatos(r_categorias);
+      } catch (error) {
+        console.log("send data error");
+      } finally {
+
+        const response = await axios.get("http://gregserver/apisP/categorias.php")
+        r_categorias = response.data
+        if (r_categorias.length >= 1) {
+          setDatos(r_categorias);
+        }
+        a_categoria = ""
+        setOper(0);
       }
-      setOper(0);
     }
   };
 

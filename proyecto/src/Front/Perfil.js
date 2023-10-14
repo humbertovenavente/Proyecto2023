@@ -4,7 +4,7 @@ const Perfil = () => {
   return (
 <div>
 
-    <h3>Hola</h3>
+    <h3>Perfil de usuario</h3>
 
 </div>
 

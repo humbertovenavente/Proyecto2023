@@ -227,43 +227,7 @@ const Registro = () => {
       }
   };
 
-    // const sendUsername = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         console.log("send data");
-    //         const response = await axios.post("http://localhost/proy/checkusername.php", {
-    //             username: username,
-    //         });
-    //         console.log(response);
-    //         //console.log(response.data);
-    //         // Puedes mostrar un mensaje de éxito o realizar otras acciones después de la inserción.
-    //     } catch (error) {
-    //         console.log("send data error");
-    //         //console.error(error);
-    //         // Manejar errores aquí
-    //     }
-    // };
 
-    // function checkEmail() {
-    //     var url = "http://localhost/proy/checkemail.php";
-    //     var headers = { "Accept": "application/json", "Content-Type": "application/json" };
-    //     var Data = { email: email }
-    //     fetch(url, {
-    //         method: "POST", headers: headers, body: JSON.stringify(Data)
-    //     }).then((response) => response.json())
-    //         .then((response) => {
-    //             setError(response[0].result);
-    //         }).catch((err) => {
-    //             setError(err);
-    //             console.log(err);
-    //         });
-    // }
-
-    // function checkPassword() {
-    //     if (password1.length < 8) {
-    //         setError("El password es menor que 8 caracteres");
-    //     }
-    // }
 
     return (
 

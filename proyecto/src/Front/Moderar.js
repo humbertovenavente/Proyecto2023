@@ -90,8 +90,7 @@ const Moderar = () => {
   return (
     <div>
       <h3>
-        Bienvenidos al Home, en esta parte se mostrarán los artículos que hayan
-        sido publicados recientemente
+        Bienvenidos a la moderacion de articulo
       </h3>
 
       {oper === 0 ? (
@@ -103,7 +102,7 @@ const Moderar = () => {
               alignItems: "center",
             }}
           >
-            10 Últimos Artículos
+            
           </h3>
 
           <div
