@@ -277,9 +277,9 @@ const Registro = () => {
 
                 <div>
 
-                    <div>Num Error: {numerror}</div>
+                    {/* <div>Num Error: {numerror}</div> */}
 
-                    <div>{m_usuario.length}</div>
+                    {/* <div>{m_usuario.length}</div> */}
 
                     {numerror === 1 ? (
                         <p>Ingrese First Name</p>
