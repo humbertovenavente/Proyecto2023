@@ -63,6 +63,14 @@ const Barra = () => {
                       Articulos Publicados
                     </Link>
                   </ul>
+                  <ul className="nav-item ml-auto">
+                    <Link
+                      className="nav-link active"
+                      to="/artxcategoria"
+                    >
+                      Articulos X Categoria
+                    </Link>
+                  </ul>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -114,6 +122,14 @@ const Barra = () => {
                       Articulos Publicados
                     </Link>
                   </ul>
+                  <ul className="nav-item ml-auto">
+                    <Link
+                      className="nav-link active"
+                      to="/artxcategoria"
+                    >
+                      Articulos X Categoria
+                    </Link>
+                  </ul>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -154,6 +170,14 @@ const Barra = () => {
                       Articulos Publicados
                     </Link>
                   </ul>
+                  <ul className="nav-item ml-auto">
+                    <Link
+                      className="nav-link active"
+                      to="/artxcategoria"
+                    >
+                      Articulos X Categoria
+                    </Link>
+                  </ul>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -192,6 +216,14 @@ const Barra = () => {
                       to="/articulos publicados"
                     >
                       Articulos Publicados
+                    </Link>
+                  </ul>
+                  <ul className="nav-item ml-auto">
+                    <Link
+                      className="nav-link active"
+                      to="/artxcategoria"
+                    >
+                      Articulos X Categoria
                     </Link>
                   </ul>
                 </ul>
@@ -237,6 +269,14 @@ const Barra = () => {
                       to="/articulos publicados"
                     >
                       Articulos Publicados
+                    </Link>
+                  </ul>
+                  <ul className="nav-item ml-auto">
+                    <Link
+                      className="nav-link active"
+                      to="/artxcategoria"
+                    >
+                      Articulos X Categoria
                     </Link>
                   </ul>
                 </ul>
@@ -287,6 +327,14 @@ const Barra = () => {
                       to="/articulos publicados"
                     >
                       Articulos Publicados
+                    </Link>
+                  </ul>
+                  <ul className="nav-item ml-auto">
+                    <Link
+                      className="nav-link active"
+                      to="/artxcategoria"
+                    >
+                      Articulos X Categoria
                     </Link>
                   </ul>
                 </ul>

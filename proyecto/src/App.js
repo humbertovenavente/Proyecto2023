@@ -16,6 +16,7 @@ import SubCategoria from './Front/subcategoria';
 import FiltroCat from './Front/FiltroCat';
 import Deporte from './Front/Deporte';
 import Categoria from './Front/categoria';
+import ArtxCategoria from './Front/artxcategoria';
 import Comida from './Front/Comida';
 import Tec from './Front/Tec';
 
@@ -88,6 +89,7 @@ function App() {
         <Route path='/moderar' element={<Moderar/>} />
         <Route path='/filtrocat' element={<FiltroCat/>} />
         <Route path='/subcategoria' element={<SubCategoria/>} />
+        <Route path='/artxcategoria' element={<ArtxCategoria/>} />
         
         <Route path = '/articulos publicados' element = {<APublicados/>}/>
        

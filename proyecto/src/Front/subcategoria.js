@@ -60,7 +60,7 @@ const SubCategoria = () => {
 
             setOper(9);
             try {
-                // console.log(a_subcategoria + categoriaAct)
+                console.log(a_subcategoria + categoriaAct)
                 const response = await axios.post("http://gregserver/apisP/crearsubcategoria.php", {
                     subcategoria: a_subcategoria,
                     id_categoria: categoriaAct
