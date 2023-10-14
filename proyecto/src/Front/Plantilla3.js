@@ -1,54 +1,176 @@
 import React from 'react';
+import './plantilla.css'; 
 
 const Plantilla3 = () => {
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className="bg-white p-4"> {/* Cuadro blanco alrededor de todo el contenido */}
-        <label className="text-center">Esta es la plantilla 3</label>
+    <div>
+      <h3 className="text-center my-4">Artículo de Revista</h3>
 
-        <h1 className="text-center">*Título del artículo*</h1>
-
-        <section className="container">
-          <div className="row">
-            <div className="col-md-4 d-flex">
-              <div className="bg-primary p-3 w-100 d-flex flex-column align-items-center justify-content-center text-white"> {/* Cuadro azul */}
-                <p className="text-center">
-                  Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un
-                  texto de ejemplo.
-                </p>
-              </div>
+      <section className="carousel-section mb-5">
+        <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src="https://picsum.photos/1920/600?random=1" className="d-block w-100" alt="Imagen 1"/>
             </div>
-
-            <div className="col-md-4 d-flex">
-              <div className="bg-success p-3 w-100 d-flex flex-column align-items-center justify-content-center text-white"> {/* Cuadro verde */}
-                <img
-                  src="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg"
-                  alt="Pelota de fútbol"
-                  style={{ maxWidth: '100%', height: 'auto' }}
-                />
-              </div>
+            <div className="carousel-item">
+              <img src="https://picsum.photos/1920/600?random=2" className="d-block w-100" alt="Imagen 2"/>
             </div>
-
-            <div className="col-md-4 d-flex">
-              <div className="bg-warning p-3 w-100 d-flex flex-column align-items-center justify-content-center"> {/* Cuadro amarillo */}
-                <p className="text-center">
-                  Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un
-                  texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de
-                  ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo.
-                  Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un
-                  texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de
-                  ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo. Esto es un texto de ejemplo.
-                </p>
-              </div>
+            <div className="carousel-item">
+              <img src="https://picsum.photos/1920/600?random=3" className="d-block w-100" alt="Imagen 3"/>
+            </div>
+            <div className="carousel-item">
+              <img src="https://picsum.photos/1920/600?random=4" className="d-block w-100" alt="Imagen 4"/>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      <section className="article-content mt-5">
+        <h2 className="text-center mb-4">Título del Artículo</h2>
+
+        <div className="row mb-5">
+          <div className="col-md-6">
+            <img className="img-fluid mb-4" src="https://picsum.photos/800/400?random=5" alt="Imagen artículo 1" />
+            <img className="img-fluid" src="https://picsum.photos/800/400?random=6" alt="Imagen artículo 2" />
+          </div>
+          <div className="col-md-6">
+            <p>Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+    
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba </p>
+            <p>Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+    
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba </p>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6">
+            <p>
+    
+     
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+    
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba </p>
+            <p>Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+    
+      
+      Prueba prueba Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba 
+      Prueba prueba  Prueba prueba  Prueba prueba  Prueba prueba </p>
+          </div>
+          <div className="col-md-6">
+            <img className="img-fluid mb-4" src="https://picsum.photos/800/400?random=7" alt="Imagen artículo 3" />
+            <img className="img-fluid" src="https://picsum.photos/800/400?random=8" alt="Imagen artículo 4" />
+          </div>
+        </div>
+      </section>
     </div>
   );
-};
+}
 
 export default Plantilla3;
-
-
-
