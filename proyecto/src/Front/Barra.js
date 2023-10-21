@@ -370,6 +370,11 @@ const Barra = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
+                    <Link className="nav-link" to="/Perfiles">
+                      Perfiles
+                    </Link>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" to="/moderar">
                       Moderar
                     </Link>

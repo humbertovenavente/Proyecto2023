@@ -227,6 +227,17 @@ const Registro = () => {
       }
   };
 
+  async function sendMail() {
+    try {
+        const response = await axios.post("http://gregserver/apisP/sendmail.php",{
+            email: email,
+            fname: fname
+        });
+        console.log(response)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
     return (
@@ -308,7 +319,7 @@ const Registro = () => {
                     ) : numerror === 0 ? (
                         <div className="col-12">
                             {estado === 0 ? (
-                            <button className="btn btn-primary" type="submit">  Registrarme </button>    
+                            <button className="btn btn-primary" type="submit" onClick={() => sendMail()}>  Registrarme </button>    
                             ) : estado === 1 ? (
                                 <div>
                                     <div className="spinner-border" role="status">
