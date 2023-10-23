@@ -72,7 +72,7 @@ const Perfiles = () => {
     setOper(9);
     console.log(rol);
     try {
-      const response = await axios.post("http://gregserver/apisP/actualizarperfil.php", {
+      const response = await axios.post("http://gregserver/apisP/actualizarperfiles.php", {
         usuario: em_username,
         nusuario: em_st_usuario,
         srusuario: rol
@@ -185,7 +185,6 @@ const Perfiles = () => {
                 <th>Username</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                {/* <th>Suscripcion</th> */}
                 <th>Activo</th>
                 <th>Rol</th>
                 <th>Seleccionar</th>
@@ -197,7 +196,6 @@ const Perfiles = () => {
                   <td>{dato.username}</td>
                   <td>{dato.nombre_usuario}</td>
                   <td>{dato.apellido_usuario}</td>
-                  {/* <td>{dato.suscripcion}</td> */}
                   <td>{dato.activo}</td>
                   <td>{dato.nombre_rol}</td>
                   <td><button id='but' onClick={() => editarUsuario(dato.username)}>Editar</button></td>

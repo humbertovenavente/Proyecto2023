@@ -1,12 +1,250 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth } from "./AuthContext";
+
+var a_usuario = '';
+var em_usuario = '';
+var em_username = '';
+var em_st_usuario = '';
+var em_st_rolusuario = '';
+var r_usuario = [];
+
+var response;
+var m_usuario = [];
+
+const roles = [
+  {id_rol : 1, n_rol : 'Usuario'},    
+  {id_rol : 2, n_rol : 'Suscriptor'},
+  {id_rol : 3, n_rol : 'Autor'},
+  {id_rol : 4, n_rol : 'Moderador'},
+  {id_rol : 5, n_rol : 'Administrador'},
+];
+var m_rolAct = ""
 
 const Perfil = () => {
+
+  const { isLoggedIn, l_user, logout, n_rol , l_rol} = useAuth();
+// const { isLoggedIn, l_user, l_rol } = useAuth();
+const [rol, setRol] = useState('');
+
+function changerol(e) {
+  setRol(e.target.value)
+  console.log(e.target.value)
+}
+
+
+
+const [datos, setDatos] = useState([]);
+const [oper, setOper] = useState(0);
+const [e_usuario, sete_usuario] = useState('');
+const [e_username, sete_username] = useState('');
+const [e_st_usuario, sete_st_usuario] = useState('');
+const [e_st_rolusuario, sete_st_rolusuario] = useState('');
+// const [e_rol_usuario, sete_rol_usuario] = useState('');
+
+useEffect(() => {
+  setOper(8);
+  // setRol(l_rol)
+  leerusuario()
+}, [])
+
+// async function leerusuario() {
+//   const response = await axios.get("http://gregserver/apisP/perfiles.php")
+//   r_usuario = response.data
+//   console.log(response);
+//   if (r_usuario.length >= 1) {
+//     setDatos(r_usuario);
+//   }
+//   setOper(0);
+// }
+
+async function leerusuario() {
+  // e.preventDefault();
+  // setOper(9);
+  // console.log(rol);
+  try {
+    // console.log(l_user);
+     response = await axios.post("http://gregserver/apisP/checkperfil.php", {
+      usuario: l_user
+    });
+    // console.log(response)
+
+  } catch (error) {
+    console.log(error);
+  } finally {
+    // console.log(response.data);
+    m_usuario = response.data
+    console.log(m_usuario.length);
+    console.log(m_usuario);
+    if (m_usuario.length >= 1) {
+      setDatos(m_usuario);
+    }
+    // m_usuario = response.data
+    // setDatos(m_usuario);
+    setOper(0);
+  }
+};
+
+
+const actualizarUsuario = async (e) => {
+  e.preventDefault();
+  setOper(9);
+  console.log(rol);
+  try {
+    const response = await axios.post("http://gregserver/apisP/actualizarperfil.php", {
+      usuario: em_username,
+      nusuario: em_st_usuario,
+      srusuario: rol
+    });
+    // console.log(response)
+
+  } catch (error) {
+    console.log("send data error");
+  } finally {
+
+    const response = await axios.get("http://gregserver/apisP/perfiles.php")
+    r_usuario = response.data
+    if (r_usuario.length >= 1) {
+      setDatos(r_usuario);
+    }
+    setOper(0);
+  }
+};
+
+const editarUsuario = (id) => {
+
+  setOper(2)
+  var i = 0
+  var found = false;
+  for (i = 0; i < r_usuario.length && !found; i++) {
+    if (r_usuario[i].username === id) {
+      found = true;
+      break;
+    }
+  }
+  em_username = r_usuario[i].username
+  sete_username(em_username)
+  em_usuario = r_usuario[i].nombre_usuario
+  sete_usuario(em_usuario)
+  em_st_usuario = r_usuario[i].activo
+  sete_st_usuario(em_st_usuario)
+  em_st_rolusuario = r_usuario[i].rol
+  setRol(r_usuario[i].rol)
+};
+
+function cambiaActivo() {
+  if (em_st_usuario === 'X') {
+    em_st_usuario = ''
+  } else {
+    em_st_usuario = 'X'
+  }
+  sete_st_usuario(em_st_usuario)
+}
+
+
+
+function regresar() {
+  em_username = ''
+  sete_username(em_username)
+  em_usuario = ''
+  sete_usuario(em_usuario)
+  em_st_usuario = ''
+  sete_st_usuario(em_st_usuario)
+  setOper(0);
+}
+
+
+const handleInputChange = (e, type) => {
+  const valor = e.target.value;
+  switch (type) {
+    case "a_usuario":
+      a_usuario = valor
+      break;
+    case "e_usuario":
+      em_usuario = valor
+      sete_usuario(em_usuario)
+      break;
+    case "e_st_rolusuario":
+      em_st_rolusuario = valor
+      sete_st_rolusuario(em_st_rolusuario)
+      break;
+    default:
+  }
+}
+
+
+
+
   return (
-<div>
 
-    <h3>Perfil de usuario</h3>
+    <div>
+      {oper === 0 ? (
+        <div>
+          <table className="table" id="tabla">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Suscripcion</th>
+                <th>Rol</th>
+                <th>Seleccionar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {datos.map((dato) => (
+                <tr key={dato.username}>
+                  <td>{dato.username}</td>
+                  <td>{dato.nombre_usuario}</td>
+                  <td>{dato.apellido_usuario}</td>
+                  <td>{dato.email}</td>
+                  <td>{dato.suscripcion}</td>
+                  <td>{dato.nombre_rol}</td>
+                  <td><button id='but' onClick={() => editarUsuario(dato.username)}>Editar</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-</div>
+                   
+        </div>
+      
+      ) : oper === 2 ? (
+        <div>
+          <label>Edición de Usuario</label>
+          <br/><br/>
+          {/* <input type="text" onChange={(e) => handleInputChange(e, "e_username")} id="e_username" value={e_username} /> */}
+          <label className="form-label">Username</label>
+          <input type="text" onChange={(e) => handleInputChange(e, "e_usuario")} value={e_usuario} id="e_usuario" placeholder='Usuario' disabled />
+          <label className="form-label">Activo</label>
+          <input type="text" onChange={(e) => handleInputChange(e, "e_st_usuario")} id="e_st_usuario" value={e_st_usuario} />
+          <button onClick={cambiaActivo}>Cambiar Activo Inactivo</button>
+          <label className="form-label">Rol</label>
+          {/* <input type="text" onChange={(e) => handleInputChange(e, "e_st_rolusuario")} id="e_st_rolusuario" value={e_st_rolusuario} maxLength="1"/> */}
+          <select id="rol" name="rol" value={rol} onChange={(e) => changerol(e)} required> 
+                                {roles.map((dato) => (
+                                    <option value={dato.id_rol} key={dato.id_rol}>{dato.n_rol}</option>
+                                ))} 
+          </select>
+          {/* <h3>{rol}</h3> */}
+          <br/><br/>
+          <button onClick={actualizarUsuario}>Grabar Datos</button>
+          <button onClick={regresar}>Regresar</button>
+        </div>
+      ) : oper === 8 ? (
+        <div>
+          <span>Leyendo Perfil, espere..</span>
+          <div className="spinner-border" role="status" />
+        </div>
+      ) : oper === 9 ? (
+        <div>
+          <span>Actualizando Perfil, espere..</span>
+          <div className="spinner-border" role="status" />
+        </div>
+      ) : (<p></p>)}
+
+    </div>
 
 
     );
