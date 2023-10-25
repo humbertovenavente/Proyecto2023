@@ -11,6 +11,72 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* .dropdown-menu{
+  position: relative;
+}
+
+.dropdown-menu .submenu{
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 1px;
+}
+
+.dropdown-menu>li:hover>.submenu{
+  display: block;
+} */
+.dropdown-menu{
+  position: relative;
+}
+
+.dropdown-menu .submenu{
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 1px;
+}
+
+.dropdown-menu>li:hover>.submenu{
+  display: block;
+}
+
+.bca{
+  display: flex;
+  align-items: center;
+}
+
+.oculto{
+  display: none;
+}
+
+.degradado-c{
+  background: linear-gradient(to bottom,  #0DCAF0, #ffffff 80%);
+}
+.degradado-c1{
+  background: linear-gradient(to bottom, #01ffff );
+}
+
+.degradado-c2{
+  background: linear-gradient(to bottom, #ffffff);
+}
+
+.degradado-o{
+  background: linear-gradient(to bottom, #0DCAF0 60%, #0400ff );
+}
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
 .degradado-c{
   background: linear-gradient(to bottom,  #0DCAF0, #ffffff 80%);
 }
@@ -46,7 +112,7 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px; /* Espacio entre las tarjetas */
+  gap: 20px; 
   max-height: 200px;
   object-fit: cover;
   height: inherit;
@@ -55,13 +121,13 @@ code {
 
 .card {
   width: 15rem;
-  border: 1px solid #ccc; /* Borde para las tarjetas */
+  border: 1px solid #ccc; 
   height: 24rem;
 }
 
 .card-img-top {
-  max-height: 200px; /* Altura máxima de la imagen */
-  object-fit: cover; /* Ajustar la imagen al tamaño de la tarjeta */
+  max-height: 200px; 
+  object-fit: cover; 
 }
 
 .card-body {
@@ -69,11 +135,11 @@ code {
 }
 
 .card-title {
-  font-size: 1.25rem; /* Tamaño del título */
+  font-size: 1.25rem; 
 }
 
 .card-text {
-  font-size: 1rem; /* Tamaño del texto */
+  font-size: 1rem; 
 }
 
 .card-footer {
@@ -90,4 +156,4 @@ code {
   display: none;
 }
 
-
+ */

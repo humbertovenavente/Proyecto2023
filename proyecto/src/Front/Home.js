@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 var r_articles = [];
@@ -9,6 +10,9 @@ var sel_articles = [];
 // import { useState } from 'react'
 
 const Home = () => {
+
+  let navigate = useNavigate();
+
   const [articles, setArticles] = useState([]);
   const [s_articles, setS_articles] = useState([]);
   const [oper, setOper] = useState(0);
@@ -41,6 +45,8 @@ const Home = () => {
     }
     sel_articles[0] = r_articles[i];
     setS_articles(sel_articles);
+
+    return navigate(`/articulo/${sel_articles[0].id_articulo}`)
   };
 
   function regresar_a() {

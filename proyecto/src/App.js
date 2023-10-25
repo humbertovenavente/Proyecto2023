@@ -20,6 +20,8 @@ import ArtxCategoria from './Front/artxcategoria';
 import Comida from './Front/Comida';
 import Tec from './Front/Tec';
 import Perfiles from './Front/Perfiles';
+import Articulo from './Front/articulo';
+import Anuncios from './Front/anuncios';
 
 import Baloncesto from './Front/Baloncesto';
 import Volley from './Front/Volley';
@@ -54,7 +56,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="container">
 
       {/* <header>
          <h1>Header en el APP.JS</h1> 
@@ -92,6 +94,8 @@ function App() {
         <Route path='/subcategoria' element={<SubCategoria/>} />
         <Route path='/artxcategoria' element={<ArtxCategoria/>} />
         <Route path = '/Perfiles' element = {<Perfiles/>}/>
+
+        <Route path='/articulo/:idarticulo' element={<Articulo />} />
         
         <Route path = '/articulos publicados' element = {<APublicados/>}/>
        
@@ -120,6 +124,11 @@ function App() {
       </Routes>
     </BrowserRouter>   
 
+    <br/>
+      <Anuncios />
+      <br/>
+
+    {/* <h3>Aqui va el anuncio</h3> */}
     </div>
   );
 }
