@@ -2,10 +2,11 @@ import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-
-
-
 import axios from "axios";
+
+var r_articles = [];
+var r_categorias = [];
+var m_categoriaAct = ""
 
 const CArticulo = () => {
   //const navigate = useNavigate();
@@ -13,6 +14,7 @@ const CArticulo = () => {
   
   let navigate = useNavigate();
 
+  const [articles, setArticles] = useState([]);
   const [titulo, setTitulo] = useState("");
   const [contenido, setContenido] = useState("");
 
@@ -37,6 +39,8 @@ const CArticulo = () => {
   useEffect(() => {
     //setOper(8);
     if (l_isLoggedIn && (l_l_rol === 3 || l_l_rol || 4 && l_l_rol || 5)) {   
+      r_articles = []
+      leercategorias()
       // setOper(8)
       // leersubcategorias()
       // leercategorias()    
@@ -48,6 +52,21 @@ const CArticulo = () => {
     }
 
   }, [])
+
+  async function leercategorias() {
+    try {
+        const response = await axios.get("http://gregserver/apisP/categorias.php")
+        r_categorias = response.data
+        // console.log(r_categorias)
+        if (r_categorias.length >= 1) {
+            setCategoriaAct(r_categorias);
+        }
+    } catch (error) {
+        console.log("send data error");
+    } finally {
+        //setOper(1)
+    }
+  }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -121,12 +140,44 @@ const CArticulo = () => {
     navigate("/home");
   };
 
+
+  function selCategoria(cat) {
+    m_categoriaAct = cat
+    setCategoriaAct(m_categoriaAct)
+    //setsubOper(1)
+    setArticles([]);
+    leerarticulosxcat(m_categoriaAct)
+}
+
+async function leerarticulosxcat(id_cat) {
+  try {
+      // console.log(id_cat)
+      const response = await axios.post("http://gregserver/apisP/artxcategoria.php", {
+          id_cat: id_cat
+      })
+      // console.log(response.data)
+      r_articles = response.data
+      if (r_articles.length >= 1) {
+          setArticles(r_articles);
+      }            
+  } catch (error) {
+      console.log(error);
+  } finally {
+      //setsubOper(2)
+  }
+
+}
+
+
+
+
+
   return (
     <div>
       <h3>En esta pestaña usted podra crear un articulo</h3>
       <form onSubmit={handleFormSubmit}>
         <br></br>
-        <label htmlFor="titulo">Ingrese el nombre del articulo</label>
+        <label htmlFor="titulo">Ingrese el titulo del articulo</label>
 
         <input
           type="text"
@@ -138,9 +189,10 @@ const CArticulo = () => {
         />
 
         <br></br>
+
         <div>
           <label htmlFor="categoria">Seleccione una categoria</label>
-          <select
+          {/* <select
             id="categoria"
             name="categoria"
             value={categoriaAct}
@@ -151,6 +203,12 @@ const CArticulo = () => {
             <option value="Deporte">Deporte</option>
             <option value="Tec">Tecnologia</option>
             <option value="Comida">Comida</option>
+          </select> */}
+          <select id="categoria" name="categoria" value={m_categoriaAct} onChange={e => (selCategoria(e.target.value))}>
+                        <option value="" key={""}>Seleccione una categoria</option>
+                        {r_categorias.map((dato) => (
+                            <option value={dato.id_categoria} key={dato.id_categoria}>{dato.nombre_categoria}</option>
+                        ))}
           </select>
         </div>
 
