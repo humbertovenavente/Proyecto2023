@@ -1,16 +1,45 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState , useEffect } from 'react';
 // import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 
 const AuthContext = createContext();
+
+var response;
+var m_usuario = [];
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [l_user, setl_user] = useState("");
   const [l_rol, setl_rol] = useState(0);
   const [n_rol, setn_rol] = useState("Visitante");
+  const [username, setUsuario] = useState("");
   var ln_rol = ''
 
   // let navigate = useNavigate();
+  useEffect(() => {
+    const l_username = localStorage.getItem('jcapp_username')
+    if(l_username){
+      sendUsername(l_username)
+    }
+  }, [])
+
+  
+
+  const sendUsername = async (l_username) => {
+    try {
+        response = await axios.post("http://gregserver/apisP/checkusername.php", {
+            username: l_username,
+        });
+        m_usuario = response.data
+        setUsuario(m_usuario);
+        if ( m_usuario.length >= 1 ) {
+            login(l_username, parseInt(m_usuario[0].rol))      
+        }                
+    } catch (error) {
+        // Manejar errores aquí
+    }
+}; 
 
   const login = ( username, rol ) => {
     setIsLoggedIn( true );
@@ -34,6 +63,10 @@ export const AuthProvider = ({ children }) => {
     }
     // console.log(ln_rol)
     setn_rol( ln_rol )
+
+    localStorage.setItem('jcapp_username', username)
+    localStorage.setItem('jcapp_l_rol', rol)
+    localStorage.setItem('jcapp_logued', 'X')
   };
   
   const logout = () => {
@@ -42,6 +75,8 @@ export const AuthProvider = ({ children }) => {
     setl_rol( 0 )
     setn_rol( 'Visitante' )
     // return navigate('/')
+
+    localStorage.clear();
   };
 
   return (

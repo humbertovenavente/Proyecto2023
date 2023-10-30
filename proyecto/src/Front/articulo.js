@@ -70,18 +70,19 @@ const Articulo = () => {
     async function leerarticulo(id_art) {
 
         try {
-            // const response = await axios.post("http://gregserver/apisP/leerdetarticulo.php", {
+            //console.log(id_art);
+            // const response = await axios.post("http://gregserver/apisP/leerdetarticulo.php", {, 
             response = await axios.post("http://gregserver/apisP/leerdetarticulo.php", {
                 id_art: id_art
             })            
-
+            console.log(response.data);
         } catch (error) {
             console.log(error)
         } finally {
 
 
-        console.log(response.data.articulo)
-        console.log(response.data.comentarios)
+        console.log(response.data)
+        //console.log(response.data.comentarios)
 
 
         r_article = response.data.articulo
@@ -141,7 +142,7 @@ const Articulo = () => {
             console.log(error);
         } finally {
 
-            const response = await axios.post("http://gregserver/apisP/leerdetarticulo.php", {
+            const response = await axios.post("http://gregserver/apisP/leerdetarticuloscv.php", {
                 id_art: idarticulo
             })
 
@@ -202,7 +203,7 @@ const Articulo = () => {
            console.log("Error Grabando Respuesta");
         } finally {
 
-            const response = await axios.post("http://gregserver/apisP/leerdetarticulo.php", {
+            const response = await axios.post("http://gregserver/apisP/leerdetarticuloscv.php", {
                 id_art: idarticulo
             })
 

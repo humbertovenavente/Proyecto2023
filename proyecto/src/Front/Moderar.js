@@ -2,23 +2,45 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+
 
 var r_articles = [];
 var sel_articles = [];
 
 const Moderar = () => {
   
+  
   let navigate = useNavigate();
+
 
   const [articles, setArticles] = useState([]);
   const [s_articles, setS_articles] = useState([]);
   const [oper, setOper] = useState(0);
 
+  const [omodalRed, setomodalRed] = useState(false);
+  const handleCloseRed = () => {
+  setomodalRed(false)
+  };
+
+  const l_isLoggedIn = localStorage.getItem('jcapp_logued')
+  const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
+
   useEffect(() => {
-    r_articles = [];
-    leer10articulos();
-    setOper(0);
-  }, []);
+    //setOper(8);
+    if (l_isLoggedIn && (l_l_rol === 5 || l_l_rol === 4)) {   
+      //setOper(8)
+      r_articles = [];
+      leer10articulos();
+    } else {
+      setomodalRed(true)
+      setTimeout(() => {
+        return navigate('/')
+      }, 2000);
+    }
+  
+  }, [])
 
   async function leer10articulos() {
     const response = await axios.get("http://gregserver/apisP/moderacion.php");
@@ -224,6 +246,17 @@ const Moderar = () => {
       )}
 
       
+{/* **Ventana Modal para Mensaje** */}
+<Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                <div>
+                    <span>No tienes autorizacion, redirigiendo al home</span>
+                    <div className="spinner-border" role="status" />                            
+                </div>
+              </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
+
     </div>
   );
 };

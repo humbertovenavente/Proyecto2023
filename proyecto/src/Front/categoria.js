@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
 
 var a_categoria = '';
 var em_categoria = '';
@@ -9,15 +12,35 @@ var r_categorias = [];
 
 const Categoria = () => {
 
+  
+  let navigate = useNavigate();
+
   const [datos, setDatos] = useState([]);
   const [oper, setOper] = useState(0);
   const [e_categoria, sete_categoria] = useState('');
   const [e_id_categoria, sete_id_categoria] = useState('');
   const [e_st_categoria, sete_st_categoria] = useState('');
 
+  const [omodalRed, setomodalRed] = useState(false);
+  const handleCloseRed = () => {
+    setomodalRed(false)
+  };
+
+  const l_isLoggedIn = localStorage.getItem('jcapp_logued')
+  const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
+
   useEffect(() => {
-    setOper(8);
-    leercategorias()
+    setOper(7);
+    if (l_isLoggedIn && l_l_rol === 5) {   
+      setOper(8)
+      leercategorias()    
+    } else {
+      setomodalRed(true)
+      setTimeout(() => {
+        return navigate('/')
+      }, 2000);
+    }
+
   }, [])
 
   async function leercategorias() {
@@ -194,6 +217,12 @@ const Categoria = () => {
           <button onClick={actualizarCategoria}>Grabar Datos</button>
           <button onClick={regresar}>Regresar</button>
         </div>
+      ) : oper === 7 ? (
+        <div>
+          <p></p>
+          {/* <span>No está logueado, redirigiendo al Home...</span>
+          <div className="spinner-border" role="status" /> */}
+        </div>
       ) : oper === 8 ? (
         <div>
           <span>Leyendo Categorias, espere..</span>
@@ -205,6 +234,18 @@ const Categoria = () => {
           <div className="spinner-border" role="status" />
         </div>
       ) : (<p></p>)}
+
+
+{/* **Ventana Modal para Mensaje** */}
+            <Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                <div>
+                    <span>No tienes autorizacion, redirigiendo al home</span>
+                    <div className="spinner-border" role="status" />                            
+                </div>
+              </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
 
     </div>
   );

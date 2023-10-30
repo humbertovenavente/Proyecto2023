@@ -1,14 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
+
+
 
 const Barra = () => {
   //const { isLoggedIn } = useAuth();
   const { isLoggedIn, l_user, logout, n_rol , l_rol} = useAuth();
-
+  let navigate = useNavigate();
   // return (
   //     <div>Test</div>
   // )
+
+  function logout_barra() {
+    logout()
+    return navigate('/')
+  }
 
   return (
     <div>
@@ -20,7 +28,7 @@ const Barra = () => {
                 {l_user} {n_rol}
               </li>
               <li className="nav-item">
-                <button onClick={logout}>Logout</button>
+                <button onClick={logout_barra}>Logout</button>
               </li>
             </ul>
           </div>

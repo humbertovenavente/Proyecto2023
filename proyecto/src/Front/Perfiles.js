@@ -1,5 +1,8 @@
 import React, { useState, useEffect, Component } from 'react';
 import axios from 'axios';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
 // import { useAuth } from './AuthContext';
 
 var a_usuario = '';
@@ -20,6 +23,9 @@ var m_rolAct = ""
 
 const Perfiles = () => {
 
+
+  
+  let navigate = useNavigate();
   // const { isLoggedIn, l_user, l_rol } = useAuth();
   const [rol, setRol] = useState('');
 
@@ -50,11 +56,27 @@ const Perfiles = () => {
   const [e_st_rolusuario, sete_st_rolusuario] = useState('');
   // const [e_rol_usuario, sete_rol_usuario] = useState('');
 
+  const [omodalRed, setomodalRed] = useState(false);
+  const handleCloseRed = () => {
+  setomodalRed(false)
+  };
+
+  const l_isLoggedIn = localStorage.getItem('jcapp_logued')
+  const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
+
   useEffect(() => {
-    setOper(8);
-    // setRol(l_rol)
+  //setOper(8);
+  if (l_isLoggedIn && l_l_rol === 5) {   
+    //setOper(8)
     leerusuario()
-  }, [])
+  } else {
+    setomodalRed(true)
+    setTimeout(() => {
+      return navigate('/')
+    }, 2000);
+  }
+
+}, [])
 
   async function leerusuario() {
     const response = await axios.get("http://gregserver/apisP/perfiles.php")
@@ -240,6 +262,17 @@ const Perfiles = () => {
           <div className="spinner-border" role="status" />
         </div>
       ) : (<p></p>)}
+
+{/* **Ventana Modal para Mensaje** */}
+<Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                <div>
+                    <span>No tienes autorizacion, redirigiendo al home</span>
+                    <div className="spinner-border" role="status" />                            
+                </div>
+              </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
 
     </div>
 

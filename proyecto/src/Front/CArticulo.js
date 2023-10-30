@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PFutbol from "./PFutbol";
-import Baloncesto from "./Baloncesto";
-import Volley from "./Volley";
-import Nt from "./Nt";
-import Medicina from "./Medicina";
-import Pf from "./Pf";
-import Postres from "./Postres";
-import Aperitivos from "./Aperitivos";
-import Nanotecnologia from "./Nanotecnologia";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+
+
+
 import axios from "axios";
 
-const CArticulo = ({}) => {
-  const navigate = useNavigate();
+const CArticulo = () => {
+  //const navigate = useNavigate();
+
+  
+  let navigate = useNavigate();
 
   const [titulo, setTitulo] = useState("");
   const [contenido, setContenido] = useState("");
@@ -26,6 +25,29 @@ const CArticulo = ({}) => {
   //const [content2, setContent2] = useState('');
   //const [content3, setContent3] = useState('');
   //const [image1, setImage1] = useState(null);
+
+  const [omodalRed, setomodalRed] = useState(false);
+  const handleCloseRed = () => {
+  setomodalRed(false)
+  };
+
+  const l_isLoggedIn = localStorage.getItem('jcapp_logued')
+  const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
+
+  useEffect(() => {
+    //setOper(8);
+    if (l_isLoggedIn && (l_l_rol === 3 || l_l_rol || 4 && l_l_rol || 5)) {   
+      // setOper(8)
+      // leersubcategorias()
+      // leercategorias()    
+    } else {
+      setomodalRed(true)
+      setTimeout(() => {
+        return navigate('/')
+      }, 2000);
+    }
+
+  }, [])
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -83,49 +105,7 @@ const CArticulo = ({}) => {
 
     let archivoJS;
 
-    switch (categoriaAct) {
-      case "Deporte":
-        archivoJS = (
-          <>
-            {subCategoriaAct === "futbol" && <PFutbol data={newArticle} />}
-
-            {subCategoriaAct === "baloncesto" && (
-              <Baloncesto data={newArticle} />
-            )}
-            {subCategoriaAct === "volley" && <Volley data={newArticle} />}
-          </>
-        );
-        break;
-
-      case "Tec":
-        archivoJS = (
-          <>
-            {subCategoriaAct === "nanotecnologia" && (
-              <Nanotecnologia data={newArticle} />
-            )}
-            {subCategoriaAct === "medicina" && <Medicina data={newArticle} />}
-            {subCategoriaAct === "nuevas tendencias" && (
-              <Nt data={newArticle} />
-            )}
-          </>
-        );
-        break;
-
-      case "Comida":
-        archivoJS = (
-          <>
-            {subCategoriaAct === "platos fuertes" && <Pf data={newArticle} />}
-            {subCategoriaAct === "postres" && <Postres data={newArticle} />}
-            {subCategoriaAct === "aperitivos" && (
-              <Aperitivos data={newArticle} />
-            )}
-          </>
-        );
-        break;
-
-      default:
-        archivoJS = null;
-    }
+    
 
     //creamos este objeto en donde se tiene los datos del articulo en la que el usuario ingrese los datos al controlador que es onArticleSubmit
     //ahora bien, onArticleSubmit sera la funcion que va a pasar como propiedad en CArticulo
@@ -252,6 +232,18 @@ const CArticulo = ({}) => {
           Publicar Articulo
         </button>
       </form>
+
+{/* **Ventana Modal para Mensaje** */}
+<Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                <div>
+                    <span>No tienes autorizacion, redirigiendo al home</span>
+                    <div className="spinner-border" role="status" />                            
+                </div>
+              </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
+
     </div>
   );
 };

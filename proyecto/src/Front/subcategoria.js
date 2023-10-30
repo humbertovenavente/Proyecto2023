@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
 
 var a_subcategoria = '';
 var em_subcategoria = '';
@@ -11,6 +14,9 @@ var m_categoriaAct = ""
 
 const SubCategoria = () => {
 
+   
+    let navigate = useNavigate();
+
     const [datos, setDatos] = useState([]);
     const [datos2, setDatos2] = useState([]);
     const [oper, setOper] = useState(0);
@@ -19,11 +25,28 @@ const SubCategoria = () => {
     const [e_id_subcategoria, sete_id_subcategoria] = useState('');
     const [e_st_subcategoria, sete_st_subcategoria] = useState('');
 
+    const [omodalRed, setomodalRed] = useState(false);
+    const handleCloseRed = () => {
+    setomodalRed(false)
+    };
+
+    const l_isLoggedIn = localStorage.getItem('jcapp_logued')
+    const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
+
     useEffect(() => {
-        setOper(0);
-        leersubcategorias()
-        leercategorias()
-    }, [])
+        //setOper(8);
+        if (l_isLoggedIn && l_l_rol === 5) {   
+          //setOper(8)
+          leersubcategorias()
+          leercategorias()    
+        } else {
+          setomodalRed(true)
+          setTimeout(() => {
+            return navigate('/')
+          }, 2000);
+        }
+    
+      }, [])
 
     async function leersubcategorias() {
         const response = await axios.get("http://gregserver/apisP/subcategorias.php")
@@ -260,6 +283,18 @@ const SubCategoria = () => {
                     <div className="spinner-border" role="status" />
                 </div>
             ) : (<p></p>)}
+
+
+{/* **Ventana Modal para Mensaje** */}
+<Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                <div>
+                    <span>No tienes autorizacion, redirigiendo al home</span>
+                    <div className="spinner-border" role="status" />                            
+                </div>
+              </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
 
         </div>
     );

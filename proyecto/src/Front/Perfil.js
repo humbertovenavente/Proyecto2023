@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from "./AuthContext";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
 
 var a_usuario = '';
 var em_usuario = '';
@@ -24,6 +27,9 @@ var m_rolAct = ""
 const Perfil = () => {
 
   const { isLoggedIn, l_user, logout, n_rol , l_rol} = useAuth();
+  let navigate = useNavigate();
+
+  //const { isLoggedIn, l_user, logout, n_rol , l_rol} = useAuth();
 // const { isLoggedIn, l_user, l_rol } = useAuth();
 const [rol, setRol] = useState('');
 
@@ -42,10 +48,29 @@ const [e_st_usuario, sete_st_usuario] = useState('');
 const [e_st_rolusuario, sete_st_rolusuario] = useState('');
 // const [e_rol_usuario, sete_rol_usuario] = useState('');
 
+const [omodalRed, setomodalRed] = useState(false);
+    const handleCloseRed = () => {
+    setomodalRed(false)
+    };
+
+// useEffect(() => {
+//   setOper(8);
+//   // setRol(l_rol)
+//   leerusuario()
+// }, [])
+
 useEffect(() => {
   setOper(8);
-  // setRol(l_rol)
-  leerusuario()
+  if (isLoggedIn) {   
+    setOper(8)
+    leerusuario()
+  } else {
+    setomodalRed(true)
+    setTimeout(() => {
+      return navigate('/')
+    }, 2000);
+  }
+
 }, [])
 
 // async function leerusuario() {
@@ -243,6 +268,17 @@ const handleInputChange = (e, type) => {
           <div className="spinner-border" role="status" />
         </div>
       ) : (<p></p>)}
+
+{/* **Ventana Modal para Mensaje** */}
+<Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                <div>
+                    <span>No tienes autorizacion, redirigiendo al home</span>
+                    <div className="spinner-border" role="status" />                            
+                </div>
+              </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
 
     </div>
 
