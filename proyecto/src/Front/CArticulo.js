@@ -1,309 +1,323 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import axios from "axios";
+import { useAuth } from './AuthContext';
 
-var r_articles = [];
 var r_categorias = [];
-var m_categoriaAct = ""
+var m_categoriaAct = "";
+var t_subcategorias = [];
+var r_subcategorias = [];
+
+const tipoArticulo = [
+  {id_tipo_articulo : 0, n_tipo_articulo : 'Gratis'},    
+  {id_tipo_articulo : 1, n_tipo_articulo : 'Premium'},
+];
+
+const plantillas = [
+  {id_plantilla : 1, n_plantilla : 'Plantilla 1'},    
+  {id_plantilla : 2, n_plantilla : 'Plantilla 2'},
+  {id_plantilla : 3, n_plantilla : 'Plantilla 3'},
+  ];
 
 const CArticulo = () => {
-  //const navigate = useNavigate();
+
+  let navigate = useNavigate();
+  const { l_user } = useAuth();
+
+  const [titulo, setTitulo] = useState("");
+  const [cita_rel, setCita_rel] = useState("");
+  const [contenido1, setContenido1] = useState("");
+  const [contenido2, setContenido2] = useState("");
+  const [contenido3, setContenido3] = useState("");
+  const [video, setVideo] = useState("");
+  const [tipo_articulo, setTipo_articulo] = useState(0);
+  const [plantilla, setPlantilla] = useState(1);
+  const [imagen1, setImagen1] = useState("");
+  const [imagen2, setImagen2] = useState("");
+  const [imagen3, setImagen3] = useState("");
+  const [imagen4, setImagen4] = useState("");
+  const [imagen5, setImagen5] = useState("");
+  const [imagen1_desc, setImagen1_desc] = useState("");
+  const [imagen2_desc, setImagen2_desc] = useState("");
+  const [imagen3_desc, setImagen3_desc] = useState("");
+  const [imagen4_desc, setImagen4_desc] = useState("");
+  const [imagen5_desc, setImagen5_desc] = useState("");
+
+  const [categoriaAct, setCategoriaAct] = useState("");
+  const [subCategoriaAct, setSubCategoriaAct] = useState("");
+  const [a_categoria, setCategoria] = useState([]);
+  const [a_subcategoria, setSubCategoria] = useState([]);
 
   
-  let navigate = useNavigate();
 
-  const [articles, setArticles] = useState([]);
-  const [titulo, setTitulo] = useState("");
-  const [contenido, setContenido] = useState("");
+  function changeTipoArticulo(e) {
+    setTipo_articulo(e.target.value)
+    // console.log(e.target.value)
+}
+    function changePlantillas(e) {
+      setPlantilla(e.target.value)
+      // console.log(e.target.value)
+  }
 
-  //const [subcategory, setSubcategory] = useState('');
-  //const [content, setContent] = useState('');
-  //const [image, setImage] = useState(null);
-
-  //const [template, setTemplate] = useState('');
-  //const [content1, setContent1] = useState('');
-  //const [content2, setContent2] = useState('');
-  //const [content3, setContent3] = useState('');
-  //const [image1, setImage1] = useState(null);
+  // const [tituloAct, setTituloAct] = useState(""); //arreglo con dos itmes, titulo es current state y el sengod es lo que ayuda a actualizar el estado
+  // const [contenidoAct, setContenidoAct] = useState("");
+  // const [imagenAct, setImagenAct] = useState(null);
+  // const [informacionGuardadaAct, setInformacionGuardadaAct] = useState(null);
+  // const [titulo, setTitulo] = useState("");
 
   const [omodalRed, setomodalRed] = useState(false);
+  const [omodalPubli, setomodalPubli] = useState(false);
   const handleCloseRed = () => {
-  setomodalRed(false)
+    setomodalRed(false)
   };
 
   const l_isLoggedIn = localStorage.getItem('jcapp_logued')
   const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
 
   useEffect(() => {
-    //setOper(8);
-    if (l_isLoggedIn && (l_l_rol === 3 || l_l_rol || 4 && l_l_rol || 5)) {   
-      r_articles = []
-      leercategorias()
-      // setOper(8)
-      // leersubcategorias()
-      // leercategorias()    
+    if (l_isLoggedIn && (l_l_rol === 3 || l_l_rol || 4 && l_l_rol || 5)) {
+      // r_articles = []
+      leercat_subcat()
     } else {
       setomodalRed(true)
       setTimeout(() => {
         return navigate('/')
       }, 2000);
     }
-
   }, [])
 
-  async function leercategorias() {
+  async function leercat_subcat() {
     try {
-        const response = await axios.get("http://gregserver/apisP/categorias.php")
-        r_categorias = response.data
-        // console.log(r_categorias)
-        if (r_categorias.length >= 1) {
-            setCategoriaAct(r_categorias);
-        }
+      const response = await axios.get("http://gregserver/apisP/leercat_subcat.php")
+      r_categorias = response.data.categorias
+      if (r_categorias.length >= 1) {
+        setCategoria(r_categorias);
+      }
+      t_subcategorias = response.data.subcategorias
+
     } catch (error) {
-        console.log("send data error");
+      console.log("send data error");
     } finally {
-        //setOper(1)
+
     }
   }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("post1");
-      const response = await axios.post(
-        "http://gregserver/apisP/guardarart.php",
+      // console.log("post1");
+      const response = await axios.post("http://gregserver/apisP/guardarart.php",
         {
+          username: l_user,
           titulo: titulo,
-          contenido: contenido,
+          cita_relevante: cita_rel,
+          contenido1: contenido1,
+          contenido2: contenido2,
+          contenido3: contenido3,
+          id_subcategoria: subCategoriaAct,
+          video: video,
+          tipo_articulo: tipo_articulo,
+          plantilla: plantilla,
+          imagen1: imagen1,
+          imagen2: imagen2,
+          imagen3: imagen3,
+          imagen4: imagen4,
+          imagen5: imagen5,
+          imagen1_desc: imagen1_desc,
+          imagen2_desc: imagen2_desc,
+          imagen3_desc: imagen3_desc,
+          imagen4_desc: imagen4_desc,
+          imagen5_desc: imagen5_desc
         }
       );
-      console.log("post1");
-      //console.log(response.data);
-      // Puedes mostrar un mensaje de éxito o realizar otras acciones después de la inserción.
+      console.log(response.data);
+      // console.log("post1");
     } catch (error) {
-      console.log("post2");
-      //console.error(error);
-      // Manejar errores aquí
+      console.log(error);
+    } finally {
+      setomodalPubli(true)
+      setTimeout(() => {
+        return navigate('/')
+      }, 2000);
+
     }
   };
 
-  const [tituloAct, setTituloAct] = useState(""); //arreglo con dos itmes, titulo es current state y el sengod es lo que ayuda a actualizar el estado
-  const [categoriaAct, setCategoriaAct] = useState("");
-  const [subCategoriaAct, setSubCategoriaAct] = useState("");
-  const [contenidoAct, setContenidoAct] = useState("");
-  const [imagenAct, setImagenAct] = useState(null);
-  const [informacionGuardadaAct, setInformacionGuardadaAct] = useState(null);
-
-  //useState se usa para declarar los estados dentros del componente
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    //const imageUrl = image ? URL.createObjectURL(image) : null;
-
-    const newArticle = {
-      //Crea un objeto llamado newArticle que contiene los datos del artículo
-      tituloAct,
-      categoriaAct,
-      subCategoriaAct,
-      contenidoAct,
-      imagenAct,
-      //imagenAct: imageUrl,
-
-      //template,
-      //content1,
-      //content2,
-      //content3,
-      //image1,
-    };
-    setInformacionGuardadaAct(newArticle); //almacena los datos del objeto en el estado informacion gaurdada
-
-    console.log("Datos enviados:", newArticle);
-
-    let archivoJS;
-
-    
-
-    //creamos este objeto en donde se tiene los datos del articulo en la que el usuario ingrese los datos al controlador que es onArticleSubmit
-    //ahora bien, onArticleSubmit sera la funcion que va a pasar como propiedad en CArticulo
-    //
-
-    // Limpia el estado después de enviar los datos
-    setTituloAct("");
-    setCategoriaAct("");
-    setSubCategoriaAct("");
-    setContenidoAct("");
-    setImagenAct(null);
-
-    navigate("/home");
-  };
-
+  // $id_subcategoria = $data['id_subcategoria'];
+  // $tipo_articulo = $data['tipo_articulo'];
+  // $plantilla = $data['plantilla'];
+  // $imagen1 = $data['imagen1'];    
+  // $imagen2 = $data['imagen2'];    
+  // $imagen3 = $data['imagen3'];    
+  // $imagen4 = $data['imagen4'];    
+  // $imagen5 = $data['imagen5'];
+  // $imagen1_desc = $data['imagen1_desc'];    
+  // $imagen2_desc = $data['imagen2_desc'];    
+  // $imagen3_desc = $data['imagen3_desc'];    
+  // $imagen4_desc = $data['imagen4_desc'];    
+  // $imagen5_desc = $data['imagen5_desc'];
 
   function selCategoria(cat) {
     m_categoriaAct = cat
     setCategoriaAct(m_categoriaAct)
-    //setsubOper(1)
-    setArticles([]);
-    leerarticulosxcat(m_categoriaAct)
-}
-
-async function leerarticulosxcat(id_cat) {
-  try {
-      // console.log(id_cat)
-      const response = await axios.post("http://gregserver/apisP/artxcategoria.php", {
-          id_cat: id_cat
-      })
-      // console.log(response.data)
-      r_articles = response.data
-      if (r_articles.length >= 1) {
-          setArticles(r_articles);
-      }            
-  } catch (error) {
-      console.log(error);
-  } finally {
-      //setsubOper(2)
+    r_subcategorias = []
+    setSubCategoriaAct([])
+    var i = 0
+    for (i = 0; i < t_subcategorias.length; i++) {
+      if (t_subcategorias[i].id_categoria === cat) {
+        // console.log(t_subcategorias[i])
+        r_subcategorias.push(t_subcategorias[i])
+      }
+    }
+    setSubCategoria(r_subcategorias)
   }
-
-}
-
-
-
-
 
   return (
     <div>
-      <h3>En esta pestaña usted podra crear un articulo</h3>
+      <h3 className="mt-3">Creación de Artículos</h3>
       <form onSubmit={handleFormSubmit}>
-        <br></br>
-        <label htmlFor="titulo">Ingrese el titulo del articulo</label>
 
-        <input
-          type="text"
-          id="titulo"
-          name="titulo"
-          value={titulo} /// className='form-control'
-          onChange={(e) => setTitulo(e.target.value)}
-          required
-        />
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese el titulo del articulo</label>
+          <input type="text" id="titulo" name="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} className="w-50" required />
+        </div>
 
-        <br></br>
+        <div className="mt-2">
+          <label htmlFor="titulo">Cita Relevante</label>
+          <input type="text" id="cita_rel" name="cita_rel" value={cita_rel} onChange={(e) => setCita_rel(e.target.value)} className="w-50" required />
+        </div>
 
-        <div>
+        <div className="mt-2">
           <label htmlFor="categoria">Seleccione una categoria</label>
-          {/* <select
-            id="categoria"
-            name="categoria"
-            value={categoriaAct}
-            onChange={(hola) => setCategoriaAct(hola.target.value)} // className="form-select"
-            required
-          >
-            <option value="">Seleccione una categoria</option>
-            <option value="Deporte">Deporte</option>
-            <option value="Tec">Tecnologia</option>
-            <option value="Comida">Comida</option>
-          </select> */}
-          <select id="categoria" name="categoria" value={m_categoriaAct} onChange={e => (selCategoria(e.target.value))}>
-                        <option value="" key={""}>Seleccione una categoria</option>
-                        {r_categorias.map((dato) => (
-                            <option value={dato.id_categoria} key={dato.id_categoria}>{dato.nombre_categoria}</option>
-                        ))}
+          <select id="categoria" name="categoria" value={categoriaAct} onChange={e => (selCategoria(e.target.value))} required >
+            <option value="" key={""}>Seleccione una categoria</option>
+            {a_categoria.map((dato) => (<option value={dato.id_categoria} key={dato.id_categoria}>{dato.nombre_categoria}</option>))}
           </select>
         </div>
 
-        <br></br>
-
-        {categoriaAct && (
-          <div>
-            <label htmlFor="subcategoria">Subcategoria</label>
-            <select
-              id="subcategoria"
-              name="subcategoria"
-              value={subCategoriaAct} // className="form-select"
-              onChange={(hola) => setSubCategoriaAct(hola.target.value)}
-              required
-            >
-              <option value="">Seleccione una subcategoria</option>
-              {categoriaAct === "Deporte" && (
-                <>
-                  <option value="futbol">Futbol</option>
-                  <option value="baloncesto">Baloncesto</option>
-                  <option value="volley">Volley</option>
-                </>
-              )}
-              {categoriaAct === "Tec" && (
-                <>
-                  <option value="nanotecnologia">Nanotecnologia</option>
-                  <option value="medicina">Medicina</option>
-                  <option value="nuevas tendencias">Nuevas tendencias</option>
-                </>
-              )}
-              {categoriaAct === "Comida" && (
-                <>
-                  <option value="platos fuertes">Platos fuertes</option>
-                  <option value="postres">Postres</option>
-                  <option value="aperitivos">Aperitivos</option>
-                </>
-              )}
-            </select>
-          </div>
-        )}
-
-        <br></br>
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <label htmlFor="texto">
-            Ingrese el texto del articulo en el cuadro de abajo
-          </label>
-          <textarea
-            id="story"
-            name="story"
-            rows="10"
-            cols="33"
-            style={{ width: "50%" }}
-            value={contenido}
-            onChange={(e) => setContenido(e.target.value)}
-            required
-          />
-
-          <br></br>
-          <label htmlFor="texto">Ingrese una imagen (si gusta) </label>
-          <input
-            type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/png, image/jpeg"
-            onChange={(hola) => setImagenAct(hola.target.files[0])}
-          />
+        <div className="mt-2">
+          <label htmlFor="subcategoria">Subcategoria</label>
+          <select id="subcategoria" name="subcategoria" value={subCategoriaAct} onChange={(e) => setSubCategoriaAct(e.target.value)} required >
+            <option value="">Seleccione una subcategoria</option>
+            {a_subcategoria.map((dato) => (<option value={dato.id_subcategoria} key={dato.id_subcategoria}>{dato.nombre_subcategoria}</option>))}
+          </select>
         </div>
-        {/* <input type="text" id="texto" name="texto"/> */}
+
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} >
+          <label htmlFor="texto">Ingrese el Contenido Parte 1</label>
+          <textarea id="conten1" name="conten1" rows="10" cols="33" style={{ width: "50%" }} value={contenido1} onChange={(e) => setContenido1(e.target.value)} required />
+          <label htmlFor="texto">Ingrese el Contenido Parte 2</label>
+          <textarea id="conten2" name="conten2" rows="10" cols="33" style={{ width: "50%" }} value={contenido2} onChange={(e) => setContenido2(e.target.value)} required />
+          <label htmlFor="texto">Ingrese el Contenido Parte 3</label>
+          <textarea id="conten3" name="conten3" rows="10" cols="33" style={{ width: "50%" }} value={contenido3} onChange={(e) => setContenido3(e.target.value)} required />
+
+          {/* <label htmlFor="texto">Ingrese una imagen (si gusta) </label>
+          <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onChange={(hola) => setImagenAct(hola.target.files[0])} /> */}
+        </div>
+
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese URL del video</label>
+          <input type="text" id="video" name="video" value={video} onChange={(e) => setVideo(e.target.value)} className="w-50" required />
+        </div>
+
+        {/* <div className="mt-2">
+          <label htmlFor="titulo">Ingrese el tipo de articulo</label>
+          <input type="text" id="tipo_articulo" name="tipo_articulo" value={tipo_articulo} onChange={(e) => setTipo_articulo(e.target.value)} className="w-50" required />
+        </div> */}
+        <label htmlFor="titulo">Ingrese el tipo de articulo</label>
+          <select id="tipo" name="tipo" value={tipo_articulo} onChange={(e) => changeTipoArticulo(e)} required> 
+                                {tipoArticulo.map((dato) => (
+                                    <option value={dato.id_tipo_articulo} key={dato.id_tipo_articulo}>{dato.n_tipo_articulo}</option>
+                                ))} 
+          </select>
 
         <br></br>
-        <button type="submit" className="btn btn-primary">
-          Publicar Articulo
-        </button>
+
+        {/* <div className="mt-2">
+          <label htmlFor="titulo">Ingrese que plantilla quiere usar</label>
+          <input type="text" id="plantilla" name="plantilla" value={plantilla} onChange={(e) => setPlantilla(e.target.value)} className="w-50" required />
+        </div> */}
+        <label htmlFor="titulo">Ingrese que plantilla quiere utilizar</label>
+          <select id="plantilla" name="plantilla" value={plantilla} onChange={(e) => changePlantillas(e)} required> 
+                                {plantillas.map((dato) => (
+                                    <option value={dato.id_plantilla} key={dato.id_plantilla}>{dato.n_plantilla}</option>
+                                ))} 
+          </select>
+
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la URL de la Primera imagen</label>
+          <input type="text" id="imagen1" name="imagen1" value={imagen1} onChange={(e) => setImagen1(e.target.value)} className="w-50" required />
+        </div>
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la descripcion de la Primera imagen</label>
+          <input type="text" id="imagen1_desc" name="imagen1_desc" value={imagen1_desc} onChange={(e) => setImagen1_desc(e.target.value)} className="w-50" required />
+        </div>
+
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la URL de la Segunda imagen</label>
+          <input type="text" id="imagen2" name="imagen2" value={imagen2} onChange={(e) => setImagen2(e.target.value)} className="w-50" required />
+        </div>
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la descripcion de la Segunda imagen</label>
+          <input type="text" id="imagen2_desc" name="imagen2_desc" value={imagen2_desc} onChange={(e) => setImagen2_desc(e.target.value)} className="w-50" required />
+        </div>
+
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la URL de la Tercera imagen</label>
+          <input type="text" id="imagen3" name="imagen3" value={imagen3} onChange={(e) => setImagen3(e.target.value)} className="w-50" required />
+        </div>
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la descripcion de la Tercera imagen</label>
+          <input type="text" id="imagen3_desc" name="imagen3_desc" value={imagen3_desc} onChange={(e) => setImagen3_desc(e.target.value)} className="w-50" required />
+        </div>
+
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la URL de la Cuarta imagen</label>
+          <input type="text" id="imagen4" name="imagen4" value={imagen4} onChange={(e) => setImagen4(e.target.value)} className="w-50" required />
+        </div>
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la descripcion de la Cuarta imagen</label>
+          <input type="text" id="imagen4_desc" name="imagen4_desc" value={imagen4_desc} onChange={(e) => setImagen4_desc(e.target.value)} className="w-50" required />
+        </div>
+
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la URL de la Quinta imagen</label>
+          <input type="text" id="imagen5" name="imagen5" value={imagen5} onChange={(e) => setImagen5(e.target.value)} className="w-50" required />
+        </div>
+        <div className="mt-2">
+          <label htmlFor="titulo">Ingrese la descripcion de la Quinta imagen</label>
+          <input type="text" id="imagen5_desc" name="imagen5_desc" value={imagen5_desc} onChange={(e) => setImagen5_desc(e.target.value)} className="w-50" required />
+        </div>
+        
+
+
+
+        <button type="submit" className="btn btn-primary">Publicar Articulo</button>
       </form>
 
-{/* **Ventana Modal para Mensaje** */}
-<Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
-                <div>
-                    <span>No tienes autorizacion, redirigiendo al home</span>
-                    <div className="spinner-border" role="status" />                            
-                </div>
-              </Box>
-            </Modal>
-            {/* **Ventana Modal para Responder** */}
+      <Modal open={omodalPubli} onClose={handleFormSubmit} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+          <div>
+            <span>Publicacion Exitosa, redirigiendo al home</span>
+            <div className="spinner-border" role="status" />
+          </div>
+        </Box>
+      </Modal>
+
+      {/* **Ventana Modal para Mensaje** */}
+      <Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+          <div>
+            <span>No tienes autorizacion, redirigiendo al home</span>
+            <div className="spinner-border" role="status" />
+          </div>
+        </Box>
+      </Modal>
+      {/* **Ventana Modal para Responder** */}
 
     </div>
   );
 };
-
 export default CArticulo;
