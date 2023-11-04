@@ -18,6 +18,11 @@ import ArtxCategoria from './Front/artxcategoria';
 import Perfiles from './Front/Perfiles';
 import Articulo from './Front/articulo';
 import Anuncios from './Front/anuncios';
+import Ofertas from './Front/ofertas';
+import MisArticulos from './Front/misarts';
+import ArticuloModerar from './Front/articulosmoderar';
+import VerMisArts from './Front/vermisarts';
+import EditarArt from './Front/editarart';
 
 import Perfil from './Front/Perfil';
 
@@ -27,6 +32,8 @@ import Plantilla2 from './Front/Plantilla2';
 import Plantilla3 from './Front/Plantilla3';
 import APublicados from './Front/APublicados';
 import AcercaDe from './Front/acercade';
+import Footer from './Front/footer';
+import PreguntasFrecuentes from './Front/preguntasfrecuentes';
 
 function App() {  
 
@@ -57,12 +64,18 @@ function App() {
         <Route path = '/perfil' element = {<Perfil/>}/>
         <Route path='/categoria' element={<Categoria />} />
         <Route path='/moderar' element={<Moderar/>} />
+        <Route path='/ofertas' element={<Ofertas/>} />
+        <Route path='/misarts' element={<MisArticulos/>} />
+
       
         <Route path='/subcategoria' element={<SubCategoria/>} />
         <Route path='/artxcategoria' element={<ArtxCategoria/>} />
         <Route path = '/Perfiles' element = {<Perfiles/>}/>
 
         <Route path='/articulo/:idarticulo' element={<Articulo />} />
+        <Route path = '/articulosmoderar/:idarticulo' element = {<ArticuloModerar/>}/>
+        <Route path = '/vermisarts/:idarticulo' element = {<VerMisArts/>}/>
+        <Route path = '/editarart/:idarticulo' element = {<EditarArt/>}/>
         
         <Route path = '/articulos publicados' element = {<APublicados/>}/>
        
@@ -72,12 +85,17 @@ function App() {
         <Route path = '/plantilla3' element = {<Plantilla3/>}/>
 
         <Route path = '/acercade' element = {<AcercaDe/>}/>
+        <Route path = '/preguntasfrecuentes' element = {<PreguntasFrecuentes/>}/>
         
       </Routes>
     </BrowserRouter>   
 
-    <br/>
-      <Anuncios />
+      <br/>
+        <Anuncios />
+      <br/>
+
+      <br/>
+        <Footer />
       <br/>
 
     </div>

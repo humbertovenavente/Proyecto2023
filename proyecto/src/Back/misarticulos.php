@@ -2,7 +2,14 @@
 
     include "conexion.php";
 
-    header ("Content-Type: application/json");
+header ("Access-Control-Allow-Origin: *");
+header ("Content-Type: application/json");
+    
+
+$data = file_get_contents("php://input");
+$data = json_decode($data, true);
+
+$username = $data['usuario'];
 
     // $query = "SELECT * FROM articulos 
     // LIMIT 10";
@@ -21,7 +28,7 @@
     //            WHERE articulos.status = 0
     //            ORDER BY articulos.id_articulo DESC";
                 
-    $query =    "SELECT * from moderar";
+    $query =    "SELECT * from articulos where username = '$username'";
 
     $result = mysqli_query ($conexion , $query);
 

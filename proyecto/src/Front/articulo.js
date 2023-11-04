@@ -16,7 +16,7 @@ var response;
 
 const Articulo = () => {
 
-    const { isLoggedIn, l_user } = useAuth();
+    const { isLoggedIn, l_user , l_rol} = useAuth();
     const [article, setArticle] = useState([]);
     const [comentarios, setComentarios] = useState([]);
     const [oper, setOper] = useState(0);
@@ -60,6 +60,7 @@ const Articulo = () => {
     let { idarticulo } = useParams()
 
     useEffect(() => {
+        // console.log(idarticulo);
         setOper(0)
         setOper_c(0)
         leerarticulo(idarticulo)
@@ -279,7 +280,11 @@ const Articulo = () => {
                     </div>
                 </div>
             ) : (
-
+                <div>
+                    
+                { ( ( l_rol === 0 || l_rol === 1 ) && parseInt(article.tipo_articulo) === 1 ) ?
+                    <div>No puedes ver articulo Premium, suscribete...</div> 
+                :
                 <div id="general">
 
                     {article.plantilla === '1' ?
@@ -480,6 +485,8 @@ const Articulo = () => {
                             <p></p>
                         )}
                     </div>
+                </div>
+}
                 </div>
             )}
 

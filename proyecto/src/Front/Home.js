@@ -117,7 +117,10 @@ const Home = () => {
                   >
                     Ver Detalle
                   </button>
+                  {article.tipo_articulo === '1' &&
+                    <div style={{ height: "1.2rem" , backgroundColor:"green"}}>* Articulo premium *</div>}
                 </div>
+                
               </div>
             ))}
           </div>

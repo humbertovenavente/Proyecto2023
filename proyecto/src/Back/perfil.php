@@ -1,18 +1,18 @@
 <?php
-include "conexion.php";
 
+include "conexion.php";
 header ("Content-Type: application/json");
 
-$query = "SELECT * FROM articulos";
+$query = "SELECT * FROM usuarios";
 
 $result = mysqli_query ($conexion , $query);
 
+// sleep(3);
 
-
-$articles = array();
+$usuario = array();
 while($row = mysqli_fetch_assoc($result)) {
-    $articles[] = $row;
+    $usuario[] = $row;
 }
-echo json_encode($articles);
+echo json_encode($usuario);
 
 ?>

@@ -249,19 +249,19 @@ const Registro = () => {
                 <p>{msg !== "" ? <span className="success">{msg} </span> : <span className="error">{error} </span>}</p>
 
                 <div className="col-md-4">
-                    <label className="form-label">First name</label>
+                    <label className="form-label">Nombre</label>
                     <input type="text" name="fname" value={fname} onChange={(e) => handleInputChange(e, "fname")}
                         className="form-control" id="validationCustom01" required />
                 </div>
 
                 <div className="col-md-4">
-                    <label className="form-label">Last name</label>
+                    <label className="form-label">Apellido</label>
                     <input type="text" name="lname" value={lname} onChange={(e) => handleInputChange(e, "lname")}
                         className="form-control" id="validationCustom02" required />
                 </div>
 
                 <div className="col-md-4">
-                    <label className="form-label">Username</label>
+                    <label className="form-label">Nombre de usuario</label>
                     <input type="text" name="username" value={username} onChange={(e) => handleInputChange(e, "username")} // onBlur={checkUsername}
                         className="form-control" id="validationCustom03" required />
                 </div>
@@ -275,13 +275,13 @@ const Registro = () => {
 
                 </div>
                 <div className="col-md-4">
-                    <label className="form-label">Password</label>
+                    <label className="form-label">Contrasena</label>
                     <input type="password" name="password1" value={password1} onChange={(e) => handleInputChange(e, "password1")} //onBlur={checkPassword}
                         className="form-control" id="validationCustom04" required />
                 </div>
 
                 <div className="col-md-4">
-                    <label className="form-label">Confirm Password</label>
+                    <label className="form-label">Confirmar Contrasena</label>
                     <input type="password" name="password2" value={password2} onChange={(e) => handleInputChange(e, "password2")}
                         className="form-control" id="validationCustom05" required />
                 </div>

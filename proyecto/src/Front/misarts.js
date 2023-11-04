@@ -4,128 +4,133 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { useAuth } from "./AuthContext";
 
 
+var response;
 var r_articles = [];
 var sel_articles = [];
 
-const Moderar = () => {
+const MisArticulos = () => {
+    
+    const { isLoggedIn, l_user, logout, n_rol , l_rol} = useAuth();
+    let navigate = useNavigate();
+
+
+    const [articles, setArticles] = useState([]);
+    const [s_articles, setS_articles] = useState([]);
+    const [oper, setOper] = useState(0);
   
+    const [omodalRed, setomodalRed] = useState(false);
+    const handleCloseRed = () => {
+    setomodalRed(false)
+    };
   
-  let navigate = useNavigate();
-
-  const [omodalPubli, setomodalPubli] = useState(false);
-  const [omodalRecha, setomodalRecha] = useState(false);
-  const [articles, setArticles] = useState([]);
-  const [s_articles, setS_articles] = useState([]);
-  const [oper, setOper] = useState(0);
-
-  const [omodalRed, setomodalRed] = useState(false);
-  const handleCloseRed = () => {
-  setomodalRed(false)
-  };
-
-  const l_isLoggedIn = localStorage.getItem('jcapp_logued')
-  const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
-
-  useEffect(() => {
-    //setOper(8);
-    if (l_isLoggedIn && (l_l_rol === 5 || l_l_rol === 4)) {   
-      //setOper(8)
-      r_articles = [];
-      leer10articulos();
-    } else {
-      setomodalRed(true)
-      setTimeout(() => {
-        return navigate('/')
-      }, 2000);
-    }
+    const l_isLoggedIn = localStorage.getItem('jcapp_logued')
+    const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
   
-  }, [])
-
-  async function leer10articulos() {
-    const response = await axios.get("http://gregserver/apisP/moderacion.php");
-    r_articles = response.data;
-    if (r_articles.length >= 1) {
-      setArticles(r_articles);
-    }
-  }
-
-  const verDetalle = (id) => {
-    // console.log(id)
-    setOper(1);
-    var i = 0;
-    var found = false;
-    sel_articles = [];
-    for (i = 0; i < r_articles.length && !found; i++) {
-      if (r_articles[i].id_articulo === id) {
-        found = true;
-        break;
+    useEffect(() => {
+      //setOper(8);
+      if (l_isLoggedIn && (l_l_rol === 5 || l_l_rol === 4)) {   
+        //setOper(8)
+        r_articles = [];
+        leer10articulos();
+      } else {
+        setomodalRed(true)
+        setTimeout(() => {
+          return navigate('/')
+        }, 2000);
       }
+    
+    }, [])
+  
+    // async function leer10articulos() {
+    //   const response = await axios.get("http://gregserver/apisP/moderacion.php");
+    //   r_articles = response.data;
+    //   if (r_articles.length >= 1) {
+    //     setArticles(r_articles);
+    //   }
+    // }
+
+    async function leer10articulos() {
+      // e.preventDefault();
+      // setOper(9);
+      // console.log(rol);
+      try {
+        // console.log(l_user);
+        response = await axios.post("http://gregserver/apisP/misarticulos.php", {
+          usuario: l_user
+        });
+        
+        // console.log(response)
+      } catch (error) {
+        console.log(error);
+      } finally {
+        r_articles = response.data;
+        if (r_articles.length >= 1) {
+          setArticles(r_articles);
+        }
+       
+        // console.log(response.data);
+        // m_usuario = response.data
+        // console.log(m_usuario.length);
+        // console.log(m_usuario);
+        // if (m_usuario.length >= 1) {
+        //   setDatos(m_usuario);
+        // }
+        // m_usuario = response.data
+        // setDatos(m_usuario);
+        // setOper(0);
+      }
+    };
+  
+    const verDetalle = (id) => {
+      // console.log(id)
+      setOper(1);
+      var i = 0;
+      var found = false;
+      sel_articles = [];
+      for (i = 0; i < r_articles.length && !found; i++) {
+        if (r_articles[i].id_articulo === id) {
+          found = true;
+          break;
+        }
+      }
+      sel_articles[0] = r_articles[i];
+      setS_articles(sel_articles);
+
+      return navigate(`/vermisarts/${sel_articles[0].id_articulo}`)
+    };
+  
+    function regresar_a() {
+      setOper(0);
     }
-    sel_articles[0] = r_articles[i];
-    setS_articles(sel_articles);
-    // console.log(r_articles[i]);
+  
 
-    return navigate(`/articulosmoderar/${sel_articles[0].id_articulo}`)
-  };
+    const EditarArt = (id) => {
+      // console.log(id)
+      setOper(1);
+      var i = 0;
+      var found = false;
+      sel_articles = [];
+      for (i = 0; i < r_articles.length && !found; i++) {
+        if (r_articles[i].id_articulo === id) {
+          found = true;
+          break;
+        }
+      }
+      sel_articles[0] = r_articles[i];
+      setS_articles(sel_articles);
 
-  function regresar_a() {
-    setOper(0);
-  }
+      return navigate(`/editarart/${sel_articles[0].id_articulo}`)
+    };
+    
+  
 
-  const publicarArticulo = async (id) => {
-    // const publicarArticulo = async (e) => {
-    // e.preventDefault();
-    setOper(9);
-    console.log(id);
-    try {
-      const response = await axios.post("http://gregserver/apisP/publicararticulo.php", {
-        id_articulo : id
-      });
-      // console.log(response)
-
-    } catch (error) {
-      console.log(error);
-    } finally {
-
-      setomodalPubli(true)
-      setTimeout(() => {
-        return navigate('/')
-      }, 2000);
-      // const response = await axios.get("http://gregserver/apisP/categorias.php")
-      // r_categorias = response.data
-      // if (r_categorias.length >= 1) {
-      //   setDatos(r_categorias);
-      // }
-      // setOper(1);
-    }
-  };
-
-  // function publicarArticulo() {
-  //   if (em_st_categoria === 'X') {
-  //     em_st_categoria = ''
-  //   } else {
-  //     em_st_categoria = 'X'
-  //   }
-  //   sete_st_categoria(em_st_categoria)
-  // }
-
-  function rechazarArticulo() {
-    // return navigate('/moderar')
-    setomodalRecha(true)
-    setTimeout(() => {
-      return navigate('/')
-    }, 2000);
-
-    setOper(0);
-  }
-
-
-  return (
-    <div>
+    return(
+        <div>
       <h3>
-        Bienvenidos a la moderacion de articulo
+        Aqui podra ver sus articulos
       </h3>
 
       {oper === 0 ? (
@@ -182,6 +187,12 @@ const Moderar = () => {
                     onClick={() => verDetalle(article.id_articulo)}
                   >
                     Ver Detalle
+                  </button>
+                  <button
+                    id="but"
+                    onClick={() => EditarArt(article.id_articulo)}
+                  >
+                    Editar
                   </button>
                 </div>
               </div>
@@ -240,10 +251,7 @@ const Moderar = () => {
                     </div>
                   </div>
                 </section>
-                <div>
-                  <button onClick={() => publicarArticulo(sarticle.id_articulo)}>Publicar</button>
-                  <button onClick={() => rechazarArticulo(sarticle.id_articulo)}>Rechazar</button>
-                </div>
+                
               </div>
             ))}
           </div>
@@ -270,31 +278,8 @@ const Moderar = () => {
             </Modal>
             {/* **Ventana Modal para Responder** */}
 
-
-{/* **Ventana Modal para Mensaje** */}
-<Modal open={omodalPubli} onClose={publicarArticulo} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
-          <div>
-            <span>Articulo publicado correctamente, redirigiendo al home</span>
-            <div className="spinner-border" role="status" />
-          </div>
-        </Box>
-      </Modal>
-      {/* **Ventana Modal para Responder** */}
-
-      {/* **Ventana Modal para Mensaje** */}
-      <Modal open={omodalRecha} onClose={rechazarArticulo} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
-          <div>
-            <span>Articulo rechazado, redirigiendo al home</span>
-            <div className="spinner-border" role="status" />
-          </div>
-        </Box>
-      </Modal>
-      {/* **Ventana Modal para Responder** */}
-
     </div>
-  );
-};
+    );
 
-export default Moderar;
+}
+export default MisArticulos;

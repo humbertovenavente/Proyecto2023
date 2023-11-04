@@ -1,84 +1,43 @@
-// src/components/AcercaDe.js
+
 import React from 'react';
-import { useAuth } from './AuthContext';
-import axios from 'axios'
+
 
 function AcercaDe() {
-
-    const { isLoggedIn } = useAuth();
-
-    async function sendMail() {
-        try {
-            const response = await axios.get("http://gregserver/apisP/sendmail.php")
-            console.log(response)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    // async function sendMail2() {
-    //     try {
-    //         const response = await axios.get("http://localhost/proy/sendmail2.php")
-    //         console.log(response)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+   
 
     return (
 
         <div>
             <h2>Acerca de</h2>
 
-            {isLoggedIn ? (
+           
                 <div>
-                    {/* <button onClick={logout}>Cerrar sesión</button> */}
+                    
                     <p>Esta es la página "Acerca de" de nuestra aplicación.</p>
                 </div>
 
-            ) : (
+         
                 <div>
-                    <p>Debes iniciar sesión</p>    
-
-                    <button id='but' onClick={() => sendMail()}>Enviar</button>
-                    {/* <button id='but' onClick={() => sendMail2()}>Enviar Mail()</button> */}
+                <p>Somos un grupo de estudiantes de tercer año de Ingeniería en Sistemas, 
+                y este es nuestro proyecto final de las clases de base de datos 1 y diseño de aplicaciones
+                web. Nuestra aplicación se centra en la creacion de articulos para que las personas
+                puedan contar sus historias y transmitirlas de la mejor manera.</p>
                 </div>
-            )}
+            
+                <div>
+                <p>Nuestro objetivo es crear una plataforma que permita a 
+                los usuarios registrados compartir sus conocimientos e historias. 
+                Queremos ofrecer una experiencia de usuario agradable para todos aquellos visitantes 
+                que quieran visitar nuestra pagina.</p>
+                </div>
 
+                <div>
+                <p>Esperamos que nuestra plataforma sea de utilidad para 
+                la comunidad y que le sirva a las personas para que puedan contar sus historias.</p>
+                </div>
         </div>
 
     );
 }
 
 export default AcercaDe;
-
-// // src/components/AcercaDe.js
-// import React from 'react';
-// import { useAuth } from './AuthContext';
-
-// function AcercaDe() {
-
-//     const { isLoggedIn } = useAuth();
-
-//     return (
-
-//         <div>
-//             <h2>Acerca de</h2>
-
-//             {isLoggedIn ? (
-//                 <div>
-//                     {/* <button onClick={logout}>Cerrar sesión</button> */}
-//                     <p>Esta es la página "Acerca de" de nuestra aplicación.</p>
-//                 </div>
-
-//             ) : (
-//                 <p>Debes iniciar sesión</p>                
-//             )}
-
-//         </div>
-
-//     );
-// }
-
-// export default AcercaDe;
-

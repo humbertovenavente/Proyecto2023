@@ -63,14 +63,14 @@ const Barra = () => {
                     </Link>
                   </li>
 
-                  <ul className="nav-item ml-auto">
+                  {/* <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
                       to="/articulos publicados"
                     >
                       Articulos Publicados
                     </Link>
-                  </ul>
+                  </ul> */}
                   <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
@@ -122,14 +122,14 @@ const Barra = () => {
                     </Link>
                   </li>
 
-                  <ul className="nav-item ml-auto">
+                  {/* <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
                       to="/articulos publicados"
                     >
                       Articulos Publicados
                     </Link>
-                  </ul>
+                  </ul> */}
                   <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
@@ -170,14 +170,14 @@ const Barra = () => {
                     </Link>
                   </li>
 
-                  <ul className="nav-item ml-auto">
+                  {/* <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
                       to="/articulos publicados"
                     >
                       Articulos Publicados
                     </Link>
-                  </ul>
+                  </ul> */}
                   <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
@@ -218,14 +218,14 @@ const Barra = () => {
                     </Link>
                   </li>
 
-                  <ul className="nav-item ml-auto">
+                  {/* <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
                       to="/articulos publicados"
                     >
                       Articulos Publicados
                     </Link>
-                  </ul>
+                  </ul> */}
                   <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
@@ -249,6 +249,11 @@ const Barra = () => {
                   <li className="nav-item">
                     <Link className="nav-link active" to="/articulos">
                       Crear articulo
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link active" to="/misarts">
+                      Mis Articulos
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -271,14 +276,14 @@ const Barra = () => {
                     </Link>
                   </li>
 
-                  <ul className="nav-item ml-auto">
+                  {/* <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
                       to="/articulos publicados"
                     >
                       Articulos Publicados
                     </Link>
-                  </ul>
+                  </ul> */}
                   <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
@@ -302,6 +307,11 @@ const Barra = () => {
                   <li className="nav-item">
                     <Link className="nav-link active" to="/articulos">
                       Crear articulo
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link active" to="/misarts">
+                      Mis Articulos
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -329,14 +339,14 @@ const Barra = () => {
                     </Link>
                   </li>
 
-                  <ul className="nav-item ml-auto">
+                  {/* <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
                       to="/articulos publicados"
                     >
                       Articulos Publicados
                     </Link>
-                  </ul>
+                  </ul> */}
                   <ul className="nav-item ml-auto">
                     <Link
                       className="nav-link active"
@@ -373,6 +383,11 @@ const Barra = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
+                    <Link className="nav-link active" to="/misarts">
+                      Mis Articulos
+                    </Link>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" to="/perfil">
                       Perfil
                     </Link>
@@ -385,6 +400,11 @@ const Barra = () => {
                   <li className="nav-item">
                     <Link className="nav-link" to="/moderar">
                       Moderar
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/ofertas">
+                      Ofertas
                     </Link>
                   </li>
                 </ul>
