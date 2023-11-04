@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 var r_articles = [];
 var r_categorias = [];
 // var sel_articles = [];
 var m_categoriaAct = ""
+var sel_articles = [];
 
 const ArtxCategoria = () => {
 
+
+    let navigate = useNavigate();
+    const [s_articles, setS_articles] = useState([]);
     const [articles, setArticles] = useState([]);
     // const [s_articles, setS_articles] = useState([]);
     const [oper, setOper] = useState(0);
@@ -38,6 +43,27 @@ const ArtxCategoria = () => {
 
     }
 
+    const verDetalle = (id) => {
+      // console.log(id)
+      setOper(1);
+      var i = 0;
+      var found = false;
+      sel_articles = [];
+      for (i = 0; i < r_articles.length && !found; i++) {
+        if (r_articles[i].id_articulo === id) {
+          found = true;
+          break;
+        }
+      }
+      sel_articles[0] = r_articles[i];
+      setS_articles(sel_articles);
+
+      return navigate(`/vermisarts/${sel_articles[0].id_articulo}`)
+    };
+  
+    function regresar_a() {
+      setOper(0);
+    }
     // const verDetalle = (id) => {
     //     // console.log(id)
     //     setOper(1)
@@ -125,7 +151,7 @@ const ArtxCategoria = () => {
                                         <p className="card-text">Subcategory: {article.nombre_subcategoria}</p>
                                     </div>
                                     <div className="card-footer mx-auto">
-                                        {/* <button id='but' onClick={() => verDetalle(article.id_articulo)}>Ver Detalle</button> */}
+                                        <button id='but' onClick={() => verDetalle(article.id_articulo)}>Ver Detalle</button>
                                     </div>
                                 </div>
                             ))}

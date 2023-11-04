@@ -293,29 +293,29 @@ const Registro = () => {
                     {/* <div>{m_usuario.length}</div> */}
 
                     {numerror === 1 ? (
-                        <p>Ingrese First Name</p>
+                        <p>Ingrese su Nombre</p>
                     ) : numerror === 2 ? (
-                        <p>Ingrese Last Name</p>
+                        <p>Ingrese su apellido</p>
                     ) : numerror === 3 ? (
-                        <p>Ingrese User Name</p>
+                        <p>Ingrese su Usuario</p>
                     ) : numerror === 4 ? (
-                        <p>User Name debe ser mayor a 5 caracteres</p>
+                        <p>El usuario debe ser mayor a 5 caracteres</p>
                     ) : numerror === 4 ? (
-                    <p>User Name debe ser mayor a 5 caracteres</p>
+                    <p>El usuario debe ser mayor a 5 caracteres</p>
                     ) : numerror === 5 ? (
-                        <p>User Name no Disponible</p>
+                        <p>Usuario no Disponible</p>
                     ) : numerror === 6 ? (
                         <p>Ingrese Email</p>
                     ) : numerror === 7 ? (
                         <p>Email no disponible</p>
                     ) : numerror === 8 ? (
-                      <p>Ingrese Ingrese Password</p>
+                      <p>Ingrese Ingrese Contrasena</p>
                     ): numerror === 9 ? (
-                        <p>La longitud del Password debe ser mayor a 8 caracteres</p>
+                        <p>La longitud de la Contrasena debe ser mayor a 8 caracteres</p>
                     ) : numerror === 10 ? (
-                        <p>Ingrese Confirm Password</p>
+                        <p>Ingrese el Confirmar Contrasena</p>
                     ) : numerror === 11 ? (
-                        <p>Los Password no coinciden</p>
+                        <p>Las contrasenas no coinciden</p>
                     ) : numerror === 0 ? (
                         <div className="col-12">
                             {estado === 0 ? (

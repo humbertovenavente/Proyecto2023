@@ -3,6 +3,8 @@ import axios from 'axios';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
+import imgtc from './../media/TC.jpg';
+import { useAuth } from './AuthContext';
 
 var em_usuario = '';
 var em_username = '';
@@ -28,16 +30,25 @@ const Perfil = () => {
 
   let navigate = useNavigate();
 
+  const { login } = useAuth();
+
   const [oper, setOper] = useState(0);
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [datos, setDatos] = useState("");
 
   const [oferta, setOferta] = useState([]);
 
   //Manejo de Ventana Modal 
   const [omodal, setomodal] = useState(false);
+  const [omodalActPer, setomodalActPer] = useState(false);
+  const [omodalSuscrip, setomodalSuscrip] = useState(false);
+  
+  //Manejo de Ventana Modal TC
+  const [omodalTC, setomodalTC] = useState(false);
+  //Manejo de Ventana Modal TC
   const handleClose = () => {
     setomodal(false)
   };
@@ -78,7 +89,7 @@ const Perfil = () => {
         setFname(m_usuario[0].nombre_usuario);
         setLname(m_usuario[0].apellido_usuario);
         setUsername(m_usuario[0].username);
-        setEmail(m_usuario[0].correo_usuario);
+        setEmail(m_usuario[0].email);
       }
       m_oferta = []
       m_oferta = response.data.oferta
@@ -115,31 +126,82 @@ const Perfil = () => {
 
   const actualizarUsuario = async (e) => {
     e.preventDefault();
-    // setOper(9);
-    // console.log(rol);
-    // try {
-    //   const response = await axios.post("http://localhost/proy/actualizarperfil.php", {
-    //     usuario: em_username,
-    //     nusuario: em_st_usuario,
-    //     srusuario: rol
-    //   });
+    setOper(9);
+    // console.log(username);
+    // console.log(fname);
+    // console.log(lname);
+    try {
+      const response = await axios.post("http://gregserver/apisP/actualizarperfil.php", {
+        usuario: username,
+        n_fname: fname,
+        n_lname: lname
+      });
 
-    // } catch (error) {
-    //   console.log("send data error");
-    // } finally {
+    } catch (error) {
+      console.log("send data error");
+    } finally {
 
-    //   const response = await axios.get("http://localhost/proy/perfiles.php")
-    //   r_usuario = response.data
-    //   if (r_usuario.length >= 1) {
-    //     setDatos(r_usuario);
-    //   }
-    //   setOper(0);
-    // }
+      const response = await axios.get("http://gregserver/apisP/perfiles.php")
+      r_usuario = response.data
+      if (r_usuario.length >= 1) {
+        setDatos(r_usuario);
+      }
+      setOper(0);
+      setomodalActPer(true);
+      setTimeout(() => {
+      return navigate('/')
+    }, 2000);
+    }
   };
 
   function Suscribirse() {
+    setomodalTC(true)
   };
 
+  const [state, setState] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvc: "",
+    focus: ""
+  })
+  const handleInputChangeTC = (e) => {
+    // setState({
+    //   ...state,
+    //   [e.target.name] : e.target.value
+    // })
+  }
+  const handleFocusChangeTC = (e) => {
+    // setState({
+    //   ...state,
+    //   focus : e.target.name
+    // })
+  }
+
+  const procesarPago = async () => {
+    handleOpen("Habilitando Suscripcion")
+    // // setOper(9);
+    try {
+      response = await axios.post("http://gregserver/apisP/actualizasuscripcion.php", {
+        username: username,
+      });
+      // console.log(response)
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setomodal(false)
+
+      setomodalSuscrip(true);
+      login(username, 2)
+      setTimeout(() => {
+      return navigate('/')
+    }, 2000);
+    }
+
+  }
+  const cancelarPago = () => {
+    setomodalTC(false)
+  }
   // const editarUsuario = (id) => {
   //   setOper(2)
   //   var i = 0
@@ -250,10 +312,74 @@ const Perfil = () => {
 
 
       {/* **Ventana Modal para Mensaje** */}
+      <Modal open={omodalActPer} onClose={actualizarUsuario} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+          <div>           
+            <span>Perfil actualizado correctamente, redirigiendo al home</span>
+            <div className="spinner-border" role="status" />
+          </div>
+        </Box>
+      </Modal>
+      {/* **Ventana Modal para Responder** */}
+
+      {/* **Ventana Modal para Mensaje** */}
       <Modal open={omodal} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
           <div>           
             <span>{omodal_msg}</span>
+            <div className="spinner-border" role="status" />
+          </div>
+        </Box>
+      </Modal>
+      {/* **Ventana Modal para Responder** */}
+
+
+      {/* *Ventana Modal para TC* */}
+      <Modal open={omodalTC} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '50px' }}>
+          <div>
+
+            <form>
+            <img src={imgtc}  alt="..." className='mx-auto d-block' style={{ align: "center", height: "10rem" }} />
+              <div className="form-group">
+                <label htmlFor="number">Número de la tarjeta</label>
+                <input type="text" name="number" id="number" maxLength="16" className="form-control"
+                  onChange={handleInputChangeTC} onFocus={handleFocusChangeTC} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="name">Nombre</label>
+                <input type="text" name="name" id="name" maxLength="30" className="form-control"
+                  onChange={handleInputChangeTC} onFocus={handleFocusChangeTC} />
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="expiry">Fecha de expiración</label>
+                  <input type="text" name="expiry" id="expiry" maxLength="5" className="form-control"
+                    onChange={handleInputChangeTC} onFocus={handleFocusChangeTC} />
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="cvc">CVC</label>
+                  <input type="text" name="cvc" id="cvc" maxLength="3" className="form-control"
+                    onChange={handleInputChangeTC} onFocus={handleFocusChangeTC} />
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "row", alignItems: "center", rowGap: "1rem", justifyContent: "top", flexWrap: "wrap", marginTop: "2rem",
+                            backgroundColor: "#d4d4d4", padding: "2rem" }}>
+              <button onClick={procesarPago} type="button" className="btn btn-success btn-block btn-lg">Pagar</button>
+              <button onClick={cancelarPago} type="button" className="btn btn-success btn-block btn-lg">Cancelar</button>
+              </div>
+            </form>
+
+          </div>
+        </Box>
+      </Modal>
+      {/* *Ventana Modal para TC* */}
+
+      {/* **Ventana Modal para Mensaje** */}
+      <Modal open={omodalSuscrip} onClose={Suscribirse} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+          <div>           
+            <span>Suscripcion correcta, redirigiendo al home</span>
             <div className="spinner-border" role="status" />
           </div>
         </Box>
