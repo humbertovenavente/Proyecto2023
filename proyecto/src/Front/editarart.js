@@ -4,11 +4,14 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import axios from "axios";
 import { useAuth } from './AuthContext';
+import { useParams } from "react-router-dom"
 
 var r_categorias = [];
 var m_categoriaAct = "";
 var t_subcategorias = [];
 var r_subcategorias = [];
+var r_article = [];
+var response;
 
 const tipoArticulo = [
   {id_tipo_articulo : 0, n_tipo_articulo : 'Gratis'},    
@@ -25,6 +28,7 @@ const EditarArt = () => {
     
     let navigate = useNavigate();
   const { l_user } = useAuth();
+  let { idarticulo } = useParams()
 
   const [titulo, setTitulo] = useState("");
   const [cita_rel, setCita_rel] = useState("");
@@ -80,6 +84,7 @@ const EditarArt = () => {
     if (l_isLoggedIn && (l_l_rol === 3 || l_l_rol || 4 && l_l_rol || 5)) {
       // r_articles = []
       leercat_subcat()
+      leerArticuloEdit(idarticulo);
     } else {
       setomodalRed(true)
       setTimeout(() => {
@@ -97,6 +102,10 @@ const EditarArt = () => {
       }
       t_subcategorias = response.data.subcategorias
 
+      if (t_subcategorias.length >= 1) {
+        setSubCategoria(t_subcategorias);
+      }
+
     } catch (error) {
       console.log("send data error");
     } finally {
@@ -104,12 +113,28 @@ const EditarArt = () => {
     }
   }
 
-  const handleFormSubmit = async (e) => {
+  function selCategoria(cat) {
+    m_categoriaAct = cat
+    setCategoriaAct(m_categoriaAct)
+    r_subcategorias = []
+    setSubCategoriaAct([])
+    var i = 0
+    for (i = 0; i < t_subcategorias.length; i++) {
+      if (t_subcategorias[i].id_categoria === cat) {
+        // console.log(t_subcategorias[i])
+        r_subcategorias.push(t_subcategorias[i])
+      }
+    }
+    setSubCategoria(r_subcategorias)
+  }
+
+  const ActualizarArticulo = async (e) => {
     e.preventDefault();
     try {
       // console.log("post1");
-      const response = await axios.post("http://gregserver/apisP/guardarart.php",
+      const response = await axios.post("http://gregserver/apisP/actualizarart.php",
         {
+          id_art : idarticulo, 
           username: l_user,
           titulo: titulo,
           cita_relevante: cita_rel,
@@ -159,28 +184,61 @@ const EditarArt = () => {
   // $imagen4_desc = $data['imagen4_desc'];    
   // $imagen5_desc = $data['imagen5_desc'];
 
-  function selCategoria(cat) {
-    m_categoriaAct = cat
-    setCategoriaAct(m_categoriaAct)
-    r_subcategorias = []
-    setSubCategoriaAct([])
-    var i = 0
-    for (i = 0; i < t_subcategorias.length; i++) {
-      if (t_subcategorias[i].id_categoria === cat) {
-        // console.log(t_subcategorias[i])
-        r_subcategorias.push(t_subcategorias[i])
-      }
-    }
-    setSubCategoria(r_subcategorias)
-  }
   
     
+  async function leerArticuloEdit(idarticulo) {
+    try {
+      console.log(idarticulo);
+      response = await axios.post("http://gregserver/apisP/leerdetmisarticulos.php", {
+        id_art: idarticulo
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      
+      r_article = [];
+      r_article = response.data.articulo
+      
+      console.log(r_article);
+
+      if (r_article.length >= 1) {
+        setTitulo(r_article[0].titulo_articulo);
+        setCita_rel(r_article[0].cita_relevante);
+        setContenido1(r_article[0].contenido_articulo);
+        setContenido2(r_article[0].contenido_articulo2);
+        setContenido3(r_article[0].contenido_articulo3);
+        setVideo(r_article[0].video_articulo);
+        setTipo_articulo(r_article[0].tipo_articulo);
+        setPlantilla(r_article[0].plantilla);
+        setImagen1(r_article[0].imagen1);
+        setImagen2(r_article[0].imagen2);
+        setImagen3(r_article[0].imagen3);
+        setImagen4(r_article[0].imagen4);
+        setImagen5(r_article[0].imagen5);
+        setImagen1_desc(r_article[0].imagen1_desc);
+        setImagen2_desc(r_article[0].imagen2_desc);
+        setImagen3_desc(r_article[0].imagen3_desc);
+        setImagen4_desc(r_article[0].imagen4_desc);
+        setImagen5_desc(r_article[0].imagen5_desc);
+        setCategoriaAct(r_article[0].id_categoria);
+        selCategoria(r_article[0].id_categoria);
+        setSubCategoriaAct(r_article[0].id_subcategoria);
+      }
+      // m_oferta = []
+      // m_oferta = response.data.oferta
+      // if (m_oferta.length >= 1) {
+      //   setOferta(m_oferta);
+      // }
+      // console.log(m_oferta)
+      // setOper(0);
+    }
+  };
   
 
     return(
         <div>
       <h3 className="mt-3">Creación de Artículos</h3>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={ActualizarArticulo}>
 
         <div className="mt-2">
           <label htmlFor="titulo">Ingrese el titulo del articulo</label>
@@ -203,7 +261,7 @@ const EditarArt = () => {
         <div className="mt-2">
           <label htmlFor="subcategoria">Subcategoria</label>
           <select id="subcategoria" name="subcategoria" value={subCategoriaAct} onChange={(e) => setSubCategoriaAct(e.target.value)} required >
-            <option value="">Seleccione una subcategoria</option>
+            {/* <option value="">Seleccione una subcategoria</option> */}
             {a_subcategoria.map((dato) => (<option value={dato.id_subcategoria} key={dato.id_subcategoria}>{dato.nombre_subcategoria}</option>))}
           </select>
         </div>
@@ -297,10 +355,10 @@ const EditarArt = () => {
 
 
 
-        <button type="submit" className="btn btn-primary">Publicar Articulo</button>
+        <button type="submit" className="btn btn-primary">Acturalizar Articulo</button>
       </form>
 
-      <Modal open={omodalPubli} onClose={handleFormSubmit} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      <Modal open={omodalPubli} onClose={ActualizarArticulo} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
           <div>
             <span>Publicacion Exitosa, redirigiendo al home</span>

@@ -11,12 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insertar un nuevo registro
     $data = json_decode(file_get_contents('php://input'), true);
     $usuario = $data['usuario'];    
-    $nusuario = $data['nusuario'];    
-    $srusuario = $data['srusuario'];
+    $nombre_usuario = $data['n_fname'];    
+    $apellido_usuario = $data['n_lname'];
 
     // echo '$categoria';
 
-    $sql = "UPDATE usuario SET rol='$srusuario', activo='$nusuario' where username='$usuario'";
+    $sql = "UPDATE usuario SET nombre_usuario='$nombre_usuario', apellido_usuario='$apellido_usuario' where username='$usuario'";
     
     if ($conexion->query($sql) === TRUE) {
         echo "Registro insertado exitosamente";
