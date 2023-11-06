@@ -79,7 +79,7 @@ const Perfiles = () => {
 }, [])
 
   async function leerusuario() {
-    const response = await axios.get("http://gregserver/apisP/perfiles.php")
+    const response = await axios.get("http://localhost/proy/perfiles.php")
     r_usuario = response.data
     console.log(response);
     if (r_usuario.length >= 1) {
@@ -94,7 +94,7 @@ const Perfiles = () => {
     setOper(9);
     console.log(rol);
     try {
-      const response = await axios.post("http://gregserver/apisP/actualizarperfiles.php", {
+      const response = await axios.post("http://localhost/proy/actualizarperfiles.php", {
         usuario: em_username,
         nusuario: em_st_usuario,
         srusuario: rol
@@ -105,7 +105,7 @@ const Perfiles = () => {
       console.log("send data error");
     } finally {
 
-      const response = await axios.get("http://gregserver/apisP/perfiles.php")
+      const response = await axios.get("http://localhost/proy/perfiles.php")
       r_usuario = response.data
       if (r_usuario.length >= 1) {
         setDatos(r_usuario);

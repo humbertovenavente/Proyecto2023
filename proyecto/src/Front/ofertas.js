@@ -152,7 +152,7 @@ const Ofertas = () => {
 
     async function leerusuarios(l_users) {
         try {
-            const response = await axios.post("http://gregserver/apisP/leerusuarios.php",
+            const response = await axios.post("http://localhost/proy/leerusuarios.php",
             {
                 l_users : l_users
             });
@@ -184,7 +184,7 @@ const Ofertas = () => {
     async function leerusuariospdl() {
         try {
             // console.log(dlog)
-            const response = await axios.post("http://gregserver/apisP/leerusuariospdl.php",
+            const response = await axios.post("http://localhost/proy/leerusuariospdl.php",
             {
               d_login : dlog
             });
@@ -225,7 +225,7 @@ const Ofertas = () => {
 
         try {
             // console.log(s_correo, s_nombre)
-            const response = await axios.post("http://gregserver/apisP/sendmailoferta.php",
+            const response = await axios.post("http://localhost/proy/sendmailoferta.php",
             {
               correo : s_correo,
               nombre: s_nombre,

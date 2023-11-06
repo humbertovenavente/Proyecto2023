@@ -44,7 +44,7 @@ const Categoria = () => {
   }, [])
 
   async function leercategorias() {
-    const response = await axios.get("http://gregserver/apisP/categorias.php")
+    const response = await axios.get("http://localhost/proy/categorias.php")
     r_categorias = response.data
     if (r_categorias.length >= 1) {
       setDatos(r_categorias);
@@ -64,7 +64,7 @@ const Categoria = () => {
     } else {
       setOper(9);
       try {
-        const response = await axios.post("http://gregserver/apisP/crearcategoria.php", {
+        const response = await axios.post("http://localhost/proy/crearcategoria.php", {
           categoria: a_categoria
         });
 
@@ -72,7 +72,7 @@ const Categoria = () => {
         console.log("send data error");
       } finally {
 
-        const response = await axios.get("http://gregserver/apisP/categorias.php")
+        const response = await axios.get("http://localhost/proy/categorias.php")
         r_categorias = response.data
         if (r_categorias.length >= 1) {
           setDatos(r_categorias);
@@ -87,7 +87,7 @@ const Categoria = () => {
     e.preventDefault();
     setOper(9);
     try {
-      const response = await axios.post("http://gregserver/apisP/actualizacategoria.php", {
+      const response = await axios.post("http://localhost/proy/actualizacategoria.php", {
         categoria: em_id_categoria,
         ncategoria: em_categoria,
         scategoria: em_st_categoria
@@ -98,7 +98,7 @@ const Categoria = () => {
       console.log("send data error");
     } finally {
 
-      const response = await axios.get("http://gregserver/apisP/categorias.php")
+      const response = await axios.get("http://localhost/proy/categorias.php")
       r_categorias = response.data
       if (r_categorias.length >= 1) {
         setDatos(r_categorias);

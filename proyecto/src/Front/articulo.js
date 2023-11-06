@@ -68,7 +68,7 @@ const Articulo = () => {
 
     async function leerarticulo(id_art) {
 
-        const response = await axios.post("http://gregserver/apisP/leerdetarticulo.php", {
+        const response = await axios.post("http://localhost/proy/leerdetarticulo.php", {
             id_art: id_art
         })
 
@@ -117,7 +117,7 @@ const Articulo = () => {
         setOper_c(9)
         try {
 
-            const response = await axios.post("http://gregserver/apisP/comentar.php", {
+            const response = await axios.post("http://localhost/proy/comentar.php", {
                 v_articulo: idarticulo,
                 v_nodopadre: '0',
                 v_nodo: '0',
@@ -130,7 +130,7 @@ const Articulo = () => {
             console.log("Error Grabando Comentario");
         } finally {
 
-            const response = await axios.post("http://gregserver/apisP/leerdetarticuloscv.php", {
+            const response = await axios.post("http://localhost/proy/leerdetarticuloscv.php", {
                 id_art: idarticulo
             })
 
@@ -175,7 +175,7 @@ const Articulo = () => {
 
         try {
 
-            const response = await axios.post("http://gregserver/apisP/comentar.php", {
+            const response = await axios.post("http://localhost/proy/comentar.php", {
                 v_articulo: idarticulo,
                 v_nodopadre: rnodo_padre,
                 v_nodo: rnodo,
@@ -188,7 +188,7 @@ const Articulo = () => {
             console.log("Error Grabando Respuesta");
         } finally {
 
-            const response = await axios.post("http://gregserver/apisP/leerdetarticuloscv.php", {
+            const response = await axios.post("http://localhost/proy/leerdetarticuloscv.php", {
                 id_art: idarticulo
             })
 
@@ -236,7 +236,7 @@ const Articulo = () => {
 
             // console.log(idarticulo, rpnodo_padre, rpnodo, rpniv, reporte, l_user)
 
-            response = await axios.post("http://gregserver/apisP/reportar.php", {
+            response = await axios.post("http://localhost/proy/reportar.php", {
                 id_articulo: idarticulo,
                 nodo_padre: rpnodo_padre,
                 nodo: rpnodo,

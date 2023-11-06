@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-import { BrowserRouter, Routes, Route, Router} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import React, { useState } from 'react';
 
 import { Login } from './Front/Login';
@@ -35,10 +35,10 @@ import AcercaDe from './Front/acercade';
 import Footer from './Front/footer';
 import PreguntasFrecuentes from './Front/preguntasfrecuentes';
 
-function App() {  
+function App() {
 
-// const [username, setUsername] = useState("");
-//const { isLoggedIn, l_user, logout } = useAuth();
+  // const [username, setUsername] = useState("");
+  //const { isLoggedIn, l_user, logout } = useAuth();
 
   const [articles, setArticles] = useState([]); // Estado para almacenar los artículos
 
@@ -51,52 +51,53 @@ function App() {
     <div className="container">
 
 
-    <BrowserRouter>
-    
-    <Barra/>
+      <BrowserRouter>
 
-      <Routes>
-        
-        <Route path = '/' element = {<Home/>}/>
-        <Route path = '/iniciarsesion' element = {<Login/>}/>
-        <Route path = '/articulos' element = {<CArticulo/>}/>
-        <Route path = '/registro' element = {<Registro/>}/>
-        <Route path = '/perfil' element = {<Perfil/>}/>
-        <Route path='/categoria' element={<Categoria />} />
-        <Route path='/moderar' element={<Moderar/>} />
-        <Route path='/ofertas' element={<Ofertas/>} />
-        <Route path='/misarts' element={<MisArticulos/>} />
+        <Barra />
 
-      
-        <Route path='/subcategoria' element={<SubCategoria/>} />
-        <Route path='/artxcategoria' element={<ArtxCategoria/>} />
-        <Route path = '/Perfiles' element = {<Perfiles/>}/>
+        <Routes>
 
-        <Route path='/articulo/:idarticulo' element={<Articulo />} />
-        <Route path = '/articulosmoderar/:idarticulo' element = {<ArticuloModerar/>}/>
-        <Route path = '/vermisarts/:idarticulo' element = {<VerMisArts/>}/>
-        <Route path = '/editarart/:idarticulo' element = {<EditarArt/>}/>
-        
-        <Route path = '/articulos publicados' element = {<APublicados/>}/>
-       
-        
-        <Route path = '/plantilla1' element = {<Plantilla1/>}/>
-        <Route path = '/plantilla2' element = {<Plantilla2/>}/>
-        <Route path = '/plantilla3' element = {<Plantilla3/>}/>
+          <Route path='/' element={<Home />} />
+          <Route path='/iniciarsesion' element={<Login />} />
+          <Route path='/articulos' element={<CArticulo />} />
+          <Route path='/registro' element={<Registro />} />
+          <Route path='/perfil' element={<Perfil />} />
+          <Route path='/categoria' element={<Categoria />} />
+          <Route path='/moderar' element={<Moderar />} />
+          <Route path='/ofertas' element={<Ofertas />} />
+          <Route path='/misarts' element={<MisArticulos />} />
 
-        <Route path = '/acercade' element = {<AcercaDe/>}/>
-        <Route path = '/preguntasfrecuentes' element = {<PreguntasFrecuentes/>}/>
-        
-      </Routes>
-    </BrowserRouter>   
 
-      <br/>
+          <Route path='/subcategoria' element={<SubCategoria />} />
+          <Route path='/artxcategoria' element={<ArtxCategoria />} />
+          <Route path='/Perfiles' element={<Perfiles />} />
+
+          <Route path='/articulo/:idarticulo' element={<Articulo />} />
+          <Route path='/articulosmoderar/:idarticulo' element={<ArticuloModerar />} />
+          <Route path='/vermisarts/:idarticulo' element={<VerMisArts />} />
+          <Route path='/editarart/:idarticulo' element={<EditarArt />} />
+
+          <Route path='/articulos publicados' element={<APublicados />} />
+
+
+          <Route path='/plantilla1' element={<Plantilla1 />} />
+          <Route path='/plantilla2' element={<Plantilla2 />} />
+          <Route path='/plantilla3' element={<Plantilla3 />} />
+
+          <Route path='/acercade' element={<AcercaDe />} />
+          <Route path='/preguntasfrecuentes' element={<PreguntasFrecuentes />} />
+
+        </Routes>
+
+
+        <br />
         <Anuncios />
-      <br/>
+        <br />
 
-      <br/>
+        <br />
         <Footer />
-      <br/>
+        <br />
+      </BrowserRouter>
 
     </div>
   );

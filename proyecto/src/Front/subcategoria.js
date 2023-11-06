@@ -49,7 +49,7 @@ const SubCategoria = () => {
       }, [])
 
     async function leersubcategorias() {
-        const response = await axios.get("http://gregserver/apisP/subcategorias.php")
+        const response = await axios.get("http://localhost/proy/subcategorias.php")
         r_subcategorias = response.data
         if (r_subcategorias.length >= 1) {
             setDatos(r_subcategorias);
@@ -57,7 +57,7 @@ const SubCategoria = () => {
     }
 
     async function leercategorias() {
-        const response = await axios.get("http://gregserver/apisP/categorias.php")
+        const response = await axios.get("http://localhost/proy/categorias.php")
         r_categorias = response.data
         if (r_categorias.length >= 1) {
             setDatos2(r_categorias);
@@ -84,7 +84,7 @@ const SubCategoria = () => {
             setOper(9);
             try {
                 console.log(a_subcategoria + categoriaAct)
-                const response = await axios.post("http://gregserver/apisP/crearsubcategoria.php", {
+                const response = await axios.post("http://localhost/proy/crearsubcategoria.php", {
                     subcategoria: a_subcategoria,
                     id_categoria: categoriaAct
                 });
@@ -93,7 +93,7 @@ const SubCategoria = () => {
                 console.log("send data error");
             } finally {
 
-                const response = await axios.get("http://gregserver/apisP/subcategorias.php")
+                const response = await axios.get("http://localhost/proy/subcategorias.php")
                 r_subcategorias = response.data
                 if (r_subcategorias.length >= 1) {
                     setDatos(r_subcategorias);
@@ -116,7 +116,7 @@ const SubCategoria = () => {
             // console.log(em_subcategoria)
             // console.log(em_st_subcategoria)
             // console.log(m_categoriaAct)
-          const response = await axios.post("http://gregserver/apisP/actualizasubcategoria.php", {
+          const response = await axios.post("http://localhost/proy/actualizasubcategoria.php", {
             subcategoria: em_id_subcategoria,
             nsubcategoria: em_subcategoria,
             ssubcategoria: em_st_subcategoria,
@@ -128,7 +128,7 @@ const SubCategoria = () => {
           console.log("send data error");
         } finally {
 
-          const response = await axios.get("http://gregserver/apisP/subcategorias.php")
+          const response = await axios.get("http://localhost/proy/subcategorias.php")
           r_subcategorias = response.data
           if (r_subcategorias.length >= 1) {
             setDatos(r_subcategorias);

@@ -13,7 +13,7 @@ const APublicados = () => {
 
   async function articulos() {
 
-    const info = await axios.get("http://gregserver/apisP/articulos.php")
+    const info = await axios.get("http://localhost/proy/articulos.php")
 
     setData(info.data);
     

@@ -18,7 +18,7 @@ const Anuncios = () => {
 
     async function leerAnuncios() {
         try {
-            response = await axios.get("http://gregserver/apisP/leeranuncios.php")
+            response = await axios.get("http://localhost/proy/leeranuncios.php")
         } catch (error) {
             setOper(3);
         } finally {

@@ -90,7 +90,7 @@ const CArticulo = () => {
 
   async function leercat_subcat() {
     try {
-      const response = await axios.get("http://gregserver/apisP/leercat_subcat.php")
+      const response = await axios.get("http://localhost/proy/leercat_subcat.php")
       r_categorias = response.data.categorias
       if (r_categorias.length >= 1) {
         setCategoria(r_categorias);
@@ -108,7 +108,7 @@ const CArticulo = () => {
     e.preventDefault();
     try {
       // console.log("post1");
-      const response = await axios.post("http://gregserver/apisP/guardarart.php",
+      const response = await axios.post("http://localhost/proy/guardarart.php",
         {
           username: l_user,
           titulo: titulo,

@@ -123,7 +123,7 @@ const Registro = () => {
         setEstado(1)
         try {
             console.log("send data");
-            const response = await axios.post("http://gregserver/apisP/registro.php", {
+            const response = await axios.post("http://localhost/proy/registro.php", {
                 fname: fname,
                 lname: lname,
                 username: m_username,
@@ -140,7 +140,7 @@ const Registro = () => {
             //console.error(error);
             // Manejar errores aquí
         } finally {
-            const response = await axios.post("http://gregserver/apisP/checklogin.php", {
+            const response = await axios.post("http://localhost/proy/checklogin.php", {
             username: m_username,
             password: password1
             });
@@ -181,7 +181,7 @@ const Registro = () => {
             // console.log("send data");
             // console.log(m_username)
             // numerror = 0;
-            const response = await axios.post("http://gregserver/apisP/checkusername.php", {
+            const response = await axios.post("http://localhost/proy/checkusername.php", {
                 username: m_username,
             });
             m_usuario = response.data
@@ -207,7 +207,7 @@ const Registro = () => {
           // console.log("send data");
           // console.log(m_username)
           // numerror = 0;
-          const response = await axios.post("http://gregserver/apisP/checkemail.php", {
+          const response = await axios.post("http://localhost/proy/checkemail.php", {
               email: m_email,
           });
           m_correo = response.data
@@ -229,7 +229,7 @@ const Registro = () => {
 
   async function sendMail() {
     try {
-        const response = await axios.post("http://gregserver/apisP/sendmail.php",{
+        const response = await axios.post("http://localhost/proy/sendmail.php",{
             email: email,
             fname: fname
         });

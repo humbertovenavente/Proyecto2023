@@ -40,7 +40,7 @@ const VerMisArts = () => {
 
         try {
             console.log(idarticulo);
-            response = await axios.post("http://gregserver/apisP/leermisarticulos.php", {
+            response = await axios.post("http://localhost/proy/leermisarticulos.php", {
             id_art: id_art
         })
 

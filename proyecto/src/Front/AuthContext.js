@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const sendUsername = async (l_username) => {
     try {
-        response = await axios.post("http://gregserver/apisP/checkusername.php", {
+        response = await axios.post("http://localhost/proy/checkusername.php", {
             username: l_username,
         });
         m_usuario = response.data

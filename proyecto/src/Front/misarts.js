@@ -45,7 +45,7 @@ const MisArticulos = () => {
     }, [])
   
     // async function leer10articulos() {
-    //   const response = await axios.get("http://gregserver/apisP/moderacion.php");
+    //   const response = await axios.get("http://localhost/proy/moderacion.php");
     //   r_articles = response.data;
     //   if (r_articles.length >= 1) {
     //     setArticles(r_articles);
@@ -58,7 +58,7 @@ const MisArticulos = () => {
       // console.log(rol);
       try {
         // console.log(l_user);
-        response = await axios.post("http://gregserver/apisP/misarticulos.php", {
+        response = await axios.post("http://localhost/proy/misarticulos.php", {
           usuario: l_user
         });
         

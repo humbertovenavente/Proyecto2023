@@ -21,7 +21,7 @@ export const Login = () => {
         e.preventDefault();
         setEstado(1)
         try {
-            response = await axios.post("http://gregserver/apisP/checklogin.php", {
+            response = await axios.post("http://localhost/proy/checklogin.php", {
                 username: username,
                 password: password
             });

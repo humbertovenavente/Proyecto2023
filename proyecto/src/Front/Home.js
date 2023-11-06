@@ -24,7 +24,7 @@ const Home = () => {
   }, []);
 
   async function leer10articulos() {
-    const response = await axios.get("http://gregserver/apisP/articulos10.php");
+    const response = await axios.get("http://localhost/proy/articulos10.php");
     r_articles = response.data;
     if (r_articles.length >= 1) {
       setArticles(r_articles);

@@ -95,7 +95,7 @@ const EditarArt = () => {
 
   async function leercat_subcat() {
     try {
-      const response = await axios.get("http://gregserver/apisP/leercat_subcat.php")
+      const response = await axios.get("http://localhost/proy/leercat_subcat.php")
       r_categorias = response.data.categorias
       if (r_categorias.length >= 1) {
         setCategoria(r_categorias);
@@ -132,7 +132,7 @@ const EditarArt = () => {
     e.preventDefault();
     try {
       // console.log("post1");
-      const response = await axios.post("http://gregserver/apisP/actualizarart.php",
+      const response = await axios.post("http://localhost/proy/actualizarart.php",
         {
           id_art : idarticulo, 
           username: l_user,
@@ -189,7 +189,7 @@ const EditarArt = () => {
   async function leerArticuloEdit(idarticulo) {
     try {
       console.log(idarticulo);
-      response = await axios.post("http://gregserver/apisP/leerdetmisarticulos.php", {
+      response = await axios.post("http://localhost/proy/leerdetmisarticulos.php", {
         id_art: idarticulo
       });
     } catch (error) {

@@ -29,7 +29,7 @@ const ArtxCategoria = () => {
 
     async function leercategorias() {
         try {
-            const response = await axios.get("http://gregserver/apisP/categorias.php")
+            const response = await axios.get("http://localhost/proy/categorias.php")
             r_categorias = response.data
             // console.log(r_categorias)
             if (r_categorias.length >= 1) {
@@ -95,7 +95,7 @@ const ArtxCategoria = () => {
     async function leerarticulosxcat(id_cat) {
         try {
             // console.log(id_cat)
-            const response = await axios.post("http://gregserver/apisP/artxcategoria.php", {
+            const response = await axios.post("http://localhost/proy/artxcategoria.php", {
                 id_cat: id_cat
             })
             // console.log(response.data)

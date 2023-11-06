@@ -77,7 +77,7 @@ const Perfil = () => {
 
   async function leerusuario() {
     try {
-      response = await axios.post("http://gregserver/apisP/checkperfil.php", {
+      response = await axios.post("http://localhost/proy/checkperfil.php", {
         usuario: l_l_username
       });
     } catch (error) {
@@ -131,7 +131,7 @@ const Perfil = () => {
     // console.log(fname);
     // console.log(lname);
     try {
-      const response = await axios.post("http://gregserver/apisP/actualizarperfil.php", {
+      const response = await axios.post("http://localhost/proy/actualizarperfil.php", {
         usuario: username,
         n_fname: fname,
         n_lname: lname
@@ -141,7 +141,7 @@ const Perfil = () => {
       console.log("send data error");
     } finally {
 
-      const response = await axios.get("http://gregserver/apisP/perfiles.php")
+      const response = await axios.get("http://localhost/proy/perfiles.php")
       r_usuario = response.data
       if (r_usuario.length >= 1) {
         setDatos(r_usuario);
@@ -182,7 +182,7 @@ const Perfil = () => {
     handleOpen("Habilitando Suscripcion")
     // // setOper(9);
     try {
-      response = await axios.post("http://gregserver/apisP/actualizasuscripcion.php", {
+      response = await axios.post("http://localhost/proy/actualizasuscripcion.php", {
         username: username,
       });
       // console.log(response)

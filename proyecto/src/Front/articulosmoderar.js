@@ -40,7 +40,7 @@ const ArticuloModerar = () => {
 
         try {
             console.log(idarticulo);
-            response = await axios.post("http://gregserver/apisP/leermoderararticulo.php", {
+            response = await axios.post("http://localhost/proy/leermoderararticulo.php", {
             id_art: id_art
         })
 
@@ -63,7 +63,7 @@ const ArticuloModerar = () => {
         setOper(9);
         console.log(id);
         try {
-          const response = await axios.post("http://gregserver/apisP/publicararticulo.php", {
+          const response = await axios.post("http://localhost/proy/publicararticulo.php", {
             id_articulo : id
           });
           // console.log(response)
@@ -76,7 +76,7 @@ const ArticuloModerar = () => {
           setTimeout(() => {
             return navigate('/')
           }, 2000);
-          // const response = await axios.get("http://gregserver/apisP/categorias.php")
+          // const response = await axios.get("http://localhost/proy/categorias.php")
           // r_categorias = response.data
           // if (r_categorias.length >= 1) {
           //   setDatos(r_categorias);

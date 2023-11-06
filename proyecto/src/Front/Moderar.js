@@ -44,7 +44,7 @@ const Moderar = () => {
   }, [])
 
   async function leer10articulos() {
-    const response = await axios.get("http://gregserver/apisP/moderacion.php");
+    const response = await axios.get("http://localhost/proy/moderacion.php");
     r_articles = response.data;
     if (r_articles.length >= 1) {
       setArticles(r_articles);
@@ -80,7 +80,7 @@ const Moderar = () => {
     setOper(9);
     console.log(id);
     try {
-      const response = await axios.post("http://gregserver/apisP/publicararticulo.php", {
+      const response = await axios.post("http://localhost/proy/publicararticulo.php", {
         id_articulo : id
       });
       // console.log(response)
@@ -93,7 +93,7 @@ const Moderar = () => {
       setTimeout(() => {
         return navigate('/')
       }, 2000);
-      // const response = await axios.get("http://gregserver/apisP/categorias.php")
+      // const response = await axios.get("http://localhost/proy/categorias.php")
       // r_categorias = response.data
       // if (r_categorias.length >= 1) {
       //   setDatos(r_categorias);
