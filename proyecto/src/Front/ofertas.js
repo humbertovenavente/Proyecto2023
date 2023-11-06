@@ -246,7 +246,7 @@ const Ofertas = () => {
     function regresar_sel() {
         setOperv1(0)
         r_usuarios = []
-        setOperv1(0)
+        setOperv2(0)
     }
 
     return (
