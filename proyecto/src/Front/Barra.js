@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Barra = () => {
   //const { isLoggedIn } = useAuth();
-  const { isLoggedIn, l_user, logout, n_rol , l_rol} = useAuth();
+  const { isLoggedIn, l_user, logout, n_rol , l_rol , p_imagen} = useAuth();
   let navigate = useNavigate();
   // return (
   //     <div>Test</div>
@@ -24,6 +24,12 @@ const Barra = () => {
         <nav className="navbar navbar-expand-lg llink">
           <div className="container-fluid">
             <ul className="navbar-nav ms-auto">
+            {p_imagen ?
+                  <img src={"data:image/png;base64," + p_imagen} className="img-fluid" alt="imagen" style={{ width: "2rem" }} />
+                :
+                  <div>
+                  </div>
+            }
               <li className="nav-item">
                 {l_user} {n_rol}
               </li>
@@ -405,6 +411,11 @@ const Barra = () => {
                   <li className="nav-item">
                     <Link className="nav-link" to="/ofertas">
                       Ofertas
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/modAnuncios">
+                      Anuncios
                     </Link>
                   </li>
                 </ul>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './plantilla.css';
-import { useParams , useNavigate} from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { useAuth } from './AuthContext';
 
@@ -24,14 +24,17 @@ const ArticuloModerar = () => {
     const [comentarios, setComentarios] = useState([]);
     const [oper, setOper] = useState(0);
     const [oper_c, setOper_c] = useState(0);
-    const [oper_r, setOper_r] = useState(0); 
-    
+    const [oper_r, setOper_r] = useState(0);
+
+    // *** Manejo de Ventana Modal ***
+    const [comment, setComment] = useState('');
+    const [omodalComentar, setomodalComentar] = useState(false);
+  
 
     let { idarticulo } = useParams()
 
     useEffect(() => {
-        // console.log(idarticulo);
-        setOper(0)
+         setOper(0)
         setOper_c(0)
         leerarticulo(idarticulo)
     }, [])
@@ -39,15 +42,15 @@ const ArticuloModerar = () => {
     async function leerarticulo(id_art) {
 
         try {
-            console.log(idarticulo);
+            // console.log(idarticulo);
             response = await axios.post("http://localhost/proy/leermoderararticulo.php", {
-            id_art: id_art
-        })
+                id_art: id_art
+            })
 
         } catch (error) {
             console.log(error);
         } finally {
-            console.log(response.data);
+            // console.log(response.data);
             r_article = response.data
             // console.log(r_article)
             if (r_article.length >= 1) {
@@ -58,43 +61,54 @@ const ArticuloModerar = () => {
     }
 
     const publicarArticulo = async (id) => {
-        // const publicarArticulo = async (e) => {
-        // e.preventDefault();
         setOper(9);
-        console.log(id);
+        // console.log(id);
         try {
-          const response = await axios.post("http://localhost/proy/publicararticulo.php", {
-            id_articulo : id
-          });
-          // console.log(response)
-    
+            const response = await axios.post("http://localhost/proy/publicararticulo.php", {
+                id_articulo: id
+            });
+
         } catch (error) {
-          console.log(error);
+            console.log(error);
         } finally {
-    
-          setomodalPubli(true)
-          setTimeout(() => {
-            return navigate('/')
-          }, 2000);
-          // const response = await axios.get("http://localhost/proy/categorias.php")
-          // r_categorias = response.data
-          // if (r_categorias.length >= 1) {
-          //   setDatos(r_categorias);
-          // }
-          // setOper(1);
+            setomodalPubli(true)
+            setTimeout(() => {
+                return navigate('/')
+            }, 2000);
         }
-      };
+    };
 
-      function rechazarArticulo() {
-        // return navigate('/moderar')
+    function rechazarArticulo(id) {        
+        // handleOpenComentar()
+    }
+
+    function enviarRechazo(id) {        
+        setomodalComentar(false)        
+        enviarRechazo_send(id)
         setomodalRecha(true)
-        setTimeout(() => {
-          return navigate('/')
-        }, 2000);
-    
-        setOper(0);
-      }
+    }    
 
+    const enviarRechazo_send = async () => {        
+        try {
+            // console.log(idarticulo)
+            // console.log(comment)
+            // console.log(article.email)
+            const response = await axios.post("http://localhost/proy/rechazararticulo.php", {
+                id_articulo: idarticulo,
+                mot_rechazo: comment,
+                titulo: article.titulo_articulo,
+                correo: article.email
+            });
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setTimeout(() => {
+                return navigate('/moderar')
+            }, 2000);
+        }
+        // setomodalRecha(false)
+    }
 
     return (
 
@@ -223,7 +237,7 @@ const ArticuloModerar = () => {
                                 {/* <p>Plantilla 3</p> */}
                                 <h3 className="text-center my-4">Artículo de Revista</h3>
 
-                                <img src={article.imagen1} className="d-block" alt="Imagen 1" style={{ align: "center", height: "15rem" }}/>
+                                <img src={article.imagen1} className="d-block" alt="Imagen 1" style={{ align: "center", height: "15rem" }} />
                                 <p style={{ fontSize: "0.8rem" }}><b>{article.imagen1_desc}</b></p>
 
                                 <section className="article-content mt-5">
@@ -244,7 +258,7 @@ const ArticuloModerar = () => {
 
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <p>{article.contenido_articulo3}</p>                                        
+                                            <p>{article.contenido_articulo3}</p>
                                         </div>
                                         <div className="col-md-6">
                                             <img className="img-fluid" src={article.imagen4} alt="Imagen artículo 4" />
@@ -258,42 +272,50 @@ const ArticuloModerar = () => {
 
                     }
                     <div>
-                          <button onClick={() => publicarArticulo(article.id_articulo)}>Publicar</button>
-                         <button onClick={() => rechazarArticulo(article.id_articulo)}>Rechazar</button>
-                     </div>
+                        <button onClick={() => publicarArticulo(article.id_articulo)}>Publicar</button>
+                        <button onClick={() => setomodalComentar(true)}>Rechazar</button>
+                    </div>
 
                 </div>
 
-                
+
             )}
 
 
-{/* **Ventana Modal para Mensaje** */}
-<Modal open={omodalPubli} onClose={publicarArticulo} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
-          <div>
-            <span>Articulo publicado correctamente, redirigiendo al home</span>
-            <div className="spinner-border" role="status" />
-          </div>
-        </Box>
-      </Modal>
-      {/* **Ventana Modal para Responder** */}
+            {/* **Ventana Modal para Mensaje** */}
+            <Modal open={omodalPubli} onClose={publicarArticulo} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                    <div>
+                        <span>Articulo publicado correctamente, redirigiendo al home</span>
+                        <div className="spinner-border" role="status" />
+                    </div>
+                </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
 
-      {/* **Ventana Modal para Mensaje** */}
-      <Modal open={omodalRecha} onClose={rechazarArticulo} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
-          <div>
-            <span>Articulo rechazado, redirigiendo al home</span>
-            <div className="spinner-border" role="status" />
-          </div>
-        </Box>
-      </Modal>
-      {/* **Ventana Modal para Responder** */}
+            {/* **Ventana Modal para Mensaje** */}
+            <Modal open={omodalRecha} onClose={rechazarArticulo} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                    <div>
+                        <span>Articulo rechazado....</span>
+                        <div className="spinner-border" role="status" />
+                    </div>
+                </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
 
+            {/* ***Ventana Modal para Comentar*** */}
+            <Modal open={omodalComentar} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                    <TextField id="comments" label='Motivo de Rechazo' minRows={1} value={comment} onChange={(e) => setComment(e.target.value)} fullWidth />
+                    <Button onClick={enviarRechazo}>Enviar y Grabar Rechazo</Button>
+                </Box>
+            </Modal>
+            {/* ***Ventana Modal para Comentar*** */}
 
         </div>
 
-        
+
     )
 }
 export default ArticuloModerar

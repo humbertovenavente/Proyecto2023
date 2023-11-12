@@ -90,7 +90,7 @@ const Home = () => {
               >
                     <div className="card-footer text-center" style={{ height: "2.5rem" , backgroundColor:"red"}}>
                         {article.destacado === '*' &&
-                    <div style={{ height: "2.5rem" , backgroundColor:"blue"}}>* Articulo Destacado *</div>}
+                    <div style={{ height: "2.5rem" , backgroundColor: "lightblue"}}>* Articulo Destacado *</div>}
                   <img
                     src={article.image}
                     className="card-img-top"

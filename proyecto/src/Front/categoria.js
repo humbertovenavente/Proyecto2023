@@ -8,6 +8,7 @@ var a_categoria = '';
 var em_categoria = '';
 var em_id_categoria = '';
 var em_st_categoria = '';
+var em_pr_categoria = '';
 var r_categorias = [];
 
 const Categoria = () => {
@@ -20,6 +21,7 @@ const Categoria = () => {
   const [e_categoria, sete_categoria] = useState('');
   const [e_id_categoria, sete_id_categoria] = useState('');
   const [e_st_categoria, sete_st_categoria] = useState('');
+  const [e_pr_categoria, sete_pr_categoria] = useState('');
 
   const [omodalRed, setomodalRed] = useState(false);
   const handleCloseRed = () => {
@@ -65,7 +67,8 @@ const Categoria = () => {
       setOper(9);
       try {
         const response = await axios.post("http://localhost/proy/crearcategoria.php", {
-          categoria: a_categoria
+          categoria: a_categoria,
+          premium : em_pr_categoria
         });
 
       } catch (error) {
@@ -90,7 +93,8 @@ const Categoria = () => {
       const response = await axios.post("http://localhost/proy/actualizacategoria.php", {
         categoria: em_id_categoria,
         ncategoria: em_categoria,
-        scategoria: em_st_categoria
+        scategoria: em_st_categoria,
+        prcategoria: em_pr_categoria
       });
       // console.log(response)
 
@@ -124,6 +128,8 @@ const Categoria = () => {
     sete_categoria(em_categoria)
     em_st_categoria = r_categorias[i].activo
     sete_st_categoria(em_st_categoria)
+    em_pr_categoria = r_categorias[i].premium
+    sete_pr_categoria(em_pr_categoria)
   };
 
   function cambiaActivo() {
@@ -135,6 +141,15 @@ const Categoria = () => {
     sete_st_categoria(em_st_categoria)
   }
 
+  function cambiaPremium() {
+    if (em_pr_categoria === 'X') {
+      em_pr_categoria = ''
+    } else {
+      em_pr_categoria = 'X'
+    }
+    sete_pr_categoria(em_pr_categoria)
+  }
+
   function regresar() {
     em_id_categoria = ''
     sete_id_categoria(em_id_categoria)
@@ -142,6 +157,8 @@ const Categoria = () => {
     sete_categoria(em_categoria)
     em_st_categoria = ''
     sete_st_categoria(em_st_categoria)
+    em_pr_categoria = ''
+    sete_pr_categoria(em_pr_categoria)
     setOper(0);
   }
 
@@ -164,6 +181,10 @@ const Categoria = () => {
         em_id_categoria = valor
         sete_categoria(em_id_categoria)
         break;
+        case "e_pr_categoria":
+        em_pr_categoria = valor
+        sete_categoria(em_pr_categoria)
+        break;
       default:
     }
   }
@@ -178,6 +199,7 @@ const Categoria = () => {
                 <th className='oculto'>ID</th>
                 <th>Categoría</th>
                 <th>Activo</th>
+                <th>Premium</th>
                 <th>Seleccionar</th>
               </tr>
             </thead>
@@ -187,6 +209,7 @@ const Categoria = () => {
                   <td className='oculto'>{dato.id_categoria}</td>
                   <td>{dato.nombre_categoria}</td>
                   <td>{dato.activo}</td>
+                  <td>{dato.premium}</td>
                   <td><button id='but' onClick={() => editarCategoria(dato.id_categoria)}>Editar</button></td>
                 </tr>
               ))}
@@ -200,6 +223,11 @@ const Categoria = () => {
           <label>Agregar</label>
           <label className="form-label">Categoría</label>
           <input type="text" onChange={(e) => handleInputChange(e, "a_categoria")} id="a_categoria" placeholder='Categoría' />
+          <label className="form-label">Premium</label>
+          <input type="text" onChange={(e) => handleInputChange(e, "e_pr_categoria")} id="e_pr_categoria" value={e_pr_categoria} />
+          <button onClick={cambiaPremium}>Cambiar A Premium</button>
+
+          <br></br>
           <button onClick={guardarCategoria}>Guardar</button>
           <button onClick={regresar_a}>Regresar</button>
         </div>
@@ -213,6 +241,10 @@ const Categoria = () => {
           <label className="form-label">Activo</label>
           <input type="text" onChange={(e) => handleInputChange(e, "e_st_categoria")} id="e_st_categoria" value={e_st_categoria} />
           <button onClick={cambiaActivo}>Cambiar Activo Inactivo</button>
+
+          <label className="form-label">Premium</label>
+          <input type="text" onChange={(e) => handleInputChange(e, "e_pr_categoria")} id="e_pr_categoria" value={e_pr_categoria} />
+          <button onClick={cambiaPremium}>Cambiar A Premium</button>
           <br/><br/>
           <button onClick={actualizarCategoria}>Grabar Datos</button>
           <button onClick={regresar}>Regresar</button>

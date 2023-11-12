@@ -23,6 +23,7 @@ import MisArticulos from './Front/misarts';
 import ArticuloModerar from './Front/articulosmoderar';
 import VerMisArts from './Front/vermisarts';
 import EditarArt from './Front/editarart';
+import ModAnuncios from './Front/modAnuncios';
 
 import Perfil from './Front/Perfil';
 
@@ -66,6 +67,8 @@ function App() {
           <Route path='/moderar' element={<Moderar />} />
           <Route path='/ofertas' element={<Ofertas />} />
           <Route path='/misarts' element={<MisArticulos />} />
+
+          <Route path='/modAnuncios' element={<ModAnuncios />} />
 
 
           <Route path='/subcategoria' element={<SubCategoria />} />

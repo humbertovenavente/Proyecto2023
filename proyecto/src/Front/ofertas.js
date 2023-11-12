@@ -114,13 +114,11 @@ const Ofertas = () => {
 
         //Limpiar arreglo de elementos vacios
         e2_usuarios = [];
-        // console.log(e_usuarios);
         for( var j = 0; j < e_usuarios.length ; j++ ){
             if ( e_usuarios[j] ){
-                e2_usuarios.push( e_usuarios[j].trim() );
+                e2_usuarios.push( e_usuarios[j] );
           }
         }
-        // console.log(e2_usuarios)
 
         // l_where = ""
 
@@ -157,7 +155,7 @@ const Ofertas = () => {
                 l_users : l_users
             });
             r_usuarios = response.data
-            // console.log(response.data)
+            console.log(response.data)
         } catch (error) {
             // console.log(error);
             setOmodalLee(false)
@@ -208,14 +206,13 @@ const Ofertas = () => {
 
     function enviar_ofertas() {   
         setomodalEnv(true)   
-        // console.log(r_usuarios)
         for( var j = 0; j < r_usuarios.length ; j++ ){
             if ( r_usuarios[j].rol === '1' ){
                 enviar_ofertas2(r_usuarios[j].email, r_usuarios[j].nombre_usuario, r_usuarios[j].username)                
           }
         }
         setTimeout(() => {
-            setomodalEnv(false)
+            setomodalElu(false)
             return navigate('/')
         }, 2000);
 
@@ -224,7 +221,7 @@ const Ofertas = () => {
     async function enviar_ofertas2(s_correo, s_nombre, s_username){
 
         try {
-            // console.log(s_correo, s_nombre)
+            // console.log(diainis)
             const response = await axios.post("http://localhost/proy/sendmailoferta.php",
             {
               correo : s_correo,
@@ -246,7 +243,7 @@ const Ofertas = () => {
     function regresar_sel() {
         setOperv1(0)
         r_usuarios = []
-        setOperv2(0)
+        setOperv1(0)
     }
 
     return (

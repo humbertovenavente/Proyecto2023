@@ -1,12 +1,10 @@
-import React, { createContext, useContext, useState , useEffect } from 'react';
-// import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios'
 
 const AuthContext = createContext();
-
 var response;
 var m_usuario = [];
+var l_username = "";
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,17 +12,16 @@ export const AuthProvider = ({ children }) => {
   const [l_rol, setl_rol] = useState(0);
   const [n_rol, setn_rol] = useState("Visitante");
   const [username, setUsuario] = useState("");
+  const [p_imagen, setP_imagen] = useState(null);
   var ln_rol = ''
 
-  // let navigate = useNavigate();
   useEffect(() => {
-    const l_username = localStorage.getItem('jcapp_username')
+    l_username = localStorage.getItem('jcapp_username')
     if(l_username){
       sendUsername(l_username)
+      getImagenes()
     }
   }, [])
-
-  
 
   const sendUsername = async (l_username) => {
     try {
@@ -39,17 +36,24 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
         // Manejar errores aquí
     }
-}; 
+  };  
 
+  async function getImagenes() {
+    const res = await axios.get('http://localhost/proy/imagenes.php?username=' + l_username);
+    if (res.data.length > 0) {
+      setP_imagen(res.data[0].imagen)
+    }    
+  }
+  
   const login = ( username, rol ) => {
+    // console.log(username , rol);
     setIsLoggedIn( true );
     setl_user( username );
-    // console.log(typeof(rol))
     setl_rol( rol )
     if ( rol === 0 ) {
       ln_rol = 'Visitante'
     } else if ( rol === 1 ) {
-      ln_rol = ''
+      ln_rol = 'Usuario'
     } else if ( rol === 2 ) {
       ln_rol = 'Premium'
     } else if ( rol === 3 ) {
@@ -61,12 +65,12 @@ export const AuthProvider = ({ children }) => {
     } else {
       ln_rol = 'Visitante'
     }
-    // console.log(ln_rol)
     setn_rol( ln_rol )
 
     localStorage.setItem('jcapp_username', username)
     localStorage.setItem('jcapp_l_rol', rol)
     localStorage.setItem('jcapp_logued', 'X')
+
   };
   
   const logout = () => {
@@ -74,13 +78,20 @@ export const AuthProvider = ({ children }) => {
     setl_user("");
     setl_rol( 0 )
     setn_rol( 'Visitante' )
-    // return navigate('/')
+    setP_imagen(null)
+    localStorage.clear()
+  };
 
-    localStorage.clear();
+  const del_imagen = () => {
+    setP_imagen(null)
+  };
+
+  const ref_imagen = () => {
+    getImagenes()
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, l_user, login, logout, l_rol, n_rol }}>
+    <AuthContext.Provider value={{ isLoggedIn, l_user, login, logout, l_rol, n_rol, p_imagen, del_imagen, ref_imagen }}>
       {children}
     </AuthContext.Provider>
   );
@@ -89,6 +100,3 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
-
-
-

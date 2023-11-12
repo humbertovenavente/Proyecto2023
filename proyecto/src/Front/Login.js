@@ -29,6 +29,7 @@ export const Login = () => {
             setEstado(2)
         } finally {
             m_usuario = response.data
+            // console.log(m_usuario);
             if (m_usuario.length >= 1) {
                 // console.log(username, m_usuario[0].rol)
                 login(username, parseInt(m_usuario[0].rol))
