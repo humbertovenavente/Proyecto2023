@@ -24,6 +24,8 @@ import ArticuloModerar from './Front/articulosmoderar';
 import VerMisArts from './Front/vermisarts';
 import EditarArt from './Front/editarart';
 import ModAnuncios from './Front/modAnuncios';
+import Comentarios from './Front/comentarios';
+import Buscador from './Front/buscador';
 
 import Perfil from './Front/Perfil';
 
@@ -74,6 +76,8 @@ function App() {
           <Route path='/subcategoria' element={<SubCategoria />} />
           <Route path='/artxcategoria' element={<ArtxCategoria />} />
           <Route path='/Perfiles' element={<Perfiles />} />
+          <Route path='/comentarios' element={<Comentarios />} />
+          <Route path='/buscador' element={<Buscador />} />
 
           <Route path='/articulo/:idarticulo' element={<Articulo />} />
           <Route path='/articulosmoderar/:idarticulo' element={<ArticuloModerar />} />

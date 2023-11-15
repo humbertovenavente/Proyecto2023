@@ -10,9 +10,9 @@ echo "llego";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insertar un nuevo registro
     $data = json_decode(file_get_contents('php://input'), true);
-    $usuario = $data['usuario'];    
-    $nombre_usuario = $data['n_fname'];    
-    $apellido_usuario = $data['n_lname'];
+    $usuario = $data['username'];    
+    $nombre_usuario = $data['nombre'];    
+    $apellido_usuario = $data['apellido'];
 
     // echo '$categoria';
 

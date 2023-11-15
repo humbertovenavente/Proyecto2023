@@ -73,14 +73,14 @@ const Articulo = () => {
         })
 
         r_article = response.data.articulo
-        // console.log(r_article)
+        console.log(r_article)
         if (r_article.length >= 1) {
             setArticle(r_article[0]);
             setOper(1)
         }
 
         r_comentarios = response.data.comentarios
-
+        console.log(r_comentarios)
         r_comentarios2 = [];
         if (r_comentarios.length >= 1) {
 
@@ -93,7 +93,8 @@ const Articulo = () => {
                     nodo_padre: item.nodo_padre,
                     nivel: item.nivel,
                     username: item.username,
-                    tabu: ''
+                    tabu: '',
+                    status: item.status
                 }
             });
 
@@ -149,7 +150,8 @@ const Articulo = () => {
                         nodo_padre: item.nodo_padre,
                         nivel: item.nivel,
                         username: item.username,
-                        tabu: ''
+                        tabu: '',
+                        status: item.status
                     }
                 });
 
@@ -207,7 +209,8 @@ const Articulo = () => {
                         nodo_padre: item.nodo_padre,
                         nivel: item.nivel,
                         username: item.username,
-                        tabu: ''
+                        tabu: '',
+                        status: item.status
                     }
                 });
 
@@ -248,6 +251,7 @@ const Articulo = () => {
         } catch (error) {
             console.log("Error Grabando Respuesta");
         } finally {
+            leerarticulo(idarticulo)
             setOper_r(0)
         }
         setReporte('');
@@ -445,7 +449,12 @@ const Articulo = () => {
                                 <p className='oculto'>{dato.nivel} - </p>
                                 <p className='oculto'>{dato.nodo_padre} - </p>
                                 <p><b>&nbsp; {dato.username}&nbsp;--&nbsp;</b></p>
-                                <p>{dato.comentario}&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                {/* <p>{dato.comentario}&nbsp;&nbsp;&nbsp;&nbsp;</p> */}
+                                {dato.status === '0' ? (
+                                <div><p>{dato.comentario}&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+                                  ): (
+                                      <div><b>*** Comentario Censurado ***</b></div>
+                                 )}
 
                                 {isLoggedIn ? (
                                     <div className='d-flex'>

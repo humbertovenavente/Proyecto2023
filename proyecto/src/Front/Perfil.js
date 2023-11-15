@@ -147,7 +147,7 @@ const Perfil = () => {
     handleOpen("Actualizando Datos de mi Perfil")
     // setOper(9);
     try {
-      response = await axios.post("http://localhost/proy/actualizamiperfil.php", {
+      response = await axios.post("http://localhost/proy/actualizarperfil.php", {
         username: username,
         nombre: m_fname,
         apellido: m_lname

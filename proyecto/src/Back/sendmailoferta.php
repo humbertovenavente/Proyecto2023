@@ -2,8 +2,8 @@
 
 include "conexion.php";
 
-//header ("Access-Control-Allow-Origin: http://gregserver:3000");
-//header ("Access-Control-Allow-Headers: Origin, Content-Type, Accept");
+header ("Access-Control-Allow-Origin: *");
+header ("Access-Control-Allow-Headers: Origin, Content-Type, Accept");
 header ("Content-Type: application/json");
 
 if ($conexion) {
@@ -18,35 +18,18 @@ if ($conexion) {
     $fecini   = $data ['fecini'];
     $fecfin   = $data ['fecfin'];
     $username = $data ['username'];
-    
-//    $fecha_ini = date("Y-m-d");
-//    $fecha_ini = $fecini;
-    
-//    echo $fecini;
-//    echo gettype($fecha_ini);
-//    echo $fecini;
-//    echo $fecha_ini;
 
-	$timeini = strtotime($fecini);
-	$newformatini = date('Y-m-d',$timeini);    
-	$timefin = strtotime($fecfin);
-	$newformatfin = date('Y-m-d',$timefin); 
-	$porcenint = intval($porcen);
-
-    $sql = "CALL graba_oferta( '$username', $porcenint, '$newformatini', '$newformatfin');";
-
+    $sql = "CALL graba_oferta( '$username', $porcen, '$fecini', '$fecfin');";
+    echo ($sql);
 
     if ($conexion->query($sql) === TRUE) {
         echo "Registro insertado exitosamente";
     } else {
         echo "Error al grabar la oferta: " . $conexion->error;
     }
-
-
 }else {
     echo "No hubo conexion ";
 }
-
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;

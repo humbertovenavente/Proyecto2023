@@ -15,6 +15,7 @@
                         articulos.titulo_articulo         AS titulo_articulo,
                         articulos.contenido_articulo      AS contenido_articulo,
                         articulos.fecha_publicacion       AS fecha_publicacion,
+                        articulos.tipo_articulo           AS tipo_articulo,
                         subcategorias.id_subcategoria     AS id_subcategoria,
                         subcategorias.nombre_subcategoria AS nombre_subcategoria,
                         categorias.id_categoria           AS id_categoria,

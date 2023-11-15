@@ -1,5 +1,6 @@
 <?php
 
+
 include "conexion.php";
 header ("Content-Type: application/json");
 
@@ -9,14 +10,12 @@ echo "llego";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insertar un nuevo registro
     $data = json_decode(file_get_contents('php://input'), true);
-    $categoria = $data['categoria'];    
-    $ncategoria = $data['ncategoria'];    
-    $scategoria = $data['scategoria'];
-    $prcategoria = $data['prcategoria'];
+    $id_anuncio = $data['id_anuncio'];    
+    $estadoAnuncio = $data['estadoAnuncio'];    
 
     // echo '$categoria';
 
-    $sql = "UPDATE categorias SET nombre_categoria='$ncategoria', activo='$scategoria' , premium = '$prcategoria' where id_categoria='$categoria'";
+    $sql = "UPDATE anuncios SET activo='$estadoAnuncio' where id_anuncio ='$id_anuncio'";
     
     if ($conexion->query($sql) === TRUE) {
         echo "Registro insertado exitosamente";

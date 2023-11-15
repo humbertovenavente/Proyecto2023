@@ -24,14 +24,18 @@ while($row = mysqli_fetch_assoc($result_o)) {
     $oferta[] = $row;
 }
 
+$query_p  = "SELECT * from planessuscripcion";
+$result_p = mysqli_query ($conexion , $query_p);
+$planes = array();
+while($row = mysqli_fetch_assoc($result_p)) {
+    $planes[] = $row;
+}
+
 $datos = array();
 $datos['usuario'] = $usuario;
 $datos['oferta'] = $oferta;
+$datos['planes'] = $planes;
 
 echo json_encode($datos);
 
 ?>
-
-
-
-

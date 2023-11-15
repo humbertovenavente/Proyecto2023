@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useEffect, Component } from 'react';
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 
 
 const Barra = () => {
   //const { isLoggedIn } = useAuth();
   const { isLoggedIn, l_user, logout, n_rol , l_rol , p_imagen} = useAuth();
+  const [omodalLogout, setomodalLogout] = useState(false);
   let navigate = useNavigate();
   // return (
   //     <div>Test</div>
@@ -15,7 +18,12 @@ const Barra = () => {
 
   function logout_barra() {
     logout()
-    return navigate('/')
+    setomodalLogout(true)
+        setTimeout(() => {
+          setomodalLogout(false)
+          return navigate('/')
+        }, 2000);
+    // return navigate('/')
   }
 
   return (
@@ -85,6 +93,11 @@ const Barra = () => {
                       Articulos X Categoria
                     </Link>
                   </ul>
+                  <li className="nav-item">
+                        <Link className="nav-link" to="/buscador">
+                          Buscador
+                        </Link>
+                      </li>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -144,6 +157,11 @@ const Barra = () => {
                       Articulos X Categoria
                     </Link>
                   </ul>
+                  <li className="nav-item">
+                        <Link className="nav-link" to="/buscador">
+                          Buscador
+                        </Link>
+                      </li>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -192,6 +210,11 @@ const Barra = () => {
                       Articulos X Categoria
                     </Link>
                   </ul>
+                  <li className="nav-item">
+                        <Link className="nav-link" to="/buscador">
+                          Buscador
+                        </Link>
+                      </li>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -240,6 +263,11 @@ const Barra = () => {
                       Articulos X Categoria
                     </Link>
                   </ul>
+                  <li className="nav-item">
+                        <Link className="nav-link" to="/buscador">
+                          Buscador
+                        </Link>
+                      </li>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -298,6 +326,11 @@ const Barra = () => {
                       Articulos X Categoria
                     </Link>
                   </ul>
+                  <li className="nav-item">
+                        <Link className="nav-link" to="/buscador">
+                          Buscador
+                        </Link>
+                      </li>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -328,6 +361,11 @@ const Barra = () => {
                   <li className="nav-item">
                     <Link className="nav-link" to="/moderar">
                       Moderar
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/comentarios">
+                      Comentarios
                     </Link>
                   </li>
                 </ul>
@@ -361,6 +399,11 @@ const Barra = () => {
                       Articulos X Categoria
                     </Link>
                   </ul>
+                  <li className="nav-item">
+                        <Link className="nav-link" to="/buscador">
+                          Buscador
+                        </Link>
+                      </li>
                 </ul>
 
                 <button className="navbar-brand mx-auto" href="#">
@@ -418,6 +461,11 @@ const Barra = () => {
                       Anuncios
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/comentarios">
+                      Comentarios
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -427,67 +475,16 @@ const Barra = () => {
         )}
       </div>
 
-      {/* <nav className="navbar navbar-expand-lg llink">
-            <div className="container-fluid">
-
-                <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                
-
-
-
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/'>Home</Link>
-                        </li>
-
-                        <ul className="nav-item ml-auto">
-                            <Link className="nav-link active" to='/articulos publicados'>Articulos Publicados</Link>
-                        </ul>
-
-                    </ul>
-
-                    <button className="navbar-brand mx-auto" href="#">
-                        <img src="https://img.freepik.com/vetores-premium/design-de-logotipo-elegante-g-e-h_728226-5.jpg?w=2000" className="card-img-top" alt="Logo" style={{ width: '40px', height: 'auto' }} />
-                    </button>
-
-                    <ul className="navbar-nav ml-auto">
-                        { !isLoggedIn ? (
-
-                        <ul className="navbar-nav ml-auto">  
-                          <li className="nav-item">
-                              <Link className="nav-link" to='/iniciarsesion'>Login</Link>
-                          </li>   
-                          <li className="nav-item">
-                            <Link className="nav-link" to='/registro'>Registro de usuario</Link>
-                          </li>
-                        </ul>                    
-                        ) : ( '' ) }
-                        
-                        <li className="nav-item">
-                            <Link className="nav-link active" to='/categoria'>Categorias</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link active" to='/articulos'>Crear articulo</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/perfil'>Perfil</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/acercade'>Acerca de</Link>
-                        </li>                        
-                        
-
-                    </ul>
-
-                </div>
-            </div>
-        </nav> */}
+      <Modal open={omodalLogout} onClose={logout_barra} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+          <div>
+            <span>Cerrando sesion, redirigiendo...</span>
+            <div className="spinner-border" role="status" />
+          </div>
+        </Box>
+      </Modal>
     </div>
-    // <div>
-    //     <Link className="nav-link" to='/'>Inicio</Link>
-    //     <Link className="nav-link" to='/front/registro'>Registro</Link>
-    //     <Link className="nav-link" to='/front/acercade'>Acerca de</Link>
-    // </div>
+   
   );
 };
 

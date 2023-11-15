@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 var r_articles = [];
 var r_categorias = [];
+var r_categorias2 = [];
 // var sel_articles = [];
 var m_categoriaAct = ""
 var sel_articles = [];
+var l_l_rol;
 
 const ArtxCategoria = () => {
 
@@ -20,20 +22,32 @@ const ArtxCategoria = () => {
     const [categoriaAct, setCategoriaAct] = useState([]);
     // const [datos, setDatos] = useState([]);
 
+    l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
+
     useEffect(() => {
         r_articles = []
         leercategorias()
+        m_categoriaAct = ""
         setOper(0)
         setsubOper(0)
     }, [])
 
     async function leercategorias() {
         try {
+            r_categorias = [];
+            r_categorias2 = [];
             const response = await axios.get("http://localhost/proy/categorias.php")
             r_categorias = response.data
             // console.log(r_categorias)
             if (r_categorias.length >= 1) {
-                setCategoriaAct(r_categorias);
+                console.log(l_l_rol)
+                if (l_l_rol === 0 || l_l_rol === 1 || isNaN(l_l_rol) ) {
+                    r_categorias2 = r_categorias.filter(x => x.premium != 'X')
+                } else {
+                    r_categorias2 = r_categorias
+                }                
+
+                setCategoriaAct(r_categorias2);
             }
         } catch (error) {
             console.log("send data error");
@@ -58,7 +72,7 @@ const ArtxCategoria = () => {
       sel_articles[0] = r_articles[i];
       setS_articles(sel_articles);
 
-      return navigate(`/vermisarts/${sel_articles[0].id_articulo}`)
+      return navigate(`/articulo/${sel_articles[0].id_articulo}`)
     };
   
     function regresar_a() {
@@ -124,8 +138,8 @@ const ArtxCategoria = () => {
                 <div>
                     <select id="categoria" name="categoria" value={m_categoriaAct} onChange={e => (selCategoria(e.target.value))}>
                         <option value="" key={""}>Seleccione una categoria</option>
-                        {r_categorias.map((dato) => (
-                            <option value={dato.id_categoria} key={dato.id_categoria}>{dato.nombre_categoria}</option>
+                        {r_categorias2.map((dato) => (                
+                                <option value={dato.id_categoria} key={dato.id_categoria}>{dato.nombre_categoria}</option>  
                         ))}
                     </select>
 
@@ -152,6 +166,8 @@ const ArtxCategoria = () => {
                                     </div>
                                     <div className="card-footer mx-auto">
                                         <button id='but' onClick={() => verDetalle(article.id_articulo)}>Ver Detalle</button>
+                                        {article.tipo_articulo === '1' &&
+                                            <div style={{ height: "1.2rem" , backgroundColor:"green"}}>* Articulo premium *</div>}
                                     </div>
                                 </div>
                             ))}
