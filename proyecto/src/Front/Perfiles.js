@@ -235,7 +235,7 @@ const Perfiles = () => {
           <br/><br/>
           {/* <input type="text" onChange={(e) => handleInputChange(e, "e_username")} id="e_username" value={e_username} /> */}
           <label className="form-label">Username</label>
-          <input type="text" onChange={(e) => handleInputChange(e, "e_usuario")} value={e_usuario} id="e_usuario" placeholder='Usuario' disabled />
+          <input type="text" onChange={(e) => handleInputChange(e, "e_usuario")} value={em_username} id="e_usuario" placeholder='Usuario' disabled />
           <label className="form-label">Activo</label>
           <input type="text" onChange={(e) => handleInputChange(e, "e_st_usuario")} id="e_st_usuario" value={e_st_usuario} />
           <button onClick={cambiaActivo}>Cambiar Activo Inactivo</button>

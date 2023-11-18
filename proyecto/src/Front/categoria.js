@@ -3,13 +3,22 @@ import axios from 'axios';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
+import imgcatp1 from '../../src/media/catplantilla1.png';
+import imgcatp2 from '../../src/media/catplantilla2.png';
 
 var a_categoria = '';
 var em_categoria = '';
 var em_id_categoria = '';
 var em_st_categoria = '';
 var em_pr_categoria = '';
+var em_plant = 0;
 var r_categorias = [];
+var imgplantilla;
+
+const l_plant = [
+  {id_pl : 1, n_pl : 'Plantilla 1'},    
+  {id_pl : 2, n_pl : 'Plantilla 2'}
+];
 
 const Categoria = () => {
 
@@ -18,6 +27,7 @@ const Categoria = () => {
 
   const [datos, setDatos] = useState([]);
   const [oper, setOper] = useState(0);
+  const [plant, setPlant] = useState(1);
   const [e_categoria, sete_categoria] = useState('');
   const [e_id_categoria, sete_id_categoria] = useState('');
   const [e_st_categoria, sete_st_categoria] = useState('');
@@ -55,6 +65,18 @@ const Categoria = () => {
   }
 
   const agregarCategoria = () => {
+    em_categoria = '';
+    sete_categoria(em_categoria)
+    sete_st_categoria(e_pr_categoria)
+    em_id_categoria = '';
+    sete_id_categoria(em_id_categoria)
+    em_st_categoria = '';
+    sete_st_categoria(em_st_categoria)
+    em_pr_categoria = '';
+    sete_pr_categoria('')
+    em_plant = 1;
+    setPlant(em_plant)
+    imgplantilla = imgcatp1
     setOper(1);
   };
 
@@ -68,7 +90,8 @@ const Categoria = () => {
       try {
         const response = await axios.post("http://localhost/proy/crearcategoria.php", {
           categoria: a_categoria,
-          premium : em_pr_categoria
+          premium : em_pr_categoria,
+          plantilla: em_plant
         });
 
       } catch (error) {
@@ -94,7 +117,8 @@ const Categoria = () => {
         categoria: em_id_categoria,
         ncategoria: em_categoria,
         scategoria: em_st_categoria,
-        prcategoria: em_pr_categoria
+        prcategoria: em_pr_categoria,
+        plantilla: em_plant
       });
       // console.log(response)
 
@@ -130,6 +154,13 @@ const Categoria = () => {
     sete_st_categoria(em_st_categoria)
     em_pr_categoria = r_categorias[i].premium
     sete_pr_categoria(em_pr_categoria)
+    em_plant = r_categorias[i].plantilla
+    setPlant(em_plant)
+    if (em_plant === '1') {
+      imgplantilla = imgcatp1
+    } else {
+      imgplantilla = imgcatp2
+    }
   };
 
   function cambiaActivo() {
@@ -152,6 +183,7 @@ const Categoria = () => {
 
   function regresar() {
     em_id_categoria = ''
+
     sete_id_categoria(em_id_categoria)
     em_categoria = ''
     sete_categoria(em_categoria)
@@ -185,10 +217,20 @@ const Categoria = () => {
         em_pr_categoria = valor
         sete_categoria(em_pr_categoria)
         break;
+        case "e_plantilla":
+          em_plant = valor
+          setPlant(em_plant)
+          console.log(em_plant)
+          if (em_plant === '1') {
+            imgplantilla = imgcatp1
+          } else {
+            imgplantilla = imgcatp2
+          }
+          break;
       default:
     }
   }
-
+  
   return (
     <div>
       {oper === 0 ? (
@@ -200,6 +242,7 @@ const Categoria = () => {
                 <th>Categoría</th>
                 <th>Activo</th>
                 <th>Premium</th>
+                <th>Plantilla</th>
                 <th>Seleccionar</th>
               </tr>
             </thead>
@@ -210,6 +253,7 @@ const Categoria = () => {
                   <td>{dato.nombre_categoria}</td>
                   <td>{dato.activo}</td>
                   <td>{dato.premium}</td>
+                  <td>{dato.plantilla}</td>
                   <td><button id='but' onClick={() => editarCategoria(dato.id_categoria)}>Editar</button></td>
                 </tr>
               ))}
@@ -219,33 +263,52 @@ const Categoria = () => {
           <button onClick={agregarCategoria}>Agregar Categoria</button>          
         </div>
       ) : oper === 1 ? (
-        <div>
+        <div style={{ padding: "10px", marginRight: "5px"}}>
           <label>Agregar</label>
+          <br/>
           <label className="form-label">Categoría</label>
           <input type="text" onChange={(e) => handleInputChange(e, "a_categoria")} id="a_categoria" placeholder='Categoría' />
+          <br/>
           <label className="form-label">Premium</label>
           <input type="text" onChange={(e) => handleInputChange(e, "e_pr_categoria")} id="e_pr_categoria" value={e_pr_categoria} />
           <button onClick={cambiaPremium}>Cambiar A Premium</button>
 
-          <br></br>
+          <br/>
+          <label className="form-label">Plantilla para Mostrar Art. x Categoría</label>
+          <select id="plant" name="plant" value={plant} onChange={(e) => handleInputChange(e, "e_plantilla")} required> 
+              {l_plant.map( (dato) => ( <option value={dato.id_pl} key={dato.id_pl}>{dato.n_pl}</option> ) )} 
+          </select>
+          <br/>
+          <img src={imgplantilla} alt="..." className='d-block' style={{ height: "12rem" }} />
+          <br/>
           <button onClick={guardarCategoria}>Guardar</button>
           <button onClick={regresar_a}>Regresar</button>
         </div>
       ) : oper === 2 ? (
-        <div>
+        <div style={{ padding: "10px", marginRight: "5px"}}>
           <label>Edición de Categoría</label>
-          <br/><br/>
+          <br/>
           <input type="text" onChange={(e) => handleInputChange(e, "e_id_categoria")} id="e_id_categoria" value={e_id_categoria} className='oculto'/>
           <label className="form-label">Categoría</label>
           <input type="text" onChange={(e) => handleInputChange(e, "e_categoria")} value={e_categoria} id="e_categoria" placeholder='Categoría' />
+          <br/>
           <label className="form-label">Activo</label>
           <input type="text" onChange={(e) => handleInputChange(e, "e_st_categoria")} id="e_st_categoria" value={e_st_categoria} />
           <button onClick={cambiaActivo}>Cambiar Activo Inactivo</button>
+          <br/>
 
           <label className="form-label">Premium</label>
           <input type="text" onChange={(e) => handleInputChange(e, "e_pr_categoria")} id="e_pr_categoria" value={e_pr_categoria} />
           <button onClick={cambiaPremium}>Cambiar A Premium</button>
-          <br/><br/>
+          <br/>
+          <label className="form-label">Plantilla para Mostrar Art. x Categoría</label>
+          <select id="plant" name="plant" value={plant} onChange={(e) => handleInputChange(e, "e_plantilla")} required> 
+              {l_plant.map( (dato) => ( <option value={dato.id_pl} key={dato.id_pl}>{dato.n_pl}</option> ) )} 
+          </select>
+          <br/>
+          <img src={imgplantilla} alt="..." className='d-block' style={{ height: "12rem" }} />
+          <br/>
+
           <button onClick={actualizarCategoria}>Grabar Datos</button>
           <button onClick={regresar}>Regresar</button>
         </div>

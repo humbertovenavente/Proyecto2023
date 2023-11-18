@@ -105,7 +105,7 @@ const ModAnuncios = () => {
 
   const editarAnuncio = (id) => {
 
-    setOper(2)
+    setOper(3)
     var i = 0
     var found = false;
     for (i = 0; i < r_anuncio.length && !found; i++) {
@@ -196,6 +196,24 @@ const ModAnuncios = () => {
     // url_anuncio = ''
     // url_imagen = ''
     setOper(0);
+  }
+
+  const handleInputChange = (e, type) => {
+    const valor = e.target.value;
+    switch (type) {
+      case "a_anuncio":
+        a_anuncio = valor
+        break;
+      case "e_anuncio":
+        em_anuncio = valor
+        sete_anuncio(em_anuncio)
+        break;
+      case "e_st_rolanuncio":
+        em_st_rolanuncio = valor
+        sete_st_rolanuncio(em_st_rolanuncio)
+        break;
+      default:
+    }
   }
 
   return (
@@ -294,7 +312,22 @@ const ModAnuncios = () => {
             </tbody>
           </table>
         </div>
-      ) : oper === 8 ? (
+      ) : oper === 3 ? (
+        <div>
+          <label>Edición de Anuncio</label>
+          <br/><br/>
+          {/* <input type="text" onChange={(e) => handleInputChange(e, "e_username")} id="e_username" value={e_username} /> */}
+          <label className="form-label">Titulo</label>
+          <input type="text" onChange={(e) => handleInputChange(e, "e_anuncio")} value={e_anuncio} id="e_anuncio" placeholder='Usuario' disabled />
+          <label className="form-label">Activo</label>
+          <input type="text" onChange={(e) => handleInputChange(e, "e_st_anuncio")} id="e_st_anuncio" value={em_st_rolanuncio} />
+          <button onClick={cambiaActivo}>Cambiar Activo Inactivo</button>
+          
+          <br/><br/>
+          <button onClick={actualizarAnuncio}>Grabar Datos</button>
+          <button onClick={regresar}>Regresar</button>
+        </div>
+        ) : oper === 8 ? (
         <div>
           <span>Leyendo Categorias, espere..</span>
           <div className="spinner-border" role="status" />

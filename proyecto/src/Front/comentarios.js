@@ -56,7 +56,7 @@ const Comentarios = () => {
     l_l_username = localStorage.getItem('jcapp_username')
   
     useEffect(() => {
-      if (l_isLoggedIn && l_l_rol === 5) {
+      if (l_isLoggedIn && (l_l_rol === 5 || l_l_rol === 4)) {
         //setOper(8)
         // r_articles = [];
         // comentariosTitulo()

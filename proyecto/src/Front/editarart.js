@@ -5,6 +5,9 @@ import Box from '@mui/material/Box';
 import axios from "axios";
 import { useAuth } from './AuthContext';
 import { useParams } from "react-router-dom"
+import imgartp1 from '../../src/media/artplantilla1.png';
+import imgartp2 from '../../src/media/artplantilla2.png';
+import imgartp3 from '../../src/media/artplantilla3.png';
 
 var r_categorias = [];
 var m_categoriaAct = "";
@@ -12,6 +15,7 @@ var t_subcategorias = [];
 var r_subcategorias = [];
 var r_article = [];
 var response;
+var imgplantilla;
 
 const tipoArticulo = [
   { id_tipo_articulo: 0, n_tipo_articulo: 'Gratis' },
@@ -56,14 +60,6 @@ const EditarArt = () => {
 
 
 
-  function changeTipoArticulo(e) {
-    setTipo_articulo(e.target.value)
-    // console.log(e.target.value)
-  }
-  function changePlantillas(e) {
-    setPlantilla(e.target.value)
-    // console.log(e.target.value)
-  }
 
   const [omodalRed, setomodalRed] = useState(false);
   const [omodalPubli, setomodalPubli] = useState(false);
@@ -87,6 +83,23 @@ const EditarArt = () => {
     }
   }, [])
 
+  
+  function changeTipoArticulo(e) {
+    setTipo_articulo(e.target.value)
+    // console.log(e.target.value)
+  }
+  function changePlantillas(e) {
+    setPlantilla(e.target.value)
+    if (e.target.value === '1') {
+      imgplantilla = imgartp1
+    } else if (e.target.value === '2') {
+      imgplantilla = imgartp2
+    } else {
+      imgplantilla = imgartp3
+    }
+    // console.log(e.target.value)
+  }
+  
   async function leercat_subcat() {
     try {
       const response = await axios.get("http://localhost/proy/leercat_subcat.php")
@@ -187,7 +200,6 @@ const EditarArt = () => {
         setContenido3(r_article[0].contenido_articulo3);
         setVideo(r_article[0].video_articulo);
         setTipo_articulo(r_article[0].tipo_articulo);
-        setPlantilla(r_article[0].plantilla);
         setImagen1(r_article[0].imagen1);
         setImagen2(r_article[0].imagen2);
         setImagen3(r_article[0].imagen3);
@@ -201,6 +213,16 @@ const EditarArt = () => {
         setCategoriaAct(r_article[0].id_categoria);
         selCategoria(r_article[0].id_categoria);
         setSubCategoriaAct(r_article[0].id_subcategoria);
+
+        setPlantilla(r_article[0].plantilla);
+        if (r_article[0].plantilla === '1') {
+          imgplantilla = imgartp1
+        } else if (r_article[0].plantilla === '2') {
+          imgplantilla = imgartp2
+        } else {
+          imgplantilla = imgartp3
+        }
+
       }
     }
   };
@@ -264,13 +286,6 @@ const EditarArt = () => {
 
         <br></br>
 
-        <label htmlFor="titulo">Ingrese que plantilla quiere utilizar</label>
-        <select id="plantilla" name="plantilla" value={plantilla} onChange={(e) => changePlantillas(e)} required>
-          {plantillas.map((dato) => (
-            <option value={dato.id_plantilla} key={dato.id_plantilla}>{dato.n_plantilla}</option>
-          ))}
-        </select>
-
         <div className="mt-2">
           <label htmlFor="titulo">Ingrese la URL de la Primera imagen</label>
           <input type="text" id="imagen1" name="imagen1" value={imagen1} onChange={(e) => setImagen1(e.target.value)} className="w-50" required />
@@ -315,6 +330,18 @@ const EditarArt = () => {
           <label htmlFor="titulo">Ingrese la descripcion de la Quinta imagen</label>
           <input type="text" id="imagen5_desc" name="imagen5_desc" value={imagen5_desc} onChange={(e) => setImagen5_desc(e.target.value)} className="w-50" required />
         </div>
+
+        <br/>
+        <label htmlFor="titulo">Ingrese que plantilla quiere utilizar</label>
+        <select id="plantilla" name="plantilla" value={plantilla} onChange={(e) => changePlantillas(e)} required>
+          {plantillas.map((dato) => (
+            <option value={dato.id_plantilla} key={dato.id_plantilla}>{dato.n_plantilla}</option>
+          ))}
+        </select>
+        <br/>
+        <img src={imgplantilla} alt="..." className='d-block' style={{ height: "20rem" }} />
+        <br/>
+
         <button type="submit" className="btn btn-primary">Actualizar Articulo</button>
       </form>
 

@@ -47,16 +47,35 @@ const Ofertas = () => {
     // const handleCloseEru = () => {
     //     setomodalEnv(false)
     // };
+    const [omodalRed, setomodalRed] = useState(false);
+    const handleCloseRed = () => {
+        setomodalRed(false)
+      };
+
+    const l_isLoggedIn = localStorage.getItem('jcapp_logued')
+    const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
 
     useEffect(() => {
-        setOper(0);
-        setPorc(1);
-        setDiasv(1);
 
-        l_diaini = new Date();
-        l_diafin.setDate(l_diaini.getDate() + 1);
-        setDiainis(l_diaini.toLocaleDateString());
-        setDiafins(l_diafin.toLocaleDateString());
+        if (l_isLoggedIn && l_l_rol === 5) {   
+            // setOper(8)
+            // leercategorias()   
+            setOper(0);
+            setPorc(1);
+            setDiasv(1);
+
+            l_diaini = new Date();
+            l_diafin.setDate(l_diaini.getDate() + 1);
+            setDiainis(l_diaini.toLocaleDateString());
+            setDiafins(l_diafin.toLocaleDateString()); 
+          } else {
+            setomodalRed(true)
+            setTimeout(() => {
+              return navigate('/')
+            }, 2000);
+          }
+
+        
 
         //     const l_isLoggedIn = localStorage.getItem('jcapp_logued')
         //     const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
@@ -429,6 +448,18 @@ const Ofertas = () => {
                 </Box>
             </Modal>
             {/* ***Ventana Modal para Responder*** */}
+
+
+            {/* **Ventana Modal para Mensaje** */}
+            <Modal open={omodalRed} onClose={handleCloseRed} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <Box sx={{ width: 500, bgcolor: 'background.paper', p: 2, outline: 'none', margin: '0 auto', marginTop: '200px' }}>
+                <div>
+                    <span>No tienes autorizacion, redirigiendo al home</span>
+                    <div className="spinner-border" role="status" />                            
+                </div>
+              </Box>
+            </Modal>
+            {/* **Ventana Modal para Responder** */}
 
         </div>
 

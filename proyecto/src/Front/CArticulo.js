@@ -4,22 +4,26 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import axios from "axios";
 import { useAuth } from './AuthContext';
+import imgartp1 from '../../src/media/artplantilla1.png';
+import imgartp2 from '../../src/media/artplantilla2.png';
+import imgartp3 from '../../src/media/artplantilla3.png';
 
 var r_categorias = [];
 var m_categoriaAct = "";
 var t_subcategorias = [];
 var r_subcategorias = [];
+var imgplantilla;
 
 const tipoArticulo = [
-  {id_tipo_articulo : 0, n_tipo_articulo : 'Gratis'},    
-  {id_tipo_articulo : 1, n_tipo_articulo : 'Premium'},
+  { id_tipo_articulo: 0, n_tipo_articulo: 'Gratis' },
+  { id_tipo_articulo: 1, n_tipo_articulo: 'Premium' },
 ];
 
 const plantillas = [
-  {id_plantilla : 1, n_plantilla : 'Plantilla 1'},    
-  {id_plantilla : 2, n_plantilla : 'Plantilla 2'},
-  {id_plantilla : 3, n_plantilla : 'Plantilla 3'},
-  ];
+  { id_plantilla: 1, n_plantilla: 'Plantilla 1' },
+  { id_plantilla: 2, n_plantilla: 'Plantilla 2' },
+  { id_plantilla: 3, n_plantilla: 'Plantilla 3' },
+];
 
 const CArticulo = () => {
 
@@ -50,22 +54,14 @@ const CArticulo = () => {
   const [a_categoria, setCategoria] = useState([]);
   const [a_subcategoria, setSubCategoria] = useState([]);
 
-  
+
 
   function changeTipoArticulo(e) {
     setTipo_articulo(e.target.value)
-    // console.log(e.target.value)
-}
-    function changePlantillas(e) {
-      setPlantilla(e.target.value)
-      // console.log(e.target.value)
   }
-
-  // const [tituloAct, setTituloAct] = useState(""); //arreglo con dos itmes, titulo es current state y el sengod es lo que ayuda a actualizar el estado
-  // const [contenidoAct, setContenidoAct] = useState("");
-  // const [imagenAct, setImagenAct] = useState(null);
-  // const [informacionGuardadaAct, setInformacionGuardadaAct] = useState(null);
-  // const [titulo, setTitulo] = useState("");
+  function changePlantillas(e) {
+    setPlantilla(e.target.value)
+  }
 
   const [omodalRed, setomodalRed] = useState(false);
   const [omodalPubli, setomodalPubli] = useState(false);
@@ -77,6 +73,9 @@ const CArticulo = () => {
   const l_l_rol = parseInt(localStorage.getItem('jcapp_l_rol'))
 
   useEffect(() => {
+    imgplantilla = imgartp1
+    // console.log(imgplantilla)
+    // console.log(imgplantilla[0].id)
     if (l_isLoggedIn && (l_l_rol === 3 || l_l_rol || 4 && l_l_rol || 5)) {
       // r_articles = []
       leercat_subcat()
@@ -87,6 +86,24 @@ const CArticulo = () => {
       }, 2000);
     }
   }, [])
+
+  
+  function changeTipoArticulo(e) {
+    setTipo_articulo(e.target.value)
+  }
+  function changePlantillas(e) {    
+    setPlantilla(e.target.value)
+    if (e.target.value === '1') {
+      imgplantilla = imgartp1
+    } else if (e.target.value === '2') {
+      imgplantilla = imgartp2
+    } else {
+      imgplantilla = imgartp3
+    }
+
+  }
+
+
 
   async function leercat_subcat() {
     try {
@@ -145,20 +162,6 @@ const CArticulo = () => {
     }
   };
 
-  // $id_subcategoria = $data['id_subcategoria'];
-  // $tipo_articulo = $data['tipo_articulo'];
-  // $plantilla = $data['plantilla'];
-  // $imagen1 = $data['imagen1'];    
-  // $imagen2 = $data['imagen2'];    
-  // $imagen3 = $data['imagen3'];    
-  // $imagen4 = $data['imagen4'];    
-  // $imagen5 = $data['imagen5'];
-  // $imagen1_desc = $data['imagen1_desc'];    
-  // $imagen2_desc = $data['imagen2_desc'];    
-  // $imagen3_desc = $data['imagen3_desc'];    
-  // $imagen4_desc = $data['imagen4_desc'];    
-  // $imagen5_desc = $data['imagen5_desc'];
-
   function selCategoria(cat) {
     m_categoriaAct = cat
     setCategoriaAct(m_categoriaAct)
@@ -212,9 +215,6 @@ const CArticulo = () => {
           <textarea id="conten2" name="conten2" rows="10" cols="33" style={{ width: "50%" }} value={contenido2} onChange={(e) => setContenido2(e.target.value)} required />
           <label htmlFor="texto">Ingrese el Contenido Parte 3</label>
           <textarea id="conten3" name="conten3" rows="10" cols="33" style={{ width: "50%" }} value={contenido3} onChange={(e) => setContenido3(e.target.value)} required />
-
-          {/* <label htmlFor="texto">Ingrese una imagen (si gusta) </label>
-          <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onChange={(hola) => setImagenAct(hola.target.files[0])} /> */}
         </div>
 
         <div className="mt-2">
@@ -222,29 +222,14 @@ const CArticulo = () => {
           <input type="text" id="video" name="video" value={video} onChange={(e) => setVideo(e.target.value)} className="w-50" required />
         </div>
 
-        {/* <div className="mt-2">
-          <label htmlFor="titulo">Ingrese el tipo de articulo</label>
-          <input type="text" id="tipo_articulo" name="tipo_articulo" value={tipo_articulo} onChange={(e) => setTipo_articulo(e.target.value)} className="w-50" required />
-        </div> */}
         <label htmlFor="titulo">Ingrese el tipo de articulo</label>
-          <select id="tipo" name="tipo" value={tipo_articulo} onChange={(e) => changeTipoArticulo(e)} required> 
-                                {tipoArticulo.map((dato) => (
-                                    <option value={dato.id_tipo_articulo} key={dato.id_tipo_articulo}>{dato.n_tipo_articulo}</option>
-                                ))} 
-          </select>
+        <select id="tipo" name="tipo" value={tipo_articulo} onChange={(e) => changeTipoArticulo(e)} required>
+          {tipoArticulo.map((dato) => (
+            <option value={dato.id_tipo_articulo} key={dato.id_tipo_articulo}>{dato.n_tipo_articulo}</option>
+          ))}
+        </select>
 
-        <br></br>
-
-        {/* <div className="mt-2">
-          <label htmlFor="titulo">Ingrese que plantilla quiere usar</label>
-          <input type="text" id="plantilla" name="plantilla" value={plantilla} onChange={(e) => setPlantilla(e.target.value)} className="w-50" required />
-        </div> */}
-        <label htmlFor="titulo">Ingrese que plantilla quiere utilizar</label>
-          <select id="plantilla" name="plantilla" value={plantilla} onChange={(e) => changePlantillas(e)} required> 
-                                {plantillas.map((dato) => (
-                                    <option value={dato.id_plantilla} key={dato.id_plantilla}>{dato.n_plantilla}</option>
-                                ))} 
-          </select>
+        <br />
 
         <div className="mt-2">
           <label htmlFor="titulo">Ingrese la URL de la Primera imagen</label>
@@ -290,9 +275,17 @@ const CArticulo = () => {
           <label htmlFor="titulo">Ingrese la descripcion de la Quinta imagen</label>
           <input type="text" id="imagen5_desc" name="imagen5_desc" value={imagen5_desc} onChange={(e) => setImagen5_desc(e.target.value)} className="w-50" required />
         </div>
-        
 
-
+        <br/>
+        <label htmlFor="titulo">Ingrese que plantilla quiere utilizar</label>
+        <select id="plantilla" name="plantilla" value={plantilla} onChange={(e) => changePlantillas(e)} required>
+          {plantillas.map((dato) => (
+            <option value={dato.id_plantilla} key={dato.id_plantilla}>{dato.n_plantilla}</option>
+          ))}
+        </select>
+        <br/>
+        <img src={imgplantilla} alt="..." className='d-block' style={{ height: "20rem" }} />
+        <br/>
 
         <button type="submit" className="btn btn-primary">Publicar Articulo</button>
       </form>

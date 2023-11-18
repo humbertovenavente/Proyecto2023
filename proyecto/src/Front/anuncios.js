@@ -20,23 +20,6 @@ const Anuncios = () => {
         // leerAnuncios()
     }, [])
 
-    // async function leerAnuncios() {
-    //     try {
-    //         response = await axios.get("http://localhost/proy/leeranuncios.php")
-    //     } catch (error) {
-    //         setOper(3);
-    //     } finally {
-    //         r_anuncios = response.data
-    //         if (r_anuncios.length >= 1) {
-    //             setDatos(r_anuncios);
-    //             setOper(0);
-    //         } else {
-    //             setOper(3);
-    //         }
-    //     }
-
-    // }
-
     function click_anuncio(e) {
         // console.log(datos[e])
         const url = datos[e].url_anuncio

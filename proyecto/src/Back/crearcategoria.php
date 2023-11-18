@@ -14,8 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $categoria = $data['categoria'];
     $premium = $data['premium'];
+    $plantilla = $data['plantilla'];
 
-    $sql = "INSERT INTO categorias (nombre_categoria, activo , premium) VALUES ('$categoria', 'X' , '$premium')";
+    $sql = "INSERT INTO categorias (nombre_categoria, activo, premium, plantilla ) VALUES ('$categoria', 'X', '$premium', $plantilla)";
     
     if ($conexion->query($sql) === TRUE) {
         echo "Registro insertado exitosamente";

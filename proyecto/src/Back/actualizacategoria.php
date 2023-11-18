@@ -13,13 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ncategoria = $data['ncategoria'];    
     $scategoria = $data['scategoria'];
     $prcategoria = $data['prcategoria'];
+    $plantilla = $data['plantilla'];
 
     // echo '$categoria';
 
-    $sql = "UPDATE categorias SET nombre_categoria='$ncategoria', activo='$scategoria' , premium = '$prcategoria' where id_categoria='$categoria'";
+    $sql = "UPDATE categorias SET nombre_categoria='$ncategoria', activo='$scategoria' , premium = '$prcategoria' , plantilla = $plantilla where id_categoria='$categoria'";
     
     if ($conexion->query($sql) === TRUE) {
-        echo "Registro insertado exitosamente";
+        echo "Registro actualizado exitosamente";
     } else {
         echo "Error al insertar el registro: " . $conexion->error;
     }
